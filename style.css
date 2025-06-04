@@ -1,8 +1,4 @@
-/* Root variables for base theming */
 :root {
-  --primary-color: #2563eb;
-  --secondary-color: black;
-
   /* Light mode defaults */
   --background-color: #ffffff;
   --text-color: #1f2937;
@@ -16,9 +12,9 @@
   --notification-text: white;
 }
 
-/* Light theme */
+/* Light theme overrides */
 [data-theme="light"] {
-  --background-color: #ffffff;
+  --background-color: rgb(31, 31, 31);
   --text-color: #1f2937;
   --section-bg: #ffffff;
   --text-block-bg: #f9fafb;
@@ -30,7 +26,7 @@
   --notification-text: white;
 }
 
-/* Dark theme */
+/* Dark theme overrides */
 [data-theme="dark"] {
   --background-color: #1f2937;
   --text-color: #e5e7eb;
@@ -43,6 +39,22 @@
   --notification-bg: #1f2937;
   --notification-text: #e5e7eb;
 }
+
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base styles */
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
 
 /* Reset and base styles */
 * {
