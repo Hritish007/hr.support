@@ -76,6 +76,14 @@ header {
   z-index: 1000;
   transition: background-color 0.3s ease;
 }
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px; /* 👈 Base font size reduced */
+  line-height: 1.5;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  scroll-behavior: smooth;
+}
 
 /* Navbar */
 .navbar {
