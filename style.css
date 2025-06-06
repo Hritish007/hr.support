@@ -2,63 +2,64 @@
 :root {
   --primary-color: #2563eb;
   --secondary-color: black;
-
-  /* Light mode defaults */
-  --background-color: #ffffff;
-  --text-color: #1f2937;
-  --section-bg: #ffffff;
-  --text-block-bg: #f9fafb;
-  --text-block-hover-bg: #e5e7eb;
-  --border-color: #3498db;
-  --header-footer-bg: black;
-  --header-footer-text: white;
-  --notification-bg: black;
-  --notification-text: white;
 }
 
-/* Light theme */
+  /* Light theme */
 [data-theme="light"] {
-  --background-color: #ffffff;
-  --text-color: #1f2937;
-  --section-bg: #ffffff;
-  --text-block-bg: #f9fafb;
-  --text-block-hover-bg: #e5e7eb;
-  --border-color: #3498db;
-  --header-footer-bg: black;
-  --header-footer-text: white;
-  --notification-bg: black;
-  --notification-text: white;
+    --background-color: rgb(31, 31, 31);
+    --text-color: #1f2937;
+    --section-bg: #ffffff;
+    --form-bg: #ffffff;
+    --input-border: #d1d5db;
+    --input-focus-shadow: rgba(37, 99, 235, 0.1);
+    --border-color: #3498db;
+    --header-footer-bg: var(--secondary-color);
+    --header-footer-text: white;
+    --notification-bg: black;
+    --notification-text: white;
+    --button-hover-bg: #1e40af;
+    --delete-enabled-bg: var(--error-color);
+    --delete-enabled-hover-bg: #b91c1c;
+    --reset-bg: var(--error-color);
+    --reset-hover-bg: #b91c1c;
 }
 
 /* Dark theme */
 [data-theme="dark"] {
-  --background-color: #1f2937;
-  --text-color: #e5e7eb;
-  --section-bg: #374151;
-  --text-block-bg: #4b5563;
-  --text-block-hover-bg: #6b7280;
-  --border-color: #60a5fa;
-  --header-footer-bg: #111827;
-  --header-footer-text: #d1d5db;
-  --notification-bg: #1f2937;
-  --notification-text: #e5e7eb;
+    --background-color: #1f2937;
+    --text-color: #e5e7eb;
+    --section-bg: #374151;
+    --form-bg: #374151;
+    --input-border: #6b7280;
+    --input-focus-shadow: rgba(96, 165, 250, 0.2);
+    --border-color: #60a5fa;
+    --header-footer-bg: #111827;
+    --header-footer-text: #d1d5db;
+    --notification-bg: #1f2937;
+    --notification-text: #e5e7eb;
+    --button-hover-bg: #3b82f6;
+    --delete-enabled-bg: #ef4444;
+    --delete-enabled-hover-bg: #dc2626;
+    --reset-bg: #ef4444;
+    --reset-hover-bg: #dc2626;
 }
 
-/* Reset and base styles */
+/* Reset default styles */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html {
+body {
   font-family: 'Inter', Arial, sans-serif;
-  line-height: 1.6;
+  font-size: 14px; /* 👈 Base font size reduced */
+  line-height: 1.5;
   color: var(--text-color);
-  background-color: rgb(31, 31, 31);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--background-color);
   scroll-behavior: smooth;
 }
+
 
 .container {
   max-width: 1050px;
@@ -75,14 +76,6 @@ header {
   top: 0;
   z-index: 1000;
   transition: background-color 0.3s ease;
-}
-body {
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 14px; /* 👈 Base font size reduced */
-  line-height: 1.5;
-  color: var(--text-color);
-  background-color: var(--background-color);
-  scroll-behavior: smooth;
 }
 
 /* Navbar */
