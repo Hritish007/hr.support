@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>HR.Help Page</title>
+  <title>HR.Help</title>
   <link rel="icon" type="image/png" href="help.jpg">
   <style>
     body {
@@ -53,7 +54,7 @@
     }
 
     .btn:hover {
-      background: #f0f0f0;
+      background: #d8d7d7;
     }
 
     .btn-back {
@@ -70,14 +71,22 @@
 </head>
 <body>
 
+ <div class="step-container active" id="step1000">
+    <div class="step-title">Check details in C-Support</div>
+    <div class="step-subtitle">"Bandwidth verified, Current RX power checked <-26, OLT RX difference <5" </div>
+    <button class="btn" onclick="goToStep(1)">All checked, Go to Step 1 </button>
+  <div><b><strong>Good Luck.</strong></b></div>
+  </div>
+
   <!-- STEP 1 -->
-  <div class="step-container active" id="step1">
+  <div class="step-container" id="step1">
     <div class="step-title">STEP 1</div>
-    <div class="step-subtitle">Device verified</div>
+    <div class="step-subtitle">Device verify</div>
     <button class="btn" onclick="goToStep(2.1)">Device verified, Connected at 2.4GHz</button>
   <button class="btn" onclick="goToStep(3.1)">Device verified, Connected at 5GHz</button>
-    <div><b><strong>Good Luck.</strong></b></div>
+  <button class="btn btn-back" onclick="goBack()">Back</button>
   </div>
+
 <div class="step-container" id="step2.2">
     <div class="step-title">STEP 3</div>
     <div class="step-subtitle">Device ping</div>
@@ -94,13 +103,6 @@
 <button class="btn btn-back" onclick="goBack()">Back</button>
   </div>
 
-  <div class="step-container" id="step2.2">
-    <div class="step-title">STEP 3</div>
-    <div class="step-subtitle">Device ping</div>
-    <button class="btn" onclick="goToStep(3)">Ping Fine</button>
-    <button class="btn" onclick="goToStep(2.3)">Ping Not Fine</button>
-<button class="btn btn-back" onclick="goBack()">Back</button>
-  </div>
     <!-- STEP 5 -->
 <div class="step-container" id="step2.3">
   <div class="step-title">STEP 4</div>
@@ -180,7 +182,7 @@
         <div class="step-container" id="step44">
           <div class="step-title">STEP 5</div>
           <div class="step-subtitle">Speed test not fine</div>
-          <button class="btn" onclick="goToStep(77)">omci profile </button>
+          <button class="btn" onclick="goToStep(77)">Check OMCi profile </button>
       <button class="btn btn-back" onclick="goBack()">Back</button>
         </div>
 
@@ -202,7 +204,7 @@
         <!-- STEP 6 -->
 <div class="step-container" id="step77">
   <div class="step-title">STEP 6</div>
-  <div class="step-subtitle">Check OMCi profile</div>
+  <div class="step-subtitle"> OMCi profile Checked?</div>
   <button class="btn" onclick="goToStep(777)">OMCI profile fine</button>
   <button class="btn" onclick="goToStep(7777)">OMCI profile not fine</button>
   <button class="btn btn-back" onclick="goBack()">Back</button>
@@ -218,18 +220,60 @@
 </div>
 <div class="step-container" id="step601">
   <div class="step-title">STEP 8</div>
-  <div class="step-subtitle">Single device connection and speedtest fine</div>
-  <button class="btn" onclick="goToStep(611)">on develop</button>
-  <button class="btn" onclick="goToStep(711)">on develop</button>
+  <div class="step-subtitle">Single device connection and speedtest fine?</div>
+  <button class="btn" onclick="goToStep(611)">Connect on their own wifi and speedtest</button>
   <button class="btn btn-back" onclick="goBack()">Back</button>
 </div>
+
+<div class="step-container" id="step611">
+          <div class="step-title">STEP 9</div>
+          <div class="step-subtitle">Connect on their own wifi and speedtest</div>
+          <button class="btn" onclick="goToStep(612)">Issue solved</button>
+          <button class="btn" onclick="goToStep(613)">Not solved</button>
+      <button class="btn btn-back" onclick="goBack()">Back</button>
+        </div>
+        <div class="step-container" id="step612">
+          <div class="step-title">CONGRATULATIONS</div>
+          <div class="step-subtitle"><strong>You followed all troubleshoot procedures according to the checklist.</strong></div>
+          <div class="step-subtitle"><strong>✅Ticket header: Close Under Related Header Of Speedtest Fine</strong></div>
+      <button class="btn btn-back" onclick="goBack()">Back</button>
+        </div>
+        <div class="step-container" id="step613">
+          <div class="step-title">STEP 10</div>
+          <div class="step-subtitle">Not solve?</div>
+          <div>✅ Ticket header: Assign based on cases " Under Related Header Of Speedtest Fine"</div>
+      <button class="btn btn-back" onclick="goBack()">Back</button>
+        </div>
+
+
+
 <div class="step-container" id="step701">
   <div class="step-title">STEP 8</div>
-  <div class="step-subtitle">Single device connection and speedtest not fine</div>
-  <button class="btn" onclick="goToStep(611)">on develop</button>
-  <button class="btn" onclick="goToStep(711)">on develop</button>
+  <div class="step-subtitle">Single device connection and speedtest not fine?</div>>
+  <button class="btn" onclick="goToStep(711)">Query on L2 Communication</button>
   <button class="btn btn-back" onclick="goBack()">Back</button>
 </div>
+<div class="step-container" id="step711">
+          <div class="step-title">STEP 9</div>
+          <div class="step-subtitle">Quiry on L2 Communication</div>
+          <button class="btn" onclick="goToStep(712)">Issue solved</button>
+          <button class="btn" onclick="goToStep(713)">Not solved</button>
+      <button class="btn btn-back" onclick="goBack()">Back</button>
+        </div>
+
+      <div class="step-container" id="step712">
+          <div class="step-title">CONGRATULATIONS</div>
+          <div class="step-subtitle"><strong>You followed all troubleshoot procedures according to the checklist.</strong></div>
+          <div class="step-subtitle"><strong>✅Ticket header: Close Under Related Header Of Speedtest Fine</strong></div>
+      <button class="btn btn-back" onclick="goBack()">Back</button>
+        </div>
+        <div class="step-container" id="step713">
+          <div class="step-title">STEP 10</div>
+          <div class="step-subtitle">Not solve?</div>
+          <div>✅ Ticket header: Assign based on cases " Under Related Header Of Speedtest Fine"</div>
+      <button class="btn btn-back" onclick="goBack()">Back</button>
+        </div>
+
 <div class="step-container" id="step611">
           <div class="step-title">STEP 9</div>
           <div class="step-subtitle">Speed test fine</div>
