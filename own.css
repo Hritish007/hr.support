@@ -83,7 +83,7 @@ body {
 header {
     background-color: var(--header-footer-bg);
     padding: 1rem 0;
-    margin-bottom: 2rem;
+    margin-bottom: 0.2rem;
     position: sticky;
     top: 0;
     z-index: 1000;
