@@ -1,249 +1,119 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HR Support</title>
-  <link rel="icon" type="image/png" href="welcome.jpg">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="welcome.jpg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
+    :root {
+      --bg: rgb(44, 44, 44);
+      --shadow-light: rgba(20, 18, 18, 0.788);
+      --shadow-dark: rgba(20, 18, 18, 0.788);
+      --primary: rgb(44, 44, 44)
+;
+      --accent: #4a90e2;
+    }
+
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
       font-family: 'Inter', sans-serif;
     }
 
-    html, body {
-      height: 100%;
-      overflow: hidden;
-      background: linear-gradient(135deg, #e0f7fa, #ffffff);
-      color: #333;
-    }
-
-    .container {
+    body {
+      background: var(--bg);
+      height: 100vh;
       display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    header {
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: white;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-      z-index: 1000;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .menu-label {
-      font-weight: 600;
-      color: #333;
-      cursor: pointer;
-    }
-
-    .menu-label:hover {
-      color: rgb(37, 99, 235);
-    }
-
-        .menu-content {/*drop cnt */
-  display: block; 
-  opacity: 0;
-  transform: translateY(10px);
-  pointer-events: none;
-  position: absolute;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 10px 0;
-  border-radius: 8px;
-  min-width: 160px;
-  z-index: 1000;
-  top: 100%;
-  left: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  margin-left: -20px;
-}
-
-.dropdown:hover .menu-content {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-  margin-left: -20px;
-}
-    .menu-content a {
-      display: block;
-      padding: 10px 16px;
-      color: #333;
-      text-decoration: none;
-      transition: background 0.2s ease;
-    }
-
-    .menu-content a:hover {
-      background-color: #f1f1f1;
-      color: rgb(37, 99, 235);
-    }
-
-    .notification-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .notification-bell {
-      font-size: 24px;
-      color: #333;
-      cursor: pointer;
-      position: relative;
-        padding-right: 60px;
-
-    }
-
-    .notification-bell .badge {
-      position: absolute;
-      top: -6px;
-      right: -6px;
-      background-color: red;
-      color: white;
-      padding: 2px 6px;
-      font-size: 12px;
-      border-radius: 50%;
-      font-weight: bold;
-      box-shadow: 0 0 0 2px white;
-        margin-right: 60px;
-
-    }
-
-    .bell-popup {
-      display: none;
-      position: absolute;
-      top: 120%;
-      right: 0;
-      width: 300px;
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      animation: slideDown 0.3s ease-out;
-      z-index: 1001;
-    }
-
-    @keyframes slideDown {
-      from {
-        transform: translateY(-30px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .hero {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      color: var(--primary);
+    }
+.hero-line{
+  color: white;
+}
+    .card {
+      background: var(--bg);
+      box-shadow: 8px 8px 16px var(--shadow-dark),
+                  -8px -8px 16px var(--shadow-light);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
       text-align: center;
-      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      animation: fadeIn 1s ease;
     }
 
-    .hero h2 {
-      font-size: 2.5rem;
+    .card h1 {
+      font-size: 2.2rem;
       margin-bottom: 1rem;
+      color: var(--accent);
     }
 
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 600px;
+    .card p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
       color: #555;
     }
 
-    .clock {
-      margin-top: 2rem;
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: rgb(37, 99, 235);
-      background: white;
-      padding: 1rem 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    .start-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease;
     }
 
-    .footer {
+    .start-btn:hover {
+      background: #357bd8;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
       text-align: center;
-      padding: 1rem;
-      background-color: #f1f1f1;
-      font-size: 0.9rem;
-      color: #777;
+      width: 100%;
+      font-size: 0.85rem;
+      color: #888;
     }
 
-    @media (max-width: 600px) {
-      .hero h2 {
-        font-size: 2rem;
+    @media (max-width: 500px) {
+      .card {
+        padding: 2rem 1.5rem;
       }
 
-      .clock {
+      .card h1 {
         font-size: 1.8rem;
+      }
+
+      .card p {
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>HR Support</h1>
-      <div class="header-right">
-        <div class="dropdown">
-          <span class="menu-label"><h3>Menu</h3></span>
-          <div class="menu-content">
-            <a href="router.html">Router</a>
-            <a href="account.html">Account</a>
-            <a href="slow.html">Slow</a>
-            <a href="tv.html">TV</a>
-            <a href="urgentclose.html">Urgent</a>
-            <a class="issuepin" href="https://hritish007.github.io/hr.support/issuepin.html" target="_blank" rel="noopener noreferrer">Issue Pin</a>
-          </div>
-        </div>
-        <div class="notification-wrapper">
-          <div class="notification-bell" onclick="toggleBellPopup(event)">
-            <i class="fas fa-bell"></i>
-            <span class="badge">3</span>
-          </div>
-          <div class="bell-popup" id="bellPopup">
-            <h2>🔔 Notifications</h2><br>
-            <h5><strong>1.</strong> Added new remarks.</h5>
-            <h5><strong>2.</strong> Added new QA links.</h5>
-            <h5><strong>3.</strong> New features are on the way, Stay tuned!</h5>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <section class="hero">
-      <h2>Time is Your Greatest Asset</h2>
-      <p id="hero-line"></p>
-      <div class="clock" id="clock">--:--:--</div>
-    </section>
-
-    <footer class="footer">
-      &copy; <span id="year">2025</span> HR Support. All rights reserved.
-    </footer>
+  <div class="card">
+    <h1>Welcome to HR Support</h1>
+    <p id="hero-line"></p>
+    <button class="start-btn" onclick="location.href='router.html'">Get Started</button><br>
   </div>
+  
+
+  <footer>&copy; <span id="year"></span> HritishShaqya. All rights reserved.</footer>
 
   <script>
     // Hero Line Message
@@ -262,38 +132,13 @@
       "You don’t need more hours — just better focus.",
       "Behind every goal is a task well-managed.",
       "Work smart. Lead strong. Finish well.",
-    ];
-
-    const display = document.getElementById("hero-line");
+    ];const display = document.getElementById("hero-line");
     let currentIndex = parseInt(localStorage.getItem("heroLineIndex")) || 0;
     display.textContent = lines[currentIndex];
     localStorage.setItem("heroLineIndex", (currentIndex + 1) % lines.length);
 
-    // Live Clock
-    function updateClock() {
-      const now = new Date();
-      document.getElementById("clock").textContent = now.toLocaleTimeString();
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
 
-    // Set Current Year
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Bell Popup
-    function toggleBellPopup(event) {
-      event.stopPropagation();
-      const popup = document.getElementById("bellPopup");
-      popup.style.display = popup.style.display === "block" ? "none" : "block";
-    }
-
-    document.addEventListener("click", function (event) {
-      const bellPopup = document.getElementById("bellPopup");
-      const bell = document.querySelector(".notification-bell");
-      if (!bellPopup.contains(event.target) && !bell.contains(event.target)) {
-        bellPopup.style.display = "none";
-      }
-    });
   </script>
+ 
 </body>
 </html>
