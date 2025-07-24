@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Date Duration Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: black;
+      color: #e2e8f0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #000000;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px #0ea5e9;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: #60a5fa;
+    }
+
+    .date-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      margin-left: 30px;
+      gap: 30px;
+    }
+
+    .date-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 50%;
+      position: relative;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #cbd5e1;
+    }
+
+    .fields {
+      display: flex;
+      gap: 10px;
+    }
+
+    input {
+      width: 60px;
+      padding: 6px;
+      text-align: center;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      background-color: #334155;
+      color: #e2e8f0;
+    }
+
+    input:focus {
+      outline: 2px solid #0ea5e9;
+    }
+
+    .dropdown {
+      position: absolute;
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 10;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    .dropdown.grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+    }
+
+    .dropdown span {
+      padding: 6px;
+      cursor: pointer;
+      text-align: center;
+      border-radius: 4px;
+      color: #e2e8f0;
+    }
+
+    .dropdown span:hover {
+      background-color: #475569;
+    }
+
+    .today-link {
+      color: #0ea5e9;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    #duration-result {
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #38bdf8;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="date-container">
+      <div class="date-group">
+        <h2>Start Date</h2>
+        <div class="fields">
+          <div>
+            <label class="label">Day:</label><br>
+            <input id="start-day" readonly>
+          </div>
+          <div>
+            <label class="label">Month:</label><br>
+            <input id="start-month" readonly>
+          </div>
+          <div>
+            <label class="label">Year:</label><br>
+            <input id="start-year" readonly>
+          </div>
+        </div>
+        <span class="today-link" onclick="setToday('start')">Today</span>
+      </div>
+
+      <div class="date-group">
+        <h2>End Date</h2>
+        <div class="fields">
+          <div>
+            <label class="label">Day:</label><br>
+            <input id="end-day" readonly>
+          </div>
+          <div>
+            <label class="label">Month:</label><br>
+            <input id="end-month" readonly>
+          </div>
+          <div>
+            <label class="label">Year:</label><br>
+            <input id="end-year" readonly>
+          </div>
+        </div>
+        <span class="today-link" onclick="setToday('end')">Today</span>
+      </div>
+    </div>
+
+    <div id="duration-result">Duration: 0 days</div>
+
+    <!-- Dropdowns -->
+    <div id="day-dropdown" class="dropdown grid"></div>
+    <div id="month-dropdown" class="dropdown grid" style="grid-template-columns: repeat(3, 1fr);"></div>
+    <div id="year-dropdown" class="dropdown grid" style="grid-template-columns: repeat(4, 1fr); max-height: 200px; overflow-y: auto;"></div>
+  </div>
+
+  <script>
+    const days = [...Array(31).keys()].map(i => String(i + 1).padStart(2, '0'));
+    const months = [
+      "01 - Jan", "02 - Feb", "03 - Mar", "04 - Apr", "05 - May", "06 - Jun",
+      "07 - Jul", "08 - Aug", "09 - Sep", "10 - Oct", "11 - Nov", "12 - Dec"
+    ];
+    const years = Array.from({ length: 24 }, (_, i) => 2004 + i);
+
+    const dropdowns = {
+      day: document.getElementById('day-dropdown'),
+      month: document.getElementById('month-dropdown'),
+      year: document.getElementById('year-dropdown'),
+    };
+
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('click', () => {
+        hideDropdowns();
+        const rect = input.getBoundingClientRect();
+        const type = input.id.includes('day') ? 'day' : input.id.includes('month') ? 'month' : 'year';
+        const dropdown = dropdowns[type];
+        dropdown.style.left = rect.left + 'px';
+        dropdown.style.top = rect.bottom + window.scrollY + 5 + 'px';
+        dropdown.setAttribute('data-target', input.id);
+        dropdown.innerHTML = '';
+
+        const values = type === 'day' ? days : type === 'month' ? months : years;
+        values.forEach(val => {
+          const span = document.createElement('span');
+          span.textContent = val;
+          span.onclick = () => {
+            document.getElementById(input.id).value = type === 'month' ? val.split(' ')[0] : val;
+            hideDropdowns();
+            updateDuration();
+          };
+          dropdown.appendChild(span);
+        });
+
+        dropdown.style.display = 'grid';
+      });
+    });
+
+    document.body.addEventListener('click', e => {
+      if (!e.target.matches('input')) hideDropdowns();
+    });
+
+    function hideDropdowns() {
+      Object.values(dropdowns).forEach(d => d.style.display = 'none');
+    }
+
+    function setToday(type) {
+      const now = new Date();
+      document.getElementById(`${type}-day`).value = String(now.getDate()).padStart(2, '0');
+      document.getElementById(`${type}-month`).value = String(now.getMonth() + 1).padStart(2, '0');
+      document.getElementById(`${type}-year`).value = now.getFullYear();
+      updateDuration();
+    }
+
+    function updateDuration() {
+      const getDate = (prefix) => {
+        const d = document.getElementById(`${prefix}-day`).value;
+        const m = document.getElementById(`${prefix}-month`).value;
+        const y = document.getElementById(`${prefix}-year`).value;
+        return (d && m && y) ? new Date(`${y}-${m}-${d}`) : null;
+      };
+
+      const start = getDate('start');
+      const end = getDate('end');
+
+      if (start && end) {
+        const msPerDay = 1000 * 60 * 60 * 24;
+        const diffDays = Math.ceil((end - start) / msPerDay);
+        let y = 0, m = 0, d = 0;
+
+        if (diffDays >= 0) {
+          let tempDate = new Date(start);
+          while (new Date(tempDate.getFullYear() + 1, tempDate.getMonth(), tempDate.getDate()) <= end) {
+            tempDate.setFullYear(tempDate.getFullYear() + 1);
+            y++;
+          }
+          while (new Date(tempDate.getFullYear(), tempDate.getMonth() + 1, tempDate.getDate()) <= end) {
+            tempDate.setMonth(tempDate.getMonth() + 1);
+            m++;
+          }
+          while (new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate() + 1) <= end) {
+            tempDate.setDate(tempDate.getDate() + 1);
+            d++;
+          }
+        }
+
+        let display = `Duration: ${y}y ${m}m ${d}d [${diffDays} days]`;
+        document.getElementById('duration-result').textContent = display;
+      }
+    }
+  </script>
+</body>
+</html>
