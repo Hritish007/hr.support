@@ -9,6 +9,244 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HR Support</title>
+  <link rel="icon" href="welcome.jpg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+   :root {
+  --bg: #1c1c28;
+  --shadow-light: rgba(255, 255, 255, 0.05);
+  --shadow-dark: rgba(0, 0, 0, 0.6);
+  --primary: #1c1c28;
+  --accent: #4a90e2;
+  --text-main: #eaeaea;
+  --text-muted: #aaa;
+}
+
+* {
+
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(ellipse at bottom, #0a0a23 0%, #000010 100%);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-main);
+}
+
+.hero-line {
+  color: var(--text-main);
+}
+
+/* Main Card */
+.card {
+  background: #131324;
+  box-shadow:
+    0 10px 25px var(--shadow-dark),
+    0 0 0 1px var(--shadow-light);
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  animation: fadeIn 1s ease forwards;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+.card p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Start Button */
+.start-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+  transition: all 0.3s ease;
+}
+
+.start-btn:hover {
+  background: #357bd8;
+  box-shadow: 0 6px 16px rgba(74, 144, 226, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Footer */
+footer {
+  position: absolute;
+  bottom: 20px;
+  text-align: center;
+  width: 100%;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .card {
+    padding: 2rem 1.5rem;
+  }
+
+  .card h1 {
+    font-size: 1.8rem;
+  }
+
+  .card p {
+    font-size: 1rem;
+  }
+}
+
+/* Starfield (Background Layer) */
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Twinkling Stars */
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 3s infinite ease-in-out;
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.3; }
+}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Welcome to HR Support</h1>
+    <p id="hero-line"></p>
+    <button class="start-btn" onclick="location.href='router.html'">Get Started</button><br>
+  </div>
+  <div id="starfield"></div>
+  
+
+  <footer>&copy; <span id="year"></span> HritishShaqya. All rights reserved.</footer>
+
+  <script>
+    // Hero Line Message
+    const lines = [
+      "Time, tasks, and support — it’s all in your hands.",
+      "Success starts with how you manage time, tasks, and support.",
+      "You own the clock, the checklist, and the challenge.",
+      "Manage time, handle tasks, support smart — it’s up to you.",
+      "Time and tasks don’t wait — neither should you.",
+      "It’s not just work — it’s how you work that counts.",
+      "Balance time, conquer tasks, lead with support.",
+      "The way you manage defines the way you succeed.",
+      "Time is limited, but your impact doesn’t have to be.",
+      "Own your time, master your tasks, support your team.",
+      "Your time, your tasks, your team — your success.",
+      "You don’t need more hours — just better focus.",
+      "Behind every goal is a task well-managed.",
+      "Work smart. Lead strong. Finish well.",
+    ];const display = document.getElementById("hero-line");
+    let currentIndex = parseInt(localStorage.getItem("heroLineIndex")) || 0;
+    display.textContent = lines[currentIndex];
+    localStorage.setItem("heroLineIndex", (currentIndex + 1) % lines.length);
+
+    const starfield = document.getElementById('starfield');
+
+  // Create twinkling stars
+  function createStars(count = 240) {
+    for(let i = 0; i < count; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      const size = Math.random() * 1.8 + 0.7; // 0.7 to 2.5px
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+      star.style.top = (Math.random() * 100) + 'vh';
+      star.style.left = (Math.random() * 100) + 'vw';
+      star.style.animationDuration = (2 + Math.random() * 3) + 's';
+      starfield.appendChild(star);
+    }
+  }
+
+  // Create a shooting star element and animate it
+  function shootingStar() {
+    const star = document.createElement('div');
+    star.classList.add('shooting-star');
+    // Start somewhere random in the top-left quadrant (but off-screen on left)
+    star.style.top = (Math.random() * 30 + 10) + 'vh';
+    star.style.left = '-150px';
+    starfield.appendChild(star);
+
+    // Trigger animation with transform & opacity
+    star.style.opacity = '1';
+    star.style.transition = 'transform 1.2s ease-out, opacity 1.2s ease-out';
+    requestAnimationFrame(() => {
+      star.style.transform = 'translate(110vw, 40vh) rotate(45deg)';
+      star.style.opacity = '0';
+    });
+
+    // Remove after animation
+    setTimeout(() => {
+      star.remove();
+    }, 1200);
+  }
+
+  createStars();
+
+  // Repeat shooting stars at random intervals between 1-4 seconds
+  setInterval(() => {
+    shootingStar();
+  }, Math.random() * 3000 + 1000);
+
+  </script>
+ 
+</body>
+</html>
+
     :root {
       --bg: rgb(44, 44, 44);
       --shadow-light: rgba(20, 18, 18, 0.788);
