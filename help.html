@@ -3,79 +3,146 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>HR.Help</title>
+  <title>HR.Help Page</title>
   <link rel="icon" type="image/png" href="help.jpg">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: rgb(44, 44, 44);
-       box-shadow: rgba(20, 18, 18, 0.788);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+   /* Night Sky Background */
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(ellipse at bottom, #0a0a23 0%, #000010 100%);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+  color: white;
+}
 
-    .step-container {
-      text-align: center;
-      background: #fff;
-      padding: 30px;
-      border-radius: 20px;
-      width: 300px;
-      display: none;
-      flex-direction: column;
-      gap: 15px;
-      box-shadow: rgba(20, 18, 18, 0.788);
-    }
+/* Step container with solid background */
+.step-container {
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+  width: 320px;
+  background: #1b1b33; /* Dark solid background */
+  border-radius: 24px;
+  padding: 35px 30px;
+  box-shadow:
+    0 12px 20px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.05); /* subtle border for separation */
+  transition: all 0.3s ease;
+  text-align: center;
+  z-index: 10; /* ensure it's above the stars */
+}
 
-    .step-container.active {
-      display: flex;
-      box-shadow: rgba(20, 18, 18, 0.788);
-    }
+/* Starfield pushed further back */
+#starfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0; /* lower z-index so it stays behind everything */
+}
 
-    .step-title {
-      font-weight: bold;
-      font-size: 20px;
-    }
 
-    .step-subtitle {
-      font-size: 16px;
-      color: #555;
-      margin-bottom: 10px;
-    }
+.step-container.active {
+  display: flex;
+}
 
-    .btn {
-      padding: 12px;
-      border: none;
-      border-radius: 25px;
-      background: white;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      transition: all 0.2s;
-      font-weight: bold;
-    }
+.step-title {
+  font-weight: 700;
+  font-size: 20px;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
 
-    .btn:hover {
-      background: #d8d7d7;
-    }
+.step-subtitle {
+  font-size: 17px;
+  color: #ccc;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
 
-    .btn-back {
-      background: #007bff;
-      color: white;
-      margin-top: 10px;
-      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
-    }
+/* Primary Button */
+.btn {
+  padding: 14px 0;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(145deg, #1e1e2a, #2c2c3c);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  color: #eee;
+  letter-spacing: 0.03em;
+  transition: all 0.3s ease;
+  user-select: none;
+}
 
-    .btn-back:hover {
-      background: #0056b3;
-    }
+.btn:hover {
+  background: linear-gradient(145deg, #2f2f40, #3a3a55);
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.5),
+    inset 0 2px 2px rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+/* Back Button (Accent Color) */
+.btn-back {
+  background: linear-gradient(145deg, #007bffd5, #0057b3da);
+  color: white;
+  box-shadow:
+    4px 4px 12px rgba(0, 123, 255, 0.5),
+    -4px -4px 12px rgba(0, 86, 179, 0.6);
+  margin-top: 12px;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background: linear-gradient(145deg, #0056b3, #003f7f);
+  box-shadow:
+    2px 2px 8px rgba(0, 86, 179, 0.7),
+    -2px -2px 8px rgba(0, 63, 127, 0.8);
+}
+
+/* Starfield Layer */
+#starfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 1;
+}
+
+/* Small Twinkling Stars */
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.3; }
+}
+
   </style>
 </head>
 <body>
 
- <div class="step-container active" id="step10000">
+ <div class="step-container active" id="step100">
     <div class="step-title">Check details in C-Support</div>
-    <div class="step-subtitle"><strong>1.</strong> Bandwidth verified,<br><br> <strong>2.</strong> Current RX power checked <-26,<br><br> <strong>3.</strong> OLT RX difference <5 </div>
+    <div class="step-subtitle"><strong>1.</strong> Bandwidth verified,<br><br> <strong>2.</strong> Current RX power checked <-26,<br><br> <strong>3.</strong> OLT RX difference <5" </div>
     <button class="btn" onclick="goToStep(1)">All checked, Go to Step 1 </button>
   <div><b><strong>Good Luck.</strong></b></div>
   </div>
@@ -484,8 +551,56 @@
           <div>✅ Ticket header:Assign on the "Channel interference/Channel interference in 5GHz"</div>
       <button class="btn btn-back" onclick="goBack()">Back</button>
         </div>
+        <div id="starfield"></div>
 
 <script>
+
+  const starfield = document.getElementById('starfield');
+
+  // Create twinkling stars
+  function createStars(count = 120) {
+    for(let i = 0; i < count; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      const size = Math.random() * 1.8 + 0.7; // 0.7 to 2.5px
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+      star.style.top = (Math.random() * 100) + 'vh';
+      star.style.left = (Math.random() * 100) + 'vw';
+      star.style.animationDuration = (2 + Math.random() * 3) + 's';
+      starfield.appendChild(star);
+    }
+  }
+
+  // Create a shooting star element and animate it
+  function shootingStar() {
+    const star = document.createElement('div');
+    star.classList.add('shooting-star');
+    // Start somewhere random in the top-left quadrant (but off-screen on left)
+    star.style.top = (Math.random() * 30 + 10) + 'vh';
+    star.style.left = '-150px';
+    starfield.appendChild(star);
+
+    // Trigger animation with transform & opacity
+    star.style.opacity = '1';
+    star.style.transition = 'transform 1.2s ease-out, opacity 1.2s ease-out';
+    requestAnimationFrame(() => {
+      star.style.transform = 'translate(110vw, 40vh) rotate(45deg)';
+      star.style.opacity = '0';
+    });
+
+    // Remove after animation
+    setTimeout(() => {
+      star.remove();
+    }, 1200);
+  }
+
+  createStars();
+
+  // Repeat shooting stars at random intervals between 1-4 seconds
+  setInterval(() => {
+    shootingStar();
+  }, Math.random() * 3000 + 1000);
   const stepHistory = [];
 
   function goToStep(stepNum) {
@@ -508,7 +623,5 @@
     }
   }
 </script>
-
-
 </body>
 </html>
