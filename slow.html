@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,66 @@
     <link rel="stylesheet" href="trys.css">
     <script src="try.js"></script>
     <link rel="icon" type="image/png" href="hr.png.jpg">
+    <style>
+     
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      animation: fadeIn 0.4s ease-out;
+      overflow: hidden;
+    }
+
+    .overlay img {
+      max-width: none;
+      max-height: none;
+      border: 8px solid cyan;
+      border-radius: 10px;
+      box-shadow: 0 0 25px cyan;
+      animation: zoomIn 0.5s ease;
+      transition: transform 0.2s ease-out;
+      cursor: grab;
+      position: relative;
+    }
+
+    .close1-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 24px;
+      color: cyan;
+      background: none;
+      border: 2px solid cyan;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 10000;
+    }
+
+    .close1-btn:hover {
+      background-color: cyan;
+      color: #111;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+    </style>
 </head>
 <body>
     <header>
@@ -32,8 +93,12 @@
         <section class="section" aria-labelledby="slow">
             <h2 id="slow">
   Slow
-  <a href="help.html" target="_blank" title="Open help page" style="text-decoration: none; margin-left: 8px; font-size: 0.9em;">❓</a>
-</h2>
+  <a href="help.html" target="_blank" title="Open help page" style=" margin-left: 8px; font-size: 0.9em;">❓</a>
+  <button style=" margin-left: 800px;" onclick="showPrompt()">🔍</button></h2>
+  <div class="overlay" id="overlay">
+    <button class="close1-btn" onclick="close1Overlay()">X</button>
+    <img id="displayImage" src="" alt="Result">
+  </div>
             <div id="text-container">
                 <p><strong>Speed test fine</strong></p>
                 <div class="text-block" onclick="copyText(event, this)">
@@ -110,6 +175,87 @@ window.addEventListener("click", function (event) {
     popup.style.display = "none";
   }
 });
+
+
+const overlay = document.getElementById("overlay");
+    const image = document.getElementById("displayImage");
+
+    let scale = 1;
+    let isDragging = false;
+    let startX = 0, startY = 0;
+    let offsetX = 0, offsetY = 0;
+
+    function showPrompt() {
+      const answer = prompt("FOR THE SLOW FLOW-CHART, \nEnter 'main' for The Main Router or Enter 'beacon' for The Beacon Router.");
+      if (!answer) return;
+
+      const input = answer.trim().toLowerCase();
+
+      if (input === "main") {
+        image.src = "main.png"; // Replace with your image
+        image.alt = "Main Image";
+        showImage();
+      } else if (input === "beacon") {
+        image.src = "second.png"; // Replace with your image
+        image.alt = "Second Image";
+        showImage();
+      } else {
+        alert("Please enter 'main' or 'beacon'.");
+      }
+    }
+
+    function showImage() {
+      overlay.style.display = "flex";
+      scale = 0.75;
+      offsetX = 0;
+      offsetY = 0;
+      updateTransform();
+    }
+
+    function close1Overlay() {
+      overlay.style.display = "none";
+    }
+
+    function updateTransform() {
+      image.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+    }
+
+    // Zoom with wheel
+    image.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      const delta = Math.sign(e.deltaY);
+      scale += delta < 0 ? 0.1 : -0.1;
+      scale = Math.min(Math.max(scale, 0.5), 5);
+      updateTransform();
+    });
+
+    // Drag functionality
+    image.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      startX = e.clientX - offsetX;
+      startY = e.clientY - offsetY;
+      image.style.cursor = "grabbing";
+    });
+
+    window.addEventListener("mouseup", () => {
+      isDragging = false;
+      image.style.cursor = "grab";
+    });
+
+    window.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      offsetX = e.clientX - startX;
+      offsetY = e.clientY - startY;
+      updateTransform();
+    });
+
+    // Double click to reset
+    image.addEventListener("dblclick", () => {
+      scale = 0.75;
+      offsetX = 0;
+      offsetY = 0;
+      updateTransform();
+    });
     </script>
 </body>
 </html>
