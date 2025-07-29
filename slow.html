@@ -41,7 +41,7 @@
       position: relative;
     }
 
-    .close1-btn {
+    .close-btn {
       position: absolute;
       top: 20px;
       right: 30px;
@@ -56,7 +56,7 @@
       z-index: 10000;
     }
 
-    .close1-btn:hover {
+    .close-btn:hover {
       background-color: cyan;
       color: #111;
     }
@@ -91,12 +91,11 @@
 
      <main class="container" id="main-content">
         <section class="section" aria-labelledby="slow">
-            <h2 id="slow">
-  Slow
-  <a href="help.html" target="_blank" title="Open help page" style=" margin-left: 8px; font-size: 0.9em;">❓</a>
-  <button style=" margin-left: 800px;" onclick="showPrompt()">🔍</button></h2>
+            <p><strong id="slow" style="font-size: 1.20rem;">Slow
+  <a href="help.html" target="_blank" title="Open help page" style=" margin-left: 8px;">❓</a>
+  <button style=" margin-left: 800px;" onclick="showPrompt()">🔍</button></strong></p><br>
   <div class="overlay" id="overlay">
-    <button class="close1-btn" onclick="close1Overlay()">X</button>
+    <button class="close-btn" onclick="closeOverlay()">X</button>
     <img id="displayImage" src="" alt="Result">
   </div>
             <div id="text-container">
@@ -212,7 +211,7 @@ const overlay = document.getElementById("overlay");
       updateTransform();
     }
 
-    function close1Overlay() {
+    function closeOverlay() {
       overlay.style.display = "none";
     }
 
