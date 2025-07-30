@@ -94,10 +94,7 @@
             <p><strong id="slow" style="font-size: 1.20rem;">Slow
   <a href="help.html" target="_blank" title="Open help page" style=" margin-left: 8px;">❓</a>
   <button style=" margin-left: 800px;" onclick="showPrompt()">🔍</button></strong></p><br>
-  <div class="overlay" id="overlay">
-    <button class="close-btn" onclick="closeOverlay()">X</button>
-    <img id="displayImage" src=""  alt="">
-  </div>
+ 
             <div id="text-container">
                 <p><strong>Speed test fine</strong></p>
                 <div class="text-block" onclick="copyText(event, this)">
@@ -129,6 +126,10 @@
                     <p>Current rx power is low, Please proceed accordingly.</p>
                 </div>
             </div>  
+             <div class="overlay" id="overlay">
+    <button class="close-btn" onclick="closeOverlay()">X</button>
+    <img id="displayImage" src=""  alt="">
+  </div>
       <div class="popup" id="myPopup">
     <div class="popup-content">
       <span class="close-btn" onclick="hidePopup()">&times;</span>
