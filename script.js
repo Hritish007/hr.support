@@ -1,5 +1,5 @@
 function showNotification() {
-        alert("Welcome, HR Support User!\n     If 🔍 is not working, just reload the page or press Ctrl+R to fix it.\n                      Thank you for choosing HR Support!");
+        alert("Welcome, HR Support User!\n\n     If 🔍 is not working, just reload the page or press Ctrl+R to fix it.\n                      Thank you for choosing HR Support!");
         }
   // Apply saved theme before styles load
   (function () {
