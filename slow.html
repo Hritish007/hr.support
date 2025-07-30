@@ -96,7 +96,7 @@
   <button style=" margin-left: 800px;" onclick="showPrompt()">🔍</button></strong></p><br>
   <div class="overlay" id="overlay">
     <button class="close-btn" onclick="closeOverlay()">X</button>
-    <img id="displayImage" src=""  alt="🡺Please reload this page">
+    <img id="displayImage" src=""  alt="">
   </div>
             <div id="text-container">
                 <p><strong>Speed test fine</strong></p>
@@ -179,29 +179,39 @@ window.addEventListener("click", function (event) {
 const overlay = document.getElementById("overlay");
     const image = document.getElementById("displayImage");
 
-    let scale = 1;
+    let scale = 0.75;
     let isDragging = false;
     let startX = 0, startY = 0;
     let offsetX = 0, offsetY = 0;
 
     function showPrompt() {
-      const answer = prompt("FOR THE SLOW FLOW-CHART, \nEnter 'main' for The Main Router or Enter 'beacon' for The Beacon Router.");
-      if (!answer) return;
+  const answer = prompt("FOR THE SLOW FLOW-CHART, \nEnter 'main' for The Main Router or Enter 'beacon' for The Beacon Router.");
+  if (!answer) return;
+  const input = answer.trim().toLowerCase();
 
-      const input = answer.trim().toLowerCase();
+  let imgPath = "";
+  if (input === "main") {
+    imgPath = "main.png";
+  } else if (input === "beacon") {
+    imgPath = "second.png";
+  } else {
+    alert("Please enter 'main' or 'beacon'.");
+    return;
+  }
 
-      if (input === "main") {
-        image.src = "main.png"; // Replace with your image
-        image.alt = "Main Image";
-        showImage();
-      } else if (input === "beacon") {
-        image.src = "second.png"; // Replace with your image
-        image.alt = "Second Image";
-        showImage();
-      } else {
-        alert("Please enter 'main' or 'beacon'.");
-      }
-    }
+  // Preload image and show only if it loads successfully
+  const tempImg = new Image();
+  tempImg.onload = function () {
+    image.src = imgPath;
+    image.alt = "";
+    showImage();
+  };
+  tempImg.onerror = function () {
+    alert("Image failed to load. Please make sure the file exists.");
+  };
+  tempImg.src = imgPath;
+}
+
 
     function showImage() {
       overlay.style.display = "flex";
