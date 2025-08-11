@@ -4,15 +4,692 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Issue Pin</title>
-    <link rel="stylesheet" href="own.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+    --primary-color: hwb(221 15% 8%);
+    --secondary-color: #000000;
+    --error-color: #dc2626;
+    --success-color: #16a34a;
+    --disabled-color: #9ca3af;
+
+    
+}
+
+/* Light theme */
+[data-theme="light"] {
+    --background-color: #000000;
+    --text-color: #1f2937;
+    --section-bg: #ffffff;
+    --form-bg: #ffffff;
+    --input-border: #d1d5db;
+    --input-focus-shadow: rgba(37, 99, 235, 0.1);
+    --border-color: #3498db;
+    --header-footer-bg: var(--secondary-color);
+    --header-footer-text: white;
+    --notification-bg: black;
+    --notification-text: white;
+    --button-hover-bg: #1e40af;
+    --delete-enabled-bg: var(--error-color);
+    --delete-enabled-hover-bg: #b91c1c;
+    --reset-bg: var(--error-color);
+    --reset-hover-bg: #b91c1c;
+    --toast-success: #16a34a;
+    --toast-error: #dc2626;
+    --toast-info: #2563eb;
+    --toast-warning: #d97706;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+    --background-color: #000000;
+    --text-color: #e5e7eb;
+    --section-bg: #11112b;
+    --form-bg: #11112b;
+    --input-border: #6b7280;
+    --input-focus-shadow: rgba(96, 165, 250, 0.2);
+    --border-color: #60a5fa;
+    --header-footer-bg: #000000;
+    --header-footer-text: #d1d5db;
+    --notification-bg: #000000;
+    --notification-text: #e5e7eb;
+    --button-hover-bg: #3b82f6;
+    --delete-enabled-bg: #ef4444;
+    --delete-enabled-hover-bg: #dc2626;
+    --reset-bg: #ef4444;
+    --reset-hover-bg: #dc2626;
+    --toast-success: #22c55e;
+    --toast-error: #ef4444;
+    --toast-info: #3b82f6;
+    --toast-warning: #f59e0b;
+}
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  scroll-behavior: smooth;
+}
+.container {
+  max-width: 1050px;
+  background-color: #2c2c2c;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+}
+
+.container.navbar {
+  max-width: 1050px;
+  margin: 0 auto;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Header styles */
+header {
+    background-color: var(--header-footer-bg);
+    padding: 1rem 0;
+    margin-bottom: 0.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navbar-brand {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .navbar-brand {
+            position: relative;
+            padding-left: 30px; /* Space for arrow */
+            text-decoration: none;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        
+        /* Right arrow before HR Support */
+        .navbar-brand::before {
+            content: '➔';
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transform: translateX(-20px);
+            color: #007bff;
+            font-size: 1.4rem;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Pulsing animation keyframes */
+        @keyframes pulseArrow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+        
+        /* Hover effect */
+        .navbar-brand:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+            animation: pulseArrow 0.5s ease-in-out infinite;
+        }
+        
+        .navbar-brand:hover {
+            color: white;
+        }
+
+/* Navigation links */
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links img {
+    width: 40px;
+}
+    #timer {
+      font-size: 16px;
+      font-weight: bold;
+      color: white
+    
+    }
+/* Theme toggle button */
+#theme-toggle {
+    padding: 0;
+    color: var(--header-footer-text);
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Main content */
+main {
+    min-height: calc(100vh - 200px);
+}
+
+/* Section styles */
+.section {
+    background-color: var(--section-bg);
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--border-color);
+    border-right: 5px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(212, 196, 196, 0.05);
+    margin-bottom: 30px;
+}
+
+.section h2 {
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+}
+
+/* Form container */
+.form-container {
+    background-color: var(--form-bg);
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--border-color);
+    border-right: 5px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(212, 196, 196, 0.05);
+    margin-bottom: 30px;
+}
+
+/* Note container */
+.note-container {
+    background-color: var(--form-bg);
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--border-color);
+    border-right: 5px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(212, 196, 196, 0.05);
+    margin-bottom: 30px;
+}
+
+/* Form row */
+.form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    position: relative;
+}
+
+/* Form group */
+.form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.form-group.username,
+.form-group.phone {
+    flex: 0 0 200px;
+}
+
+.form-group.issue {
+    flex: 2 0 300px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.form-group input,
+.form-note textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: var(--form-bg);
+    color: var(--text-color);
+}
+
+.form-group input:focus,
+.form-note textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--input-focus-shadow);
+}
+
+.form-group input.error {
+    border-color: var(--error-color);
+}
+
+/* Error message */
+.error-message {
+    color: var(--error-color);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+/* Delete button */
+.delete-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: not-allowed;
+    height: fit-content;
+}
+
+.delete-btn:not(:disabled) {
+    background-color: var(--button-hover-bg);
+}
+
+.delete-btn:disabled {
+    background-color: var(--disabled-color);
+    cursor: not-allowed;
+}
+
+.delete-btn.enabled {
+    background-color: var(--delete-enabled-bg);
+    cursor: pointer;
+}
+
+.delete-btn.enabled:hover {
+    background-color: var(--delete-enabled-hover-bg);
+}
+
+/* Reset button */
+.reset-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.reset-btn {
+    background-color: var(--reset-bg);
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    height: fit-content;
+}
+
+.reset-btn:hover {
+    background-color: var(--reset-hover-bg);
+}
+
+/* Solved checkbox */
+.solved-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--success-color);
+}
+
+/* Checkbox container */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: fit-content;
+}
+
+.checkbox-container label {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* Form note */
+.form-note {
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+/* Notification styles */
+.notification {
+    position: fixed;
+    background-color: var(--notification-bg);
+    color: var(--notification-text);
+    padding: 8px 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    z-index: 1000;
+    font-size: 14px;
+}
+
+/* Toast notification system */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    position: relative;
+    min-width: 250px;
+    max-width: 350px;
+    padding: 15px 20px;
+    border-radius: 6px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    animation: slideIn 0.3s ease-out forwards;
+    overflow: hidden;
+}
+
+.toast::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.toast.success {
+    background-color: var(--toast-success);
+}
+
+.toast.error {
+    background-color: var(--toast-error);
+}
+
+.toast.info {
+    background-color: var(--toast-info);
+}
+
+.toast.warning {
+    background-color: var(--toast-warning);
+}
+
+.toast-icon {
+    margin-right: 12px;
+    font-size: 20px;
+}
+
+.toast-content {
+    flex: 1;
+}
+
+.toast-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.toast-message {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.toast-close {
+    margin-left: 12px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.toast-close:hover {
+    opacity: 1;
+}
+
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.toast-progress-bar {
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    animation: progressBar linear forwards;
+}
+
+/* Clipboard icon styles */
+.copy-icon {
+    margin-left: 8px;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.copy-icon:hover {
+    color: var(--button-hover-bg);
+}
+
+.copy-icon:active {
+    transform: scale(0.95);
+}
+
+/* Clipboard button for textarea */
+.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 1rem;
+    z-index: 1;
+}
+
+.copy-btn:hover {
+    color: var(--button-hover-bg);
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+}
+
+/* Tooltip for clipboard */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes progressBar {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+/* Footer styles */
+.footer {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: var(--header-footer-bg);
+    color: var(--header-footer-text);
+    width: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .nav-links img {
+        width: 30px;
+    }
+
+    .navbar-brand {
+        font-size: 1.2rem;
+        padding-left: 25px;
+    }
+
+    .navbar-brand::before {
+        font-size: 1.2rem;
+    }
+
+    .section {
+        padding: 15px;
+    }
+
+    .section h2 {
+        font-size: 1.5rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .delete-btn {
+        width: 100%;
+    }
+
+    .reset-btn-container {
+        justify-content: center;
+    }
+
+    .reset-btn {
+        width: 100%;
+    }
+
+    .checkbox-container {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .form-group.username,
+    .form-group.phone,
+    .form-group.issue {
+        flex: 1 0 100%;
+    }
+
+    #theme-toggle {
+        padding: 0;
+        font-size: 0.8rem;
+    }
+    
+    .toast-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+    }
+    
+    .toast {
+        min-width: auto;
+        width: calc(100% - 20px);
+        max-width: none;
+    }
+    
+    .copy-btn {
+        top: 5px;
+        right: 5px;
+    }
+}
+</style>
     <script src="main.js"></script>
 
     <link rel="icon" type="image/png" href="pinn.png" />
 </head>
 <body>
+    <div class="toast-container" id="toast-container"></div>
+    
     <header>
         <nav class="navbar container">
             <a class="navbar-brand" onclick="showNotification()">HR Support</a>
+            
             <div class="nav-links">
                 <div id="timer">00:00:00</div>
                 <button id="theme-toggle" aria-label="Switch to dark theme">🌙</button>
@@ -26,7 +703,10 @@
                 <h2 id="form-title"> Pin your Issue</h2><br />
                 <div class="form-row">
                     <div class="form-group phone">
-                        <label for="phone"><strong>Called Number</strong></label>
+                        <label for="phone">
+                            <i class="fas fa-phone"></i> Contact Number
+                            <i class="fas fa-clipboard copy-icon" onclick="copyToClipboard('phone')" title="Copy phone number"></i>
+                        </label>
                         <input
                             type="tel"
                             id="phone"
@@ -41,12 +721,18 @@
                         <div class="error-message" id="phone-error">Please enter a valid phone number (7-15 digits)</div>
                     </div>
                     <div class="form-group username">
-                        <label for="username"><strong>Username</strong></label>
+                        <label for="username">
+                            <i class="fas fa-user"></i> Username
+                            <i class="fas fa-clipboard copy-icon" onclick="copyToClipboard('username')" title="Copy username"></i>
+                        </label>
                         <input type="text" id="username" name="username" placeholder="Enter username" required aria-describedby="username-error" />
                         <div class="error-message" id="username-error">Please enter a valid username</div>
                     </div>
                     <div class="form-group issue">
-                        <label for="issue"><strong>Issue Description</strong></label>
+                        <label for="issue">
+                            <i class="fas fa-exclamation-circle"></i> Issue Description
+                            <i class="fas fa-clipboard copy-icon" onclick="copyToClipboard('issue')" title="Copy issue description"></i>
+                        </label>
                         <input type="text" id="issue" name="issue" placeholder="Describe your issue" required aria-describedby="issue-error" />
                         <div class="error-message" id="issue-error">Please describe the issue</div>
                     </div>
@@ -60,10 +746,12 @@
         </div>
 
         <section class="note-container">
-            <h2 id="note">Note</h2>
+            <h2 id="note">Note <i class="fas fa-clipboard copy-icon" onclick="copyToClipboard('note-text')" title="Copy note"></i></h2>
             <form id="NoteForm">
                 <div class="form-note">
                     <textarea id="note-text" rows="8" placeholder="Enter your note here"></textarea>
+                    <button type="button" class="copy-btn" onclick="copyToClipboard('note-text')" title="Copy note">
+                    </button>
                     <div id="note-error" class="error-message"></div>
                 </div>
                 <div class="reset-btn-container">
@@ -77,7 +765,118 @@
     </main>
  
     <script>
-    
+        // Toast notification system
+        function showToast({ title, message, type = 'info', duration = 5000 }) {
+            const toastContainer = document.getElementById('toast-container');
+            if (!toastContainer) return;
+            
+            const icons = {
+                success: '✓',
+                error: '✕',
+                warning: '⚠',
+                info: 'i'
+            };
+            
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <span class="toast-icon">${icons[type]}</span>
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    <div class="toast-message">${message}</div>
+                </div>
+                <span class="toast-close">&times;</span>
+                <div class="toast-progress">
+                    <div class="toast-progress-bar" style="animation-duration: ${duration}ms"></div>
+                </div>
+            `;
+            
+            const closeBtn = toast.querySelector('.toast-close');
+            closeBtn.addEventListener('click', () => {
+                removeToast(toast);
+            });
+            
+            toastContainer.appendChild(toast);
+            
+            if (duration > 0) {
+                setTimeout(() => {
+                    removeToast(toast);
+                }, duration);
+            }
+            
+            return toast;
+        }
+        
+        function removeToast(toast) {
+            toast.style.animation = 'slideOut 0.3s ease-out forwards';
+            toast.addEventListener('animationend', () => {
+                toast.remove();
+            });
+        }
+        
+        // Copy to clipboard function
+        function copyToClipboard(fieldId) {
+            const element = document.getElementById(fieldId);
+            if (!element) return;
+            
+            // Select the text
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                element.select();
+                element.setSelectionRange(0, 99999); // For mobile devices
+            } else {
+                // For other elements, create a range to select
+                const range = document.createRange();
+                range.selectNode(element);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+            }
+            
+            try {
+                document.execCommand('copy');
+                
+                let fieldName = '';
+                if (fieldId === 'phone' || fieldId.includes('phone-')) {
+                    fieldName = 'Phone number';
+                } else if (fieldId === 'username' || fieldId.includes('username-')) {
+                    fieldName = 'Username';
+                } else if (fieldId === 'issue' || fieldId.includes('issue-')) {
+                    fieldName = 'Issue description';
+                } else if (fieldId === 'note-text') {
+                    fieldName = 'Note';
+                }
+                
+                showToast({
+                    title: 'Copied!',
+                    message: `${fieldName} copied to clipboard`,
+                    type: 'success',
+                    duration: 2000
+                });
+            } catch (err) {
+                showToast({
+                    title: 'Error',
+                    message: 'Failed to copy text',
+                    type: 'error',
+                    duration: 2000
+                });
+            }
+            
+            // Remove selection
+            if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+            }
+        }
+
+        // Example usage:
+        function showNotification() {
+            showToast({
+                title: 'Welcome!',
+                message: 'You are using HR Support System',
+                type: 'info',
+                duration: 3000
+            });
+        }
+        
+        // Rest of your existing code...
         const form = document.getElementById("userForm");
         const noteForm = document.getElementById("NoteForm");
         const noteText = document.getElementById("note-text");
@@ -166,6 +965,10 @@
                 deleteBtn.classList.toggle("enabled", checkbox.checked);
             });
         }
+        // Show welcome notification
+        function showNotification() {
+                       alert("Welcome HR Support User!,\n        You can pin your issue here, and it will stay saved even if you reload or close the page. Thank you for choosing HR Support!");
+        }
 
         // Add event listeners to inputs and buttons in a row
         function addInputListeners(row) {
@@ -185,10 +988,28 @@
 
                             if (!isPhoneValid) {
                                 phoneInput.focus();
+                                showToast({
+                                    title: 'Validation Error',
+                                    message: 'Please enter a valid phone number',
+                                    type: 'warning',
+                                    duration: 3000
+                                });
                             } else if (!isUsernameValid) {
                                 usernameInput.focus();
+                                showToast({
+                                    title: 'Validation Error',
+                                    message: 'Please enter a valid username',
+                                    type: 'warning',
+                                    duration: 3000
+                                });
                             } else {
                                 addNewRow();
+                                showToast({
+                                    title: 'New Row Added',
+                                    message: 'A new issue row has been created',
+                                    type: 'success',
+                                    duration: 2000
+                                });
                             }
                         } else if (index < inputs.length - 1) {
                             inputs[index + 1].focus();
@@ -206,38 +1027,55 @@
                     saveFormData();
                 });
             });
-
             checkbox.addEventListener("change", () => {
                 deleteBtn.disabled = !checkbox.checked;
                 deleteBtn.classList.toggle("enabled", checkbox.checked);
                 saveFormData();
+                
+                if (checkbox.checked) {
+                    showToast({
+                        title: 'Issue Solved',
+                        message: 'This issue has been marked as solved',
+                        type: 'success',
+                        duration: 2000
+                    });
+                }
             });
-
             deleteBtn.addEventListener("click", () => {
                 row.remove();
                 updateDeleteButtons();
                 saveFormData();
+                showToast({
+                    title: 'Row Deleted',
+                    message: 'The issue row has been removed',
+                    type: 'info',
+                    duration: 2000
+                });
             });
         }
-
-        // Add a new row to the form, optionally with saved data
         function addNewRow(savedData = null) {
             const timestamp = Date.now();
             const newRow = document.createElement("div");
             newRow.className = "form-row";
             newRow.innerHTML = `
                 <div class="form-group phone">
-                    <label for="phone-${timestamp}"><strong>Called Number</strong></label>
+                    <label for="phone-${timestamp}"><strong>Called Number</strong>
+                        <i class="fas fa-clipboard copy-icon" onclick="copyToClipboard('phone-${timestamp}')" title="Copy phone number"></i>
+                    </label>
                     <input type="tel" id="phone-${timestamp}" name="phone" placeholder="Contact Number." required pattern="^\\d{7,15}$" maxlength="15" onkeypress="restrictToNumbers(event)" aria-describedby="phone-${timestamp}-error" />
                     <div class="error-message" id="phone-${timestamp}-error">Please enter a valid phone number (7-15 digits)</div>
                 </div>
                 <div class="form-group username">
-                    <label for="username-${timestamp}"><strong>Username</strong></label>
+                    <label for="username-${timestamp}"><strong>Username</strong>
+                        <i class="fas fa-clipboard copy-icon" onclick="copyToClipboard('username-${timestamp}')" title="Copy username"></i>
+                    </label>
                     <input type="text" id="username-${timestamp}" name="username" placeholder="Enter username" required aria-describedby="username-${timestamp}-error" />
                     <div class="error-message" id="username-${timestamp}-error">Please enter a valid username</div>
                 </div>
                 <div class="form-group issue">
-                    <label for="issue-${timestamp}"><strong>Issue Description</strong></label>
+                    <label for="issue-${timestamp}"><strong>Issue Description</strong>
+                        <i class="fas fa-clipboard copy-icon" onclick="copyToClipboard('issue-${timestamp}')" title="Copy issue description"></i>
+                    </label>
                     <input type="text" id="issue-${timestamp}" name="issue" placeholder="Describe your issue" required aria-describedby="issue-${timestamp}-error" />
                     <div class="error-message" id="issue-${timestamp}-error">Please describe the issue</div>
                 </div>
@@ -263,12 +1101,9 @@
             newRow.querySelector("input:not(.solved-checkbox)").focus();
         }
 
-        // Save note text to localStorage
         function saveNoteData() {
             localStorage.setItem(`noteData_${pageName}`, noteText.value);
         }
-
-        // Load note text from localStorage
         function loadNoteData() {
             const savedNote = localStorage.getItem(`noteData_${pageName}`);
             if (savedNote) {
@@ -280,18 +1115,117 @@
 
         noteForm.addEventListener("reset", () => {
             localStorage.removeItem(`noteData_${pageName}`);
+           
         });
 
         function confirmReset() {
-            return confirm("Are you sure you want to reset the Note?");
+            const confirmed = confirm("Are you sure you want to reset the Note?");
+            if (confirmed) {
+                showToast({
+                    title: 'Note Reset',
+                    message: 'Your note has been cleared',
+                    type: 'error',
+                    duration: 2000
+                });
+            }
+            return confirmed;
         }
-
-        // Initialization
         document.querySelectorAll(".form-row").forEach(addInputListeners);
         updateDeleteButtons();
         loadFormData();
         loadNoteData();
-
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', savedTheme);
+            updateToggleIcon(savedTheme);
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateToggleIcon(newTheme);
+                showToast({
+                    title: 'Theme Changed',
+                    message: `Switched to ${newTheme} mode`,
+                    type: 'info',
+                    duration: 2000
+                });
+            });
+            function updateToggleIcon(theme) {
+                themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+                themeToggle.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+            }
+            
+            // Show welcome toast
+            setTimeout(() => {
+                showToast({
+                    title: 'Welcome!',
+                    message: 'You are using HR Support System',
+                    type: 'info',
+                    duration: 3000
+                });
+            }, 500);
+            
+            // Start timer
+            startTimer();
+        });
+        
+        // Timer functionality
+        function startTimer() {
+            let seconds = 0;
+            const timerElement = document.getElementById('timer');
+            
+            setInterval(() => {
+                seconds++;
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                const secs = seconds % 60;
+                
+                timerElement.textContent = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
     </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+     
+</script>
 </body>
 </html>
