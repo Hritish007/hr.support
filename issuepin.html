@@ -4,10 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Issue Pin</title>
-    <!-- Add Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-    /* Root variables for theming */
 :root {
     --primary-color: hwb(221 15% 8%);
     --secondary-color: #000000;
@@ -18,7 +16,6 @@
     
 }
 
-/* Light theme */
 [data-theme="light"] {
     --background-color: #000000;
     --text-color: #1f2937;
@@ -42,7 +39,6 @@
     --toast-warning: #d97706;
 }
 
-/* Dark theme */
 [data-theme="dark"] {
     --background-color: #000000;
     --text-color: #e5e7eb;
@@ -66,7 +62,6 @@
     --toast-warning: #f59e0b;
 }
 
-/* Reset default styles */
 * {
     margin: 0;
     padding: 0;
@@ -81,7 +76,6 @@ body {
   background-color: var(--background-color);
   scroll-behavior: smooth;
 }
-/* Base styles */
 .container {
   max-width: 1050px;
   background-color: #2c2c2c;
@@ -108,7 +102,6 @@ header {
     z-index: 1000;
 }
 
-/* Navbar styles */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -133,7 +126,6 @@ header {
             cursor: pointer;
         }
         
-        /* Right arrow before HR Support */
         .navbar-brand::before {
             content: '➔';
             position: absolute;
@@ -145,13 +137,11 @@ header {
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
         
-        /* Pulsing animation keyframes */
         @keyframes pulseArrow {
             0%, 100% { transform: translateX(0); }
             50% { transform: translateX(5px); }
         }
         
-        /* Hover effect */
         .navbar-brand:hover::before {
             opacity: 1;
             transform: translateX(0);
@@ -162,7 +152,6 @@ header {
             color: white;
         }
 
-/* Navigation links */
 .nav-links {
     display: flex;
     gap: 2rem;
@@ -177,7 +166,6 @@ header {
       color: white
     
     }
-/* Theme toggle button */
 #theme-toggle {
     padding: 0;
     color: var(--header-footer-text);
@@ -189,12 +177,10 @@ header {
     font-weight: 500;
 }
 
-/* Main content */
 main {
     min-height: calc(100vh - 200px);
 }
 
-/* Section styles */
 .section {
     background-color: var(--section-bg);
     padding: 20px;
@@ -211,7 +197,6 @@ main {
     color: var(--secondary-color);
 }
 
-/* Form container */
 .form-container {
     background-color: var(--form-bg);
     padding: 20px;
@@ -223,7 +208,6 @@ main {
     margin-bottom: 30px;
 }
 
-/* Note container */
 .note-container {
     background-color: var(--form-bg);
     padding: 20px;
@@ -235,7 +219,6 @@ main {
     margin-bottom: 30px;
 }
 
-/* Form row */
 .form-row {
     display: flex;
     gap: 1rem;
@@ -245,7 +228,6 @@ main {
     position: relative;
 }
 
-/* Form group */
 .form-group {
     flex: 1;
     min-width: 200px;
@@ -289,7 +271,6 @@ main {
     border-color: var(--error-color);
 }
 
-/* Error message */
 .error-message {
     color: var(--error-color);
     font-size: 0.875rem;
@@ -297,7 +278,6 @@ main {
     display: none;
 }
 
-/* Delete button */
 .delete-btn {
     background-color: var(--primary-color);
     color: white;
@@ -326,7 +306,6 @@ main {
     background-color: var(--delete-enabled-hover-bg);
 }
 
-/* Reset button */
 .reset-btn-container {
     display: flex;
     justify-content: flex-end;
@@ -347,7 +326,6 @@ main {
     background-color: var(--reset-hover-bg);
 }
 
-/* Solved checkbox */
 .solved-checkbox {
     width: 20px;
     height: 20px;
@@ -355,7 +333,6 @@ main {
     accent-color: var(--success-color);
 }
 
-/* Checkbox container */
 .checkbox-container {
     display: flex;
     align-items: center;
@@ -368,13 +345,11 @@ main {
     color: var(--text-color);
 }
 
-/* Form note */
 .form-note {
     margin-bottom: 1rem;
     position: relative;
 }
 
-/* Notification styles */
 .notification {
     position: fixed;
     background-color: var(--notification-bg);
@@ -387,7 +362,6 @@ main {
     font-size: 14px;
 }
 
-/* Toast notification system */
 .toast-container {
     position: fixed;
     top: 20px;
@@ -520,7 +494,6 @@ main {
     transform: scale(0.95);
 }
 
-/* Tooltip for clipboard */
 .tooltip {
     position: relative;
     display: inline-block;
@@ -591,7 +564,6 @@ main {
     }
 }
 
-/* Footer styles */
 .footer {
     text-align: center;
     padding: 1rem 0;
@@ -600,7 +572,6 @@ main {
     width: 100%;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -769,7 +740,6 @@ main {
     </main>
  
     <script>
-        // Toast notification system
         function showToast({ title, message, type = 'info', duration = 5000 }) {
             const toastContainer = document.getElementById('toast-container');
             if (!toastContainer) return;
@@ -818,17 +788,14 @@ main {
             });
         }
         
-        // Copy to clipboard function
         function copyToClipboard(fieldId) {
             const element = document.getElementById(fieldId);
             if (!element) return;
             
-            // Select the text
             if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                 element.select();
                 element.setSelectionRange(0, 99999); // For mobile devices
             } else {
-                // For other elements, create a range to select
                 const range = document.createRange();
                 range.selectNode(element);
                 window.getSelection().removeAllRanges();
@@ -864,13 +831,11 @@ main {
                 });
             }
             
-            // Remove selection
             if (window.getSelection) {
                 window.getSelection().removeAllRanges();
             }
         }
 
-        // Example usage:
         function showNotification() {
             showToast({
                 title: 'Welcome!',
@@ -880,7 +845,6 @@ main {
             });
         }
         
-        // Rest of your existing code...
         const form = document.getElementById("userForm");
         const noteForm = document.getElementById("NoteForm");
         const noteText = document.getElementById("note-text");
@@ -889,7 +853,6 @@ main {
 
         const pageName = window.location.pathname.split("/").pop().replace(".html", "");
 
-        // Restrict input to numbers only
         function restrictToNumbers(event) {
             const charCode = event.which || event.keyCode;
             if (charCode !== 8 && charCode !== 13 && (charCode < 48 || charCode > 57)) {
@@ -897,7 +860,6 @@ main {
             }
         }
 
-        // Load saved form data from localStorage
         function loadFormData() {
             const savedData = localStorage.getItem(`formData_${pageName}`);
             if (savedData) {
@@ -918,7 +880,6 @@ main {
             }
         }
 
-        // Save current form data to localStorage
         function saveFormData() {
             const rows = form.querySelectorAll(".form-row");
             const data = Array.from(rows).map((row) => ({
@@ -930,7 +891,6 @@ main {
             localStorage.setItem(`formData_${pageName}`, JSON.stringify(data));
         }
 
-        // Validate generic input field
         function validateInput(input) {
             const errorElement = document.getElementById(`${input.id}-error`);
             if (!input.value.trim()) {
@@ -944,7 +904,6 @@ main {
             }
         }
 
-        // Validate phone input specifically
         function validatePhone(input) {
             const errorElement = document.getElementById(`${input.id}-error`);
             const phoneRegex = /^\d{7,15}$/;
@@ -959,7 +918,6 @@ main {
             }
         }
 
-        // Enable or disable delete buttons based on solved checkbox
         function updateDeleteButtons() {
             const rows = form.querySelectorAll(".form-row");
             rows.forEach((row) => {
@@ -970,7 +928,6 @@ main {
             });
         }
 
-        // Add event listeners to inputs and buttons in a row
         function addInputListeners(row) {
             const inputs = row.querySelectorAll('input:not(.solved-checkbox)');
             const checkbox = row.querySelector(".solved-checkbox");
@@ -1158,7 +1115,6 @@ main {
                 themeToggle.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
             }
             
-            // Show welcome toast
             setTimeout(() => {
                 showToast({
                     title: 'Welcome!',
@@ -1168,11 +1124,9 @@ main {
                 });
             }, 500);
             
-            // Start timer
             startTimer();
         });
         
-        // Timer functionality
         function startTimer() {
             let seconds = 0;
             const timerElement = document.getElementById('timer');
@@ -1188,9 +1142,7 @@ main {
             }, 1000);
         }
     </script>
-<!-- Code injected by live-server -->
 <script>
-	// <![CDATA[  <-- For SVG support
 	if ('WebSocket' in window) {
 		(function () {
 			function refreshCSS() {
@@ -1225,10 +1177,11 @@ main {
 		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
 	}
 	// ]]>
-     // Show welcome notification
         function showNotification() {
                        alert("Welcome HR Support User!,\n        You can pin your issue here, and it will stay saved even if you reload or close the page. Thank you for choosing HR Support!");
         }
 </script>
 </body>
 </html>
+
+
