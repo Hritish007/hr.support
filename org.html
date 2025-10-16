@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="css/trys.css">
+    <script src="js/try.js"></script>
+    <link rel="icon" type="image/png" href="hr.png.jpg">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            line-height: 1.6;
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme (Default) */
+        body.dark-theme {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            color: #ffffff;
+        }
+
+        /* Light Theme */
+        body.light-theme {
+            background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
+            color: #2d3748;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            transition: all 0.4s ease;
+            border-bottom: 3px solid;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Dark Theme Navbar */
+        body.dark-theme .navbar {
+            background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
+            border-bottom-color: #00ffff;
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+        }
+
+        /* Light Theme Navbar */
+        body.light-theme .navbar {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border-bottom-color: #3182ce;
+            box-shadow: 0 4px 15px rgba(49, 130, 206, 0.2);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        /* Dark Theme Brand */
+        body.dark-theme .navbar-brand {
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Light Theme Brand */
+        body.light-theme .navbar-brand {
+            color: #3182ce;
+            text-shadow: 0 0 10px rgba(49, 130, 206, 0.3);
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+
+        body.dark-theme .navbar-brand:hover {
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+        }
+
+        body.light-theme .navbar-brand:hover {
+            color: #2b6cb0;
+            text-shadow: 0 0 20px rgba(49, 130, 206, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a img {
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            padding: 2px;
+        }
+
+        /* Dark Theme Nav Images */
+        body.dark-theme .nav-links a img {
+            border: 2px solid transparent;
+        }
+
+        body.dark-theme .nav-links a img:hover {
+            transform: scale(1.15);
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Light Theme Nav Images */
+        body.light-theme .nav-links a img {
+            border: 2px solid transparent;
+        }
+
+        body.light-theme .nav-links a img:hover {
+            transform: scale(1.15);
+            border-color: #3182ce;
+            box-shadow: 0 0 15px rgba(49, 130, 206, 0.4);
+        }
+
+        .nav-links button {
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        /* Dark Theme Buttons */
+        body.dark-theme .nav-links button {
+            background: linear-gradient(135deg, #00ffff, #00b3b3);
+            color: #1a1a1a;
+        }
+
+        body.dark-theme .nav-links button:hover {
+            background: linear-gradient(135deg, #00e6e6, #008080);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+            transform: scale(1.1);
+        }
+
+        /* Light Theme Buttons */
+        body.light-theme .nav-links button {
+            background: linear-gradient(135deg, #3182ce, #2b6cb0);
+            color: white;
+        }
+
+        body.light-theme .nav-links button:hover {
+            background: linear-gradient(135deg, #2b6cb0, #2c5282);
+            box-shadow: 0 0 20px rgba(49, 130, 206, 0.5);
+            transform: scale(1.1);
+        }
+
+        #theme-toggle {
+            transition: all 0.3s ease;
+        }
+
+        /* Dark Theme Toggle */
+        body.dark-theme #theme-toggle {
+            background: linear-gradient(135deg, #ffd700, #ff6b00);
+            color: #1a1a1a;
+        }
+
+        body.dark-theme #theme-toggle:hover {
+            background: linear-gradient(135deg, #ffed4e, #ff8533);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+        }
+
+        /* Light Theme Toggle */
+        body.light-theme #theme-toggle {
+            background: linear-gradient(135deg, #4a5568, #2d3748);
+            color: #f7fafc;
+        }
+
+        body.light-theme #theme-toggle:hover {
+            background: linear-gradient(135deg, #2d3748, #1a202c);
+            box-shadow: 0 0 20px rgba(74, 85, 104, 0.5);
+        }
+
+        /* Main Content Styles */
+        main {
+            padding: 40px 0;
+        }
+
+        .section {
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 1px solid;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Section */
+        body.dark-theme .section {
+            background: linear-gradient(135deg, #2a2a2a, #333333);
+            border-color: #444;
+        }
+
+        /* Light Theme Section */
+        body.light-theme .section {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border-color: #e2e8f0;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+
+        /* Dark Theme Shimmer */
+        body.dark-theme .section::before {
+            background: linear-gradient(90deg, #00ffff, #ff00ff, #00ffff);
+        }
+
+        /* Light Theme Shimmer */
+        body.light-theme .section::before {
+            background: linear-gradient(90deg, #3182ce, #805ad5, #3182ce);
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        #account {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Title */
+        body.dark-theme #account {
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Light Theme Title */
+        body.light-theme #account {
+            color: #3182ce;
+            text-shadow: 0 0 10px rgba(49, 130, 206, 0.3);
+        }
+
+        /* Text Container Styles */
+        #text-container {
+            margin-top: 20px;
+        }
+
+        #text-container > p {
+            font-size: 1.3rem;
+            margin: 25px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Section Titles */
+        body.dark-theme #text-container > p {
+            color: #00ffff;
+            border-bottom-color: #00ffff;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Light Theme Section Titles */
+        body.light-theme #text-container > p {
+            color: #3182ce;
+            border-bottom-color: #3182ce;
+            text-shadow: 0 0 5px rgba(49, 130, 206, 0.2);
+        }
+
+        /* Text Block Styles */
+        .text-block {
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 5px solid;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid;
+        }
+
+        /* Dark Theme Text Blocks */
+        body.dark-theme .text-block {
+            background: linear-gradient(135deg, #333, #2a2a2a);
+            border-left-color: #00ffff;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+
+        /* Light Theme Text Blocks */
+        body.light-theme .text-block {
+            background: linear-gradient(135deg, #ffffff, #f7fafc);
+            border-left-color: #3182ce;
+            border-color: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .text-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            transition: left 0.5s ease;
+        }
+
+        /* Dark Theme Hover Effect */
+        body.dark-theme .text-block::before {
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+        }
+
+        /* Light Theme Hover Effect */
+        body.light-theme .text-block::before {
+            background: linear-gradient(90deg, transparent, rgba(49, 130, 206, 0.1), transparent);
+        }
+
+        .text-block:hover::before {
+            left: 100%;
+        }
+
+        .text-block:hover {
+            transform: translateY(-3px) translateX(5px);
+        }
+
+        /* Dark Theme Text Block Hover */
+        body.dark-theme .text-block:hover {
+            background: linear-gradient(135deg, #3a3a3a, #2f2f2f);
+            box-shadow: 0 8px 20px rgba(0, 255, 255, 0.2);
+            border-left-color: #ff00ff;
+        }
+
+        /* Light Theme Text Block Hover */
+        body.light-theme .text-block:hover {
+            background: linear-gradient(135deg, #f0f4f8, #e6fffa);
+            box-shadow: 0 8px 20px rgba(49, 130, 206, 0.15);
+            border-left-color: #805ad5;
+        }
+
+        .text-block p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+
+        /* Quick Access Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Popup */
+        body.dark-theme .popup {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Light Theme Popup */
+        body.light-theme .popup {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .popup-content {
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: popupSlide 0.3s ease-out;
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Popup Content */
+        body.dark-theme .popup-content {
+            background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
+            border-color: #00ffff;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Light Theme Popup Content */
+        body.light-theme .popup-content {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border-color: #3182ce;
+            box-shadow: 0 0 40px rgba(49, 130, 206, 0.2);
+        }
+
+        @keyframes popupSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .popup-content h2 {
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Popup Title */
+        body.dark-theme .popup-content h2 {
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Light Theme Popup Title */
+        body.light-theme .popup-content h2 {
+            color: #3182ce;
+            text-shadow: 0 0 10px rgba(49, 130, 206, 0.3);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 5px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Dark Theme Close Button */
+        body.dark-theme .close-btn {
+            color: #00ffff;
+        }
+
+        body.dark-theme .close-btn:hover {
+            background: #00ffff;
+            color: #1a1a1a;
+        }
+
+        /* Light Theme Close Button */
+        body.light-theme .close-btn {
+            color: #3182ce;
+        }
+
+        body.light-theme .close-btn:hover {
+            background: #3182ce;
+            color: white;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        .bookmark {
+            display: block;
+            padding: 15px 20px;
+            margin: 12px 0;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Dark Theme Bookmarks */
+        body.dark-theme .bookmark {
+            background: linear-gradient(135deg, #333, #2a2a2a);
+            color: #00ffff;
+            border-color: #444;
+        }
+
+        /* Light Theme Bookmarks */
+        body.light-theme .bookmark {
+            background: linear-gradient(135deg, #ffffff, #f7fafc);
+            color: #3182ce;
+            border-color: #e2e8f0;
+        }
+
+        .bookmark::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            transition: left 0.5s ease;
+        }
+
+        /* Dark Theme Bookmark Hover */
+        body.dark-theme .bookmark::before {
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+        }
+
+        /* Light Theme Bookmark Hover */
+        body.light-theme .bookmark::before {
+            background: linear-gradient(90deg, transparent, rgba(49, 130, 206, 0.1), transparent);
+        }
+
+        .bookmark:hover::before {
+            left: 100%;
+        }
+
+        .bookmark:hover {
+            transform: translateX(10px) scale(1.05);
+        }
+
+        /* Dark Theme Bookmark Hover */
+        body.dark-theme .bookmark:hover {
+            background: linear-gradient(135deg, #00ffff, #00b3b3);
+            color: #1a1a1a;
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+            border-color: #00ffff;
+        }
+
+        /* Light Theme Bookmark Hover */
+        body.light-theme .bookmark:hover {
+            background: linear-gradient(135deg, #3182ce, #2b6cb0);
+            color: white;
+            box-shadow: 0 5px 15px rgba(49, 130, 206, 0.4);
+            border-color: #3182ce;
+        }
+
+        /* Footer Styles */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            border-top: 1px solid;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Footer */
+        body.dark-theme .footer {
+            background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
+            border-top-color: #444;
+            color: #888;
+        }
+
+        /* Light Theme Footer */
+        body.light-theme .footer {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border-top-color: #e2e8f0;
+            color: #718096;
+        }
+
+        #year {
+            font-weight: bold;
+            transition: color 0.4s ease;
+        }
+
+        /* Dark Theme Year */
+        body.dark-theme #year {
+            color: #00ffff;
+        }
+
+        /* Light Theme Year */
+        body.light-theme #year {
+            color: #3182ce;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links a img {
+                width: 40px;
+            }
+
+            .section {
+                padding: 20px;
+                margin: 10px 0;
+            }
+
+            #account {
+                font-size: 1.6rem;
+            }
+
+            #text-container > p {
+                font-size: 1.1rem;
+            }
+
+            .text-block {
+                padding: 15px;
+            }
+
+            .text-block p {
+                font-size: 0.9rem;
+            }
+
+            .popup-content {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+
+            .popup-content h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            .navbar-brand {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                gap: 8px;
+            }
+
+            .nav-links a img {
+                width: 35px;
+            }
+
+            .nav-links button {
+                padding: 8px 12px;
+                font-size: 1.1rem;
+            }
+
+            .section {
+                padding: 15px;
+            }
+
+            #account {
+                font-size: 1.4rem;
+            }
+
+            .text-block {
+                padding: 12px;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Scrollbar */
+        body.dark-theme ::-webkit-scrollbar-track {
+            background: #2a2a2a;
+        }
+
+        /* Light Theme Scrollbar */
+        body.light-theme ::-webkit-scrollbar-track {
+            background: #f7fafc;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Scrollbar Thumb */
+        body.dark-theme ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #00ffff, #00b3b3);
+        }
+
+        body.dark-theme ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #00e6e6, #008080);
+        }
+
+        /* Light Theme Scrollbar Thumb */
+        body.light-theme ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3182ce, #2b6cb0);
+        }
+
+        body.light-theme ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2b6cb0, #2c5282);
+        }
+
+        /* Selection Color */
+        ::selection {
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Selection */
+        body.dark-theme ::selection {
+            background: rgba(0, 255, 255, 0.3);
+            color: white;
+        }
+
+        /* Light Theme Selection */
+        body.light-theme ::selection {
+            background: rgba(49, 130, 206, 0.3);
+            color: #2d3748;
+        }
+
+        /* Focus Styles for Accessibility */
+        button:focus,
+        a:focus,
+        .text-block:focus {
+            outline: 2px solid;
+            outline-offset: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Dark Theme Focus */
+        body.dark-theme button:focus,
+        body.dark-theme a:focus,
+        body.dark-theme .text-block:focus {
+            outline-color: #00ffff;
+        }
+
+        /* Light Theme Focus */
+        body.light-theme button:focus,
+        body.light-theme a:focus,
+        body.light-theme .text-block:focus {
+            outline-color: #3182ce;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <header>
+        <nav class="navbar container">
+            <a class="navbar-brand" onclick="showNotification()">HR Support</a>
+            <div class="nav-links">
+                <button onclick="togglePopup()">🚨</button>
+                <a href="router.html" data-page="router.html"><img src="img/router.png.jpg" alt="router" width="50"></a>
+                <a href="account.html" data-page="account.html"><img src="img/account.jpg" alt="account" width="50"></a>
+                <a href="slow.html" data-page="slow.html"><img src="img/slow.png.jpg" alt="slow" width="50"></a>
+                <a href="tv.html" data-page="tv.html"><img src="img/iptv.png.jpg" alt="TV" width="50"></a>
+                <a href="myworldlink.html" data-page="myworldlink.html"><img src="img/myworldlink.png.jpg" alt="myworldlink" width="50"></a>
+                <a href="urgentclose.html" data-page="urgentclose.html"><img src="img/urgentclose.png.jpg" alt="urgentclose" style="width: 45px; height: auto;"></a>
+                <button id="theme-toggle" aria-label="Switch to light theme">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container" id="main-content">
+        <section class="section" aria-labelledby="Account">
+            <p><strong id="account" style="font-size: 1.25rem;">Account</strong></p><br>
+            <div id="text-container">
+                <p><strong>Account Extend</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Account extended for 1 day. Suggested to use My WorldLink app and also suggested to pay.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Account extended for 2 days. Suggested to use My WorldLink app and also suggested to pay.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Account extended for 3 days. Suggested to use My WorldLink app and also suggested to pay.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client has already account extended for 3 days, Suggested to pay.</p>
+                </div>
+                <p><strong>Account Disable-Pending transaction</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Account enabled for once and also suggested to say.</p>
+                </div>
+                <p><strong>Account Status</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client, he/she was offered a 1-month bonus after payment. Payment done, but it hasn't been added. Please proceed accordingly..</p>
+                </div>
+                <p><strong>Payment</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client he paid his money through ESEWA but the payment is not received, suggested to contact with vendor.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per the client, the payment was made to the wrong username, i.e., '____'. Please proceed accordingly.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client want bonus while paying on the same package, please do needful.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client, he/she was offered a 1-month bonus after payment of __ months. Please proceed accordingly.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Cash paid to our staff but not updated in the account. Please do what is required.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Cash paid to the branch but not updated in the account. Please do what is required.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client he settled his payment with Nrs. ____ but not uploaded yet, Please proceed accordingly.</p>
+                </div>
+                <p><strong>Query About Package</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client wants to downgrade package otherwise he/she will terminate the service. Please do needful, asap </p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client wants to upgrade package to ____, please do needful, asap. </p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client wants _____ package for __ months , please do needful, asap.</p>
+                </div>
+            </div>
+            <div class="popup" id="myPopup">
+                <div class="popup-content">
+                    <span class="close-btn" onclick="hidePopup()">&times;</span>
+                    <h2>⚡ Quick Access</h2>
+                    <a class="bookmark" href="https://epayment.worldlink.com.np/new/internet-payment" target="_blank" rel="noopener noreferrer">E-payment</a>
+                    <a class="bookmark" href="https://amyo.target" target="_blank" rel="noopener noreferrer">Amyo</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        © <span id="year">2025</span> HritishShaqya. Keep learning and Enjoying.
+    </footer>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Check for saved theme preference or use system preference
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        body.classList.add(savedTheme + '-theme');
+        updateThemeToggle(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = body.classList.contains('dark-theme');
+            if (isDark) {
+                body.classList.replace('dark-theme', 'light-theme');
+                localStorage.setItem('theme', 'light');
+                updateThemeToggle('light');
+            } else {
+                body.classList.replace('light-theme', 'dark-theme');
+                localStorage.setItem('theme', 'dark');
+                updateThemeToggle('dark');
+            }
+        });
+
+        function updateThemeToggle(theme) {
+            if (theme === 'dark') {
+                themeToggle.textContent = '☀️';
+                themeToggle.setAttribute('aria-label', 'Switch to light theme');
+            } else {
+                themeToggle.textContent = '🌙';
+                themeToggle.setAttribute('aria-label', 'Switch to dark theme');
+            }
+        }
+
+        // Update year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Close popup when clicking outside of popup-content
+        window.addEventListener("click", function (event) {
+            const popup = document.getElementById("myPopup");
+            if (!popup) return;
+            
+            const popupContent = popup.querySelector(".popup-content");
+
+            if (popup.style.display === "flex" &&
+                !popupContent.contains(event.target) &&
+                !event.target.closest("button[onclick='togglePopup()']")) {
+                popup.style.display = "none";
+            }
+        });
+
+        // Copy text function
+        function copyText(event, element) {
+            const text = element.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                // Visual feedback based on theme
+                const isDark = body.classList.contains('dark-theme');
+                const originalBg = element.style.background;
+                const originalColor = element.style.color;
+                
+                if (isDark) {
+                    element.style.background = 'linear-gradient(135deg, #00ffff, #00b3b3)';
+                    element.style.color = '#1a1a1a';
+                } else {
+                    element.style.background = 'linear-gradient(135deg, #3182ce, #2b6cb0)';
+                    element.style.color = 'white';
+                }
+                
+                setTimeout(() => {
+                    element.style.background = originalBg;
+                    element.style.color = originalColor;
+                }, 500);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+
+        // Quick Access Popup Functions
+        function togglePopup() {
+            const popup = document.getElementById("myPopup");
+            if (popup) {
+                popup.style.display = popup.style.display === "flex" ? "none" : "flex";
+            }
+        }
+
+        function hidePopup() {
+            const popup = document.getElementById("myPopup");
+            if (popup) {
+                popup.style.display = "none";
+            }
+        }
+
+        // Notification function
+        function showNotification() {
+            alert("HR Support System - Account Management");
+        }
+
+        // Make functions globally available
+        window.copyText = copyText;
+        window.togglePopup = togglePopup;
+        window.hidePopup = hidePopup;
+        window.showNotification = showNotification;
+    </script>
+</body>
+</html>

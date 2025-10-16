@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HR Support - HTM</title>
+  <link rel="icon" href="img/welcom.jpg" />
+
+  <style>
+    :root{
+      --bg:#06060a;
+      --card:#0e1117;
+      --muted:#a9b0bf;
+      --accent:#6ee7b7;
+      --accent-2:#54b4ff;
+      --glass-border: rgba(255,255,255,0.06);
+      --shadow: 0 8px 30px rgba(2,6,23,0.6);
+      --radius: 14px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(84,180,255,0.06), transparent),
+                  radial-gradient(1000px 500px at 90% 90%, rgba(110,231,183,0.03), transparent),
+                  var(--bg);
+      color: #e6eef6;
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      padding:40px 20px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    #starfield{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      filter: blur(0.25px);
+      mix-blend-mode:screen;
+    }
+
+    .card{
+      z-index:2;
+      width:min(600px,95%);
+      background: rgba(255,255,255,0.02);
+      border-radius:var(--radius);
+      padding:36px;
+      box-shadow:var(--shadow);
+      border:1px solid var(--glass-border);
+      backdrop-filter: blur(8px);
+      text-align:center;
+    }
+
+    h1{
+      margin:0 0 8px 0;
+      font-size:clamp(22px,4vw,34px);
+      color: #f6fbff;
+    }
+
+    #hero-line{
+      font-size:clamp(14px,1.8vw,18px);
+      color:var(--muted);
+      margin:0 0 20px;
+      min-height:1.4em;
+      transition: opacity 0.6s ease;
+    }
+
+    .start-btn{
+      border:0;
+      cursor:pointer;
+      padding:12px 18px;
+      border-radius:10px;
+      font-weight:600;
+      font-size:15px;
+      background: linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#07121a;
+      box-shadow: 0 8px 20px rgba(17,124,106,0.14);
+      transition:transform .12s ease;
+    }
+    .start-btn:hover{transform:translateY(-3px)}
+
+    #timer{
+      margin-top:18px;
+      color:var(--accent);
+      font-size:16px;
+      letter-spacing:0.5px;
+    }
+
+    /* Footer styles */
+    footer {
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      z-index: 1;
+      padding: 10px;
+    }
+    /* Footer styles with enhanced shadow */
+    footer {
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      z-index: 1;
+      padding: 12px 20px;
+      background: rgba(6, 6, 10, 0.7);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3),
+                  0 -2px 8px rgba(84, 180, 255, 0.05),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      border-radius: 12px 12px 0 0;
+      width: fit-content;
+      margin: 0 auto;
+      min-width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-content">
+      <h1>Welcome to HR Support</h1><br>
+      <p id="hero-line"></p>
+      <div id="timer">00:00</div><br>
+      <button class="start-btn" onclick="history.back()">Get Started</button>
+    </div>
+  </div>
+
+  <canvas id="starfield"></canvas>
+  <footer>&copy; <span id="year"></span> HritishShaqya. All rights reserved.</footer>
+
+  <script>
+    const lines = [
+      "Time, tasks, and support — it's all in your hands.",
+      "Success starts with how you manage time, tasks, and support.",
+      "You own the clock, the checklist, and the challenge.",
+      "Manage time, handle tasks, support smart — it's up to you.",
+      "Time and tasks don't wait — neither should you.",
+      "It's not just work — it's how you work that counts.",
+      "Balance time, conquer tasks, lead with support.",
+      "The way you manage defines the way you succeed.",
+      "Time is limited, but your impact doesn't have to be.",
+      "Own your time, master your tasks, support your team.",
+      "Your time, your tasks, your team — your success.",
+      "You don't need more hours — just better focus.",
+      "Behind every goal is a task well-managed.",
+      "Work smart. Lead strong. Finish well.",
+    ];
+
+    const display = document.getElementById("hero-line");
+    let currentLineIndex = 0;
+    let currentCharIndex = 0;
+    let isTyping = true;
+    let typingSpeed = 50; // milliseconds per character
+    let displayDuration = 2000; // milliseconds to display complete sentence
+
+    function typeLine() {
+      if (isTyping) {
+        // Typing phase
+        if (currentCharIndex < lines[currentLineIndex].length) {
+          display.textContent = lines[currentLineIndex].substring(0, currentCharIndex + 1);
+          currentCharIndex++;
+          setTimeout(typeLine, typingSpeed);
+        } else {
+          // Finished typing, wait then reset
+          isTyping = false;
+          setTimeout(typeLine, displayDuration);
+        }
+      } else {
+        // Reset phase - clear text instantly
+        display.textContent = '';
+        currentCharIndex = 0;
+        isTyping = true;
+        
+        // Move to next line
+        currentLineIndex = (currentLineIndex + 1) % lines.length;
+        
+        // Start typing next line after a brief pause
+        setTimeout(typeLine, 500);
+      }
+    }
+
+    // Start the typing animation
+    typeLine();
+
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Timer - Fixed to work even when page is in background
+    const timerDisplay = document.getElementById('timer');
+    let startTime = Date.now();
+    let elapsedSeconds = 0;
+    let timerInterval;
+
+    function updateTimer() {
+      const currentTime = Date.now();
+      elapsedSeconds = Math.floor((currentTime - startTime) / 1000);
+      
+      let mins = Math.floor(elapsedSeconds / 60);
+      let secs = elapsedSeconds % 60;
+      timerDisplay.textContent = ` ${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+    }
+
+    // Handle page visibility changes
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        // Page is hidden, stop the interval
+        clearInterval(timerInterval);
+      } else {
+        // Page is visible again, recalculate the time and restart the interval
+        const currentTime = Date.now();
+        elapsedSeconds = Math.floor((currentTime - startTime) / 1000);
+        updateTimer(); // Update immediately
+        timerInterval = setInterval(updateTimer, 1000);
+      }
+    });
+
+    // Start the timer
+    timerInterval = setInterval(updateTimer, 1000);
+
+    // Starfield
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function createStars() {
+      stars = [];
+      for (let i = 0; i < 300; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.2,
+          o: Math.random()
+        });
+      }
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'white';
+      for (let s of stars) {
+        ctx.globalAlpha = s.o;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function animate() {
+      drawStars();
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      resize();
+      createStars();
+    });
+
+    resize();
+    createStars();
+    animate();
+  </script>
+</body>
+</html>
