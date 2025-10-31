@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Support</title>
+    <link rel="icon" href="img/welcom.jpg" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/trys.css">
+    <script src="script.js"></script>
+
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            line-height: 1.6;
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme (Default) */
+        body.dark-theme {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            color: #ffffff;
+        }
+
+        /* Light Theme */
+        body.light-theme {
+            background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
+            color: #2d3748;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            transition: all 0.4s ease;
+            border-bottom: 3px solid;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        /* Dark Theme Navbar */
+        body.dark-theme .navbar {
+            background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
+            border-bottom-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+        }
+
+        /* Light Theme Navbar */
+        body.light-theme .navbar {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border-bottom-color: #1b70c0;
+            box-shadow: 0 4px 15px rgba(49, 130, 206, 0.2);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:focus, 
+        .navbar-brand:active {
+            outline: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        /* Dark Theme Brand/ header */
+        body.dark-theme .navbar-brand {
+            color: #1677ff;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Light Theme Brand */
+        body.light-theme .navbar-brand {
+            color: #1677ff;
+            text-shadow: 0 0 10px rgba(49, 130, 206, 0.3);
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+
+        /* header:hover */
+        body.dark-theme .navbar-brand:hover {
+            color: #e0e0e0;
+            text-shadow: 0 0 20px rgba(49, 130, 206, 0.5);
+        }
+
+        body.light-theme .navbar-brand:hover {
+            color: #4a5568;
+            text-shadow: 0 0 20px rgba(49, 130, 206, 0.5);
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-right: 15px;
+        }
+
+        .search-input {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 2px solid;
+            width: 314px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        /* Dark Theme Search */
+        body.dark-theme .search-input {
+            background: #333;
+            color: #ffffff;
+            border-color: #555;
+        }
+
+        body.dark-theme .search-input:focus {
+            border-color: #1677ff;
+            box-shadow: 0 0 10px rgba(22, 119, 255, 0.5);
+        }
+
+        /* Light Theme Search */
+        body.light-theme .search-input {
+            background: #ffffff;
+            color: #2d3748;
+            border-color: #cbd5e0;
+        }
+
+        body.light-theme .search-input:focus {
+            border-color: #1677ff;
+            box-shadow: 0 0 10px rgba(22, 119, 255, 0.3);
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: inherit;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1001;
+            display: none;
+            margin-top: 5px;
+            border: 1px solid;
+        }
+
+        /* Dark Theme Search Results */
+        body.dark-theme .search-results {
+            background: #2a2a2a;
+            border-color: #555;
+        }
+
+        /* Light Theme Search Results */
+        body.light-theme .search-results {
+            background: #ffffff;
+            border-color: #e2e8f0;
+        }
+
+        .search-result-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid;
+            transition: all 0.2s ease;
+        }
+
+        /* Dark Theme Search Result Item */
+        body.dark-theme .search-result-item {
+            border-bottom-color: #444;
+            color: #e0e0e0;
+        }
+
+        body.dark-theme .search-result-item:hover {
+            background: #3a3a3a;
+        }
+
+        /* Light Theme Search Result Item */
+        body.light-theme .search-result-item {
+            border-bottom-color: #e2e8f0;
+            color: #4a5568;
+        }
+
+        body.light-theme .search-result-item:hover {
+            background: #f7fafc;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item .section-name {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #1677ff;
+        }
+
+        .search-result-item .header-name {
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-bottom: 3px;
+            color: #ffd700; /*Searchh sub header*/
+        }
+
+        .search-result-item .result-text {
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .no-results {
+            padding: 15px;
+            text-align: center;
+            color: #888;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a img {
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            padding: 2px;
+        }
+
+        /* Dark Theme Nav Images */
+        body.dark-theme .nav-links a img {
+            border: 2px solid transparent;
+        }
+
+        body.dark-theme .nav-links a img:hover {
+            transform: scale(1.15);
+            border-color:none;
+            box-shadow: 0 0 15px rgba(126, 126, 126, 0.5);
+        }
+
+        /* Light Theme Nav Images */
+        body.light-theme .nav-links a img {
+            border: 2px solid transparent;
+        }
+
+        body.light-theme .nav-links a img:hover {
+            transform: scale(1.15);
+            border-color: #000000;
+            box-shadow: 0 0 15px rgba(49, 130, 206, 0.4);
+        }
+
+        .nav-links button {
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        /* Dark Theme Buttons */
+        body.dark-theme .nav-links button {
+            background: linear-gradient(180deg,#000000, #ffffff, #000000);
+            color: #1a1a1a;
+        }
+
+        body.dark-theme .nav-links button:hover {
+            background: linear-gradient(180deg, #000000, #ffffff, #000000);
+            box-shadow: 0 0 10px rgba(143, 140, 140, 0.7);
+            transform: scale(1.1);
+        }
+
+        /* Light Theme Buttons */
+        body.light-theme .nav-links button {
+            background: linear-gradient(180deg, #4882b9, #fdfdfd, #4882b9);
+            color: white;
+        }
+
+        body.light-theme .nav-links button:hover {
+            background: linear-gradient(180deg, #4882b9, #fdfdfd, #4882b9);
+            box-shadow: 0 0 20px rgba(49, 130, 206, 0.5);
+            transform: scale(1.1);
+        }
+
+        #theme-toggle {
+            transition: all 0.3s ease;
+        }
+
+        /* Dark Theme Toggle */
+        body.dark-theme #theme-toggle {
+            background: linear-gradient(180deg, #ffd700, #ff6b00);
+            color: #1a1a1a;
+        }
+
+        body.dark-theme #theme-toggle:hover {
+            background: linear-gradient(180deg, #ffed4e, #ff8533);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+        }
+
+        /* Light Theme Toggle */
+        body.light-theme #theme-toggle {
+            background: linear-gradient(180deg, #4a5568, #2d3748);
+            color: #f7fafc;
+        }
+
+        body.light-theme #theme-toggle:hover {
+            background: linear-gradient(180deg, #2d3748, #1a202c);
+            box-shadow: 0 0 20px rgba(74, 85, 104, 0.5);
+        }
+
+        /* Main Content Styles */
+        main {
+            padding: 40px 0;
+        }
+
+        .section {
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 1px solid;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            display: none; /* Hide all sections by default */
+        }
+
+        .section.active {
+            display: block; /* Show active section */
+        }
+
+        /* Dark Theme Section */
+        body.dark-theme .section {
+            background: linear-gradient(135deg, #202020, #2e2e2e);
+            border-color: #444;
+        }
+
+        /* Light Theme Section */
+        body.light-theme .section {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border-color: #e2e8f0;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+
+        /* Dark Theme Shimmer linee */
+        body.dark-theme .section::before {
+            background: linear-gradient(90deg, #805ad5, #805ad5,#805ad5, #805ad5);
+        }
+
+        /* Light Theme Shimmer liinee*/
+        body.light-theme .section::before {
+            background: linear-gradient(90deg, #805ad5, #805ad5, #805ad5, #805ad5);
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Title */
+        body.dark-theme .section-title {
+            color: #1677ff;
+            text-shadow:  none;
+        }
+
+        /* Light Theme Title */
+        body.light-theme .section-title {
+            color: #1677ff;
+            text-shadow: 0 0 10px rgba(49, 130, 206, 0.3);
+        }
+
+        /* Text Container Styles */
+        .text-container {
+            margin-top: 20px;
+        }
+
+        .text-container > p {
+            font-size: 1.3rem;
+            margin: 25px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Section Titles linee */
+        body.dark-theme .text-container > p {
+            color: #ffd700;
+            border-bottom-color: #0665d1;
+            text-shadow: none;
+        }
+
+        /* Light Theme Section Titles linee */
+        body.light-theme .text-container > p {
+            color: #ffd700;
+            border-bottom-color: #0665d1;
+            text-shadow: none;
+        }
+
+        /* Text Block Styles */
+        .text-block {
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 5px solid;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid;
+        }
+
+        /* Dark Theme Text Blocks */
+        body.dark-theme .text-block {
+            background: linear-gradient(135deg, #333, #2a2a2a);
+            border-left-color: #ffffff;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+
+        /* Light Theme Text Blocks */
+        body.light-theme .text-block {
+            background: linear-gradient(135deg, #ffffff, #f7fafc);
+            border-left-color: #000000;
+            border-color: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .text-block:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Dark Theme Text Block Hover */
+        body.dark-theme .text-block:hover {
+            background: linear-gradient(135deg, #3a3a3a, #2f2f2f);
+            box-shadow: 0 4px 10px rgba(0, 255, 255, 0.1);
+        }
+
+        /* Light Theme Text Block Hover */
+        body.light-theme .text-block:hover {
+            background: linear-gradient(135deg, #f0f4f8, #e6fffa);
+            box-shadow: 0 4px 10px rgba(49, 130, 206, 0.1);
+        }
+
+        .text-block p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+            transition: color 0.1s ease;
+        }
+
+        /* Selection highlight for navigation */
+        .text-block.selected-for-copy {
+            border-left-color: #1677ff !important;
+            background: linear-gradient(135deg, #3a3a3a, #2f2f2f) !important;
+            box-shadow: 0 0 15px rgba(22, 119, 255, 0.4) !important;
+        }
+
+        body.light-theme .text-block.selected-for-copy {
+            background: linear-gradient(135deg, #e6f3ff, #d4e7ff) !important;
+            box-shadow: 0 0 15px rgba(22, 119, 255, 0.3) !important;
+        }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            z-index: 1000;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .notification.hide {
+            opacity: 0;
+            transform: translateY(-100px);
+        }
+
+        body.dark-theme .notification {
+            background: #ffffff;
+            color: #1a1a1a;
+            box-shadow: 0 2px 10px rgba(0, 255, 255, 0.3);
+        }
+
+        body.light-theme .notification {
+            background: #000000;
+            color: white;
+            box-shadow: 0 2px 10px rgba(49, 130, 206, 0.3);
+        }
+
+        /* Quick Access Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Popup */
+        body.dark-theme .popup {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Light Theme Popup */
+        body.light-theme .popup {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .popup-content {
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: popupSlide 0.3s ease-out;
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Popup Content */
+        body.dark-theme .popup-content {
+            background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
+            border-color: #ffffff;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Light Theme Popup Content */
+        body.light-theme .popup-content {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border-color: #000000;
+            box-shadow: 0 0 40px rgba(49, 130, 206, 0.2);
+        }
+
+        @keyframes popupSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .popup-content h2 {
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Popup Title */
+        body.dark-theme .popup-content h2 {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Light Theme Popup Title */
+        body.light-theme .popup-content h2 {
+            color: #000000;
+            text-shadow: 0 0 10px rgba(49, 130, 206, 0.3);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 5px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Dark Theme Close Button */
+        body.dark-theme .close-btn {
+            color: #ffffff;
+        }
+
+        body.dark-theme .close-btn:hover {
+            background: #ffffff;
+            color: #1a1a1a;
+        }
+
+        /* Light Theme Close Button */
+        body.light-theme .close-btn {
+            color: #000000;
+        }
+
+        body.light-theme .close-btn:hover {
+            background: #000000;
+            color: white;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        .bookmark {
+            display: block;
+            padding: 15px 20px;
+            margin: 12px 0;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Dark Theme Bookmarks */
+        body.dark-theme .bookmark {
+            background: linear-gradient(135deg, #333, #2a2a2a);
+            color: #ffffff;
+            border-color: #444;
+        }
+
+        /* Light Theme Bookmarks */
+        body.light-theme .bookmark {
+            background: linear-gradient(135deg, #ffffff, #f7fafc);
+            color: #000000;
+            border-color: #e2e8f0;
+        }
+
+        .bookmark:hover {
+            transform: translateX(5px);
+        }
+
+        /* Dark Theme Bookmark Hover */
+        body.dark-theme .bookmark:hover {
+            background: linear-gradient(135deg, #ffffff, #00b3b3);
+            color: #1a1a1a;
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+            border-color: #ffffff;
+        }
+
+        /* Light Theme Bookmark Hover */
+        body.light-theme .bookmark:hover {
+            background: linear-gradient(135deg, #000000, #2b6cb0);
+            color: white;
+            box-shadow: 0 5px 15px rgba(49, 130, 206, 0.4);
+            border-color: #000000;
+        }
+
+        /* Footer Styles */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            border-top: 1px solid;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Footer */
+        body.dark-theme .footer {
+            background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
+            border-top-color: #444;
+            color: #888;
+        }
+
+        /* Light Theme Footer */
+        body.light-theme .footer {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border-top-color: #e2e8f0;
+            color: #718096;
+        }
+
+        #year {
+            font-weight: bold;
+            transition: color 0.4s ease;
+        }
+
+        /* Dark Theme Year */
+        body.dark-theme #year {
+            color: #ffffff;
+        }
+
+        /* Light Theme Year */
+        body.light-theme #year {
+            color: #000000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-container {
+                margin-right: 0;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            .nav-links a img {
+                width: 40px;
+            }
+
+            .section {
+                padding: 20px;
+                margin: 10px 0;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .text-container > p {
+                font-size: 1.1rem;
+            }
+
+            .text-block {
+                padding: 15px;
+            }
+
+            .text-block p {
+                font-size: 0.9rem;
+            }
+
+            .popup-content {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+
+            .popup-content h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            .navbar-brand {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                gap: 8px;
+            }
+
+            .nav-links a img {
+                width: 35px;
+            }
+
+            .nav-links button {
+                padding: 8px 12px;
+                font-size: 1.1rem;
+            }
+
+            .section {
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .text-block {
+                padding: 12px;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Scrollbar */
+        body.dark-theme ::-webkit-scrollbar-track {
+            background: #2a2a2a;
+        }
+
+        /* Light Theme Scrollbar */
+        body.light-theme ::-webkit-scrollbar-track {
+            background: #f7fafc;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Scrollbar Thumb */
+        body.dark-theme ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #ffffff, #00b3b3);
+        }
+
+        body.dark-theme ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #00e6e6, #008080);
+        }
+
+        /* Light Theme Scrollbar Thumb */
+        body.light-theme ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #000000, #2b6cb0);
+        }
+
+        body.light-theme ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2b6cb0, #2c5282);
+        }
+
+        /* Selection Color */
+        ::selection {
+            transition: all 0.4s ease;
+        }
+
+        /* Dark Theme Selection */
+        body.dark-theme ::selection {
+            background: rgba(0, 255, 255, 0.3);
+            color: white;
+        }
+
+        /* Light Theme Selection */
+        body.light-theme ::selection {
+            background: rgba(49, 130, 206, 0.3);
+            color: #2d3748;
+        }
+
+        /* Focus Styles for Accessibility */
+        button:focus,
+        a:focus,
+        .text-block:focus {
+            outline: 2px solid;
+            outline-offset: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Dark Theme Focus */
+        body.dark-theme button:focus,
+        body.dark-theme a:focus,
+        body.dark-theme .text-block:focus {
+            outline-color: #ffffff;
+        }
+
+        /* Light Theme Focus */
+        body.light-theme button:focus,
+        body.light-theme a:focus,
+        body.light-theme .text-block:focus {
+            outline-color: #000000;
+        }
+
+        /* Search result styling */
+        .result-type {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        /* Selected search result */
+        .search-result-item.selected {
+            background-color: rgba(22, 119, 255, 0.2);
+        }
+
+        /* Keyboard help modal */
+        .keyboard-help {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 10000;
+            display: none;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .keyboard-help h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .keyboard-help ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .keyboard-help li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .keyboard-help kbd {
+            background: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 2px 6px;
+            margin-right: 10px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+            display: none;
+        }
+
+        body.dark-theme .keyboard-help {
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        body.dark-theme .keyboard-help kbd {
+            background: #444;
+            border-color: #666;
+            color: #fff;
+        }
+
+        /* Mark styling for highlighted search terms */
+        mark {
+            background-color: #d8d8d7;
+            color: #000;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        /* Selection highlight for navigation */
+.text-block.selected-for-copy {
+    border-left-color: #1677ff !important;
+    background: linear-gradient(135deg, #3a3a3a, #2f2f2f) !important;
+    box-shadow: 0 0 15px rgba(22, 119, 255, 0.4) !important;
+}
+
+body.light-theme .text-block.selected-for-copy {
+    background: linear-gradient(135deg, #e6f3ff, #d4e7ff) !important;
+    box-shadow: 0 0 15px rgba(22, 119, 255, 0.3) !important;
+}
+
+/* Temporary highlight animation */
+.text-block.temporary-highlight {
+    animation: temporary-highlight 2.5s ease-in-out;
+    border-left-color: #ffd700;
+}
+
+@keyframes temporary-highlight {
+    0% { 
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+        border-left-color: #ffd700;
+    }
+    50% { 
+        box-shadow: 0 0 0 10px rgba(255, 215, 0, 0.3);
+        border-left-color: #ffd700;
+    }
+    100% { 
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+        border-left-color: #ffffff;
+    }
+}
+
+body.light-theme .text-block.temporary-highlight {
+    animation: temporary-highlight-light 2.5s ease-in-out;
+}
+
+@keyframes temporary-highlight-light {
+    0% { 
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+        border-left-color: #ffd700;
+    }
+    50% { 
+        box-shadow: 0 0 0 10px rgba(255, 215, 0, 0.3);
+        border-left-color: #ffd700;
+    }
+    100% { 
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+        border-left-color: #000000;
+    }
+}
+
+/* Header highlight styles */
+.text-container > p.selected-for-copy {
+    background: rgba(22, 119, 255, 0.2) !important;
+    padding: 10px;
+    border-radius: 8px;
+    border-bottom-color: #ffd700 !important;
+}
+
+.text-container > p.temporary-highlight {
+    animation: header-highlight 2.5s ease-in-out;
+}
+
+@keyframes header-highlight {
+    0% { 
+        background: rgba(255, 215, 0, 0.3);
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+    }
+    50% { 
+        background: rgba(255, 215, 0, 0.5);
+        box-shadow: 0 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+    100% { 
+        background: rgba(22, 119, 255, 0.2);
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+    }
+}
+    </style>
+</head>
+<body class="dark-theme">
+    <header>
+        <nav class="navbar container">
+            <a class="navbar-brand" href="pin" target="_blank">HR Support</a>
+            <div class="search-container">
+                <input type="text" class="search-input" id="search-input" placeholder="Search for content...">
+                <div class="search-results" id="search-results"></div>
+            </div>
+            <div class="nav-links">
+                <button onclick="togglePopup()">⚡</button>
+                <!-- Navigation buttons with onclick handlers -->
+                <a onclick="showSection('router')"><img src="img/router.jpg" alt="router" width="50"></a>
+                <a onclick="showSection('account')"><img src="img/account.jpg" alt="account" width="50"></a>
+                <a onclick="showSection('slow')"><img src="img/slow.jpg" alt="slow" width="50"></a>
+                <a onclick="showSection('tv')"><img src="img/iptv.jpg" alt="TV" width="50"></a>
+                <a onclick="showSection('myworldlink')"><img src="img/myworldlink.jpg" alt="myworldlink" width="50"></a>
+                <a onclick="showSection('urgentclose')"><img src="img/urgent.jpg" alt="urgentclose" style="width: 45px; height: auto;"></a>
+                
+                <button id="theme-toggle" aria-label="Switch to light theme">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+     <main class="container" id="main-content">
+        <!-- Router Section -->
+        <section id="router-section" class="section active">
+            <p><strong class="section-title">Router</strong></p><br>
+            <div class="text-container">
+                <p><strong>ONU Status Offline</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Light not verified. Please do the needful.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>No light in router, please do needful, asap.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>No light on auth and link. Please do the needful.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client, fiber cable has been damaged. Please do the needful.</p>
+                </div>
+                
+
+                <p><strong>Disconnection Problem</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>The router was connected to a multiplug. Suggested connecting it directly to the wall socket. will contact us again if the issue persists.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Disconnection problem seen, The router was already connected to the wall socket, please do needful, asap.</p>
+                </div>
+                
+                <p><strong>General</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client is requesting for cable management. Please proceed accordingly.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client want to shift router from one floor to another floor, please do needful asap.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client want to shift location from _____, to _____, please do needful, asap.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Account Section -->
+        <section id="account-section" class="section">
+            <p><strong class="section-title">Account</strong></p><br>
+            <div class="text-container">
+                <p><strong>Accound Extend</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Account extended for 1 day. Suggested to use My WorldLink app and also suggested to pay.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Account extended for 2 days. Suggested to use My WorldLink app and also suggested to pay.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Account extended for 3 days. Suggested to use My WorldLink app and also suggested to pay.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client has already account extended for 3 days, Suggested to pay.</p>
+                </div>
+
+                <p><strong>Account Disable-Pending transaction</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Account enabled for once and also suggested to say.</p>
+                </div>
+
+                <p><strong>Acound Status</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client, he/she was offered a 1-month bonus after payment. Payment done, but it hasn't been added. Please proceed accordingly.</p>
+                </div>
+
+                <p><strong>Payment Query</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client he paid his money through ESEWA but the payment is not received, suggested to contact with vender.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Cash paid to our staff but not updated in the account. Please do what is required.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client is requesting staff support for the payment process. Please address this promptly.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Cash paid to the branch but not updated in the account. Please do what is required.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client want bonus while paying on the same package, please do needful.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client, he/she was offered a 1-month bonus after payment of __ months. Please proceed accordingly.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client he settled his payment with Nrs. ____, but not uploaded yet, Please proceed accordingly.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per the client, the payment was made to the wrong username, i.e., '____'. Please proceed accordingly.</p>
+                </div>
+
+                <p><strong>Query About Package</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client wants to downgrade package otherwise he/she will terminate the service. Please do needful, asap </p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client wants to upgrade package to ____, please do needful, asap. </p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client wants _____ package for __ months , please do needful, asap.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slow Section -->
+        <section id="slow-section" class="section">
+            <p><strong class="section-title">Slow Connection</strong></p><br>
+            <div class="text-container">
+                <p><strong>Speed test fine</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                        <p>Bandwidth verified, R.X. power checked, device verified, ping test fine, speed test done, domain ping fine, issue resolved.</p>
+                    </div>
+                <p><strong>High Latency in a single device with good RSSI</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                        <p>Bandwidth fine, R.X. power fine, device verified, range fine (<= -65dBm), initial ping not fine, another device ping fine, reconnected Wi-Fi on first device, issue resolved.</p>
+                    </div>
+                 <p><strong>High Latency in a single device with good RSSI (Interference not Seen)</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                 <p>Bandwidth verified, R.X. power checked, device checked, initial ping not fine, range fine (<= -65dBm), another device ping not fine, channel interference not seen, reconnected WiFi, issue resolved.</p>
+                    </div>
+            
+                <p><strong>Interference Seen    (For Single Band ONU)</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                <p>Bandwidth verified, R.X. power checked, device checked, initial ping not fine, range fine (<= -65dBm), another device ping not fine, channel interference seen, suggested solutions for interference (suggested dual band ONU), refreshed channel and verified, issue resolved.</p>
+                    </div>
+                <p><strong>Interference Seen    (For Dual Band ONU)</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                <p>Bandwidth verified, R.X. power checked, device verified, range fine (<= -65dBm), initial ping not fine, another device ping not fine, channel interference seen, refreshed channel, issue resolved.</p>
+                    </div>
+                <p><strong>Range Issues</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                        <p>Bandwidth verified, R.X. power checked, device verified, initial ping not fine, range not fine (<= -65dBm), suggest secondary ONU and also suggest reposition.</p>
+                    </div> 
+                    <div class="text-block" onclick="copyText(event, this)">
+                    <p>Device verified, range not fine, device ping not fine, Client is requesting to reposition the router, Please proceed accordingly. .</p>
+                </div>
+                    <p><strong>Low power level recorded </strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Current rx power is low, Please proceed accordingly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TV Section -->
+        <section id="tv-section" class="section">
+            <p><strong class="section-title">IPTV</strong></p><br>
+            <div class="text-container">
+                <p><strong>Authentication Issue</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Reset OSP password after client verification and re-entered it on the STB box; issue resolved.</p>
+                </div>
+                <p><strong>No Signal</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Verified and replugged HDMI/AV Jack connection, changed source; issue resolved.</p>
+                </div>
+                <p><strong>Error Code 1503: No Internet Connection</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p> Network status Checked, STB IP Verified, launcher refresh/factory reset done, issue resolved.</p>
+                </div>
+                <p><strong>Error Code 1598: No Internet Connection</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Verified LAN status, replugged LAN cable, MAC filter checked, restarted system; issue resolved.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Verified LAN status, LAN down,  replugged LAN cable, still issue, please do needful, asap.</p>
+                </div>
+                <p><strong>Hardware Related</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>The STB shows a red light, and no bytes or packets are being received. A hard reset of the STB is required, Please proceed accordingly.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>The client reported an issue with the ___, and requested a replacement, please do needful, asap.</p>
+                </div>
+                <p><strong>Primary Package Expired</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Performed launcher refresh, issue resolved.</p>
+                </div>
+                <p><strong>Live TV Buffering</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Verified buffering across all channels. Confirmed WiFi was off on IPTV and performed launcher refresh; issue resolved.</p>
+                </div>
+                <p><strong>Live TV Stopped Working</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Performed launcher refresh and STB reboot.</p>
+                </div>
+                <p><strong>Query About YouTube Services</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Guided the client on how to log in or sign up for YouTube using the remote or a mobile device.</p>
+                </div>
+                <p><strong>NET TV Mobile App Inquiry</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Provided information to client about Net TV mobile app and its features.</p>
+                </div>
+                <p><strong>Query About Netflix Services</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Checked if client has Stream Z+ STB box. Updated STB box to include Netflix feature. Informed client they need their own Netflix subscription.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MyWorldLink Section -->
+        <section id="myworldlink-section" class="section">
+            <p><strong class="section-title">MyWorldLink</strong></p><br>
+            <div class="text-container">
+                <h4>For Android Users</h4>
+                
+            <span class="comment"><b>Note: If client have andriod verson 12 or higher simply follow iPhone/Windows/PC steps.<br></strong></b><strong>
+            1. Go to Wi-Fi Settings and select the SSID "myWorldLink".<br>
+            2. Click on “myWorldLink” SSID from the list.<br>
+            3. Now Click on “Advance Options<br>
+            4. Select “PEAP” in the EAP method<br>
+            5. Select “MSCHAPV2” in Phase 2 authentication<br>
+            6. Select "Do not validate" or "Unspecified" in the CA certificate field.<br>
+            7. Type your WorldLink account Username in Identity<br>
+            8. Ignore other fields<br>
+            9. In the Password section, enter your WorldLink Online Service password.<br>
+            10. Click "CONNECT"</span>
+            
+    </div>
+    <div class="text-block" onclick="copyText(event, this)">
+                    <strong><p>Guided the client on how to connect to MyWorldLink WiFi on an Android device.</p></strong>
+                </div>
+            </div>
+
+             <div id="notes-container">
+                <strong><h4>For Iphone Users</h4></strong>
+                
+            1. Go to Settings and Select Wi-Fi<br>
+            2. Select “myWorldLink” SSID from the list.<br>
+            3. Type your WorldLink account “Username & Password”<br>
+            4. Click “CONNECT” 
+    </div>
+    <div class="text-block" onclick="copyText(event, this)">
+                    <strong><p>Guided the client on how to connect to MyWorldLink WiFi on an Ipnone device.</p></strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Urgent Close Section -->
+        <section id="urgentclose-section" class="section">
+            <p><strong class="section-title">Urgent</strong></p><br>
+            <div class="text-container">
+                <p><strong>TT close/update</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Informed accordingly.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Please do needful, it's urgent, asap.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client, it works now, will contact us later if issue.</p>
+                </div>
+                 <div class="text-block" onclick="copyText(event, this)">
+                    <p>Updated on TT.</p>
+                 </div>
+                <p><strong>Client Side Issue</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Issue is not verified, Call Disconnected.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Issue is not verified, client is outside, will contact us later.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client, will contact us later.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Power outage in the client side, will contact us later.</p>
+                </div>
+                <p><strong>Client verification</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client verified, provided username.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client verified, provided current password.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client verified, password changed.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client verified, SSID enabled.</p>
+                </div>
+                <p><strong>L2 Communication</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>No light on auth but stable on link, please do check once.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>TT raised on GPON down but seems offline case, please do check once.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Username: ____ ,Outage Issue, Client has called multiple times, unsatisfied due to our late service. </p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Username: ____, reachable no._____, unsatisfied client due to our late service (Reason_behind_unsatisfied), it's urgent, pending from more than 24hrs.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Quick Access Popup -->
+        <div class="popup" id="myPopup">
+            <div class="popup-content">
+                <span class="close-btn" onclick="hidePopup()">&times;</span>
+                <h2>⚡ Quick Access</h2>
+      <a class="bookmark" href="https://epayment.worldlink.com.np/new/internet-payment" target="_blank" rel="noopener noreferrer">E-payment</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/u/0/d/e/2PACX-1vTLhXrudNQookJuRHAIbUeIuAX1vLtSyQPe_QSgmtCfS-ArswcqBEMO_TIwUj9lEQatlapGn-XtgNdJ/pubhtml?pli=1" target="_blank" rel="noopener noreferrer">Department No.</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/d/1yCLvefgWU_SnU3OIPX_GBJWorQFRE1SASISzv6SJLbM/edit?pli=1&gid=1621541645#gid=1621541645" target="_blank" rel="noopener noreferrer">Branch Location</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/d/1yCLvefgWU_SnU3OIPX_GBJWorQFRE1SASISzv6SJLbM/edit?gid=1438794880#gid=1438794880" target="_blank" rel="noopener noreferrer">Packages Details</a>
+      <a class="bookmark" href="https://hritish007.github.io/hr.support/pin/" target="_blank" rel="noopener noreferrer">Issue Pin </a>
+      <a class="bookmark" href="https://csupport.wlink.com.np/" target="_blank" rel="noopener noreferrer">C-Support</a>
+      <a class="bookmark" href="https://ebill.wlink.com.np/" target="_blank" rel="noopener noreferrer">E-Bill</a>
+      <a class="bookmark" href="https://ftth.wlink.com.np/login" target="_blank" rel="noopener noreferrer">Ftth</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/d/1yCLvefgWU_SnU3OIPX_GBJWorQFRE1SASISzv6SJLbM/edit?gid=1858361334#gid=1858361334" target="_blank" rel="noopener noreferrer">Iptv issue ✔</a>
+      <a class="bookmark" href="https://nettv.wlink.com.np/" target="_blank" rel="noopener noreferrer">NetTv Dashboard</a>
+      <a class="bookmark" href="https://webtv.nettv.com.np/login" target="_blank" rel="noopener noreferrer">Nettv/login</a>
+      <a class="bookmark" href="http://nagios-olt-01.wlink.com.np/nagios/" target="_blank" rel="noopener noreferrer">Nagios</a>
+      <a class="bookmark" href="https://ameyoapp.wlink.com.np:8443/app/#!home" target="_blank" rel="noopener noreferrer">Ameyoapp</a>
+      
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        © <span id="year">2025</span> HritishShaqya. Keep learning and Enjoying.
+    </footer>
+
+    <!-- Keyboard Help Modal -->
+    <div class="overlay" id="overlay"></div>
+    <div class="keyboard-help" id="keyboardHelp">
+        <h3>Keyboard Shortcuts</h3>
+        <ul>
+            <li><kbd>?</kbd> - Show/hide this help</li>
+            <li><kbd>Esc</kbd> - Close search or help</li>
+            <li><kbd>↑</kbd>/<kbd>↓</kbd> - Navigate search results</li>
+            <li><kbd>Page Up</kbd>/<kbd>Page Down</kbd> - Navigate remarks under selected header</li>
+            <li><kbd>Enter</kbd> - Copy selected remark</li>
+            <li><kbd>/</kbd> - Focus search input</li>
+        </ul>
+        <button onclick="hideKeyboardHelp()" style="margin-top: 15px; padding:  15px; background: #1677ff; color: white; border: none; border-radius: 4px; cursor: pointer;">X</button>
+    </div>
+
+    <script>
+    // Theme Toggle Functionality
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
+
+// Check for saved theme preference or use system preference
+const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+body.classList.add(savedTheme + '-theme');
+updateThemeToggle(savedTheme);
+
+themeToggle.addEventListener('click', () => {
+    const isDark = body.classList.contains('dark-theme');
+    if (isDark) {
+        body.classList.replace('dark-theme', 'light-theme');
+        localStorage.setItem('theme', 'light');
+        updateThemeToggle('light');
+    } else {
+        body.classList.replace('light-theme', 'dark-theme');
+        localStorage.setItem('theme', 'dark');
+        updateThemeToggle('dark');
+    }
+});
+
+function updateThemeToggle(theme) {
+    if (theme === 'dark') {
+        themeToggle.textContent = '☀️';
+        themeToggle.setAttribute('aria-label', 'Switch to light theme');
+    } else {
+        themeToggle.textContent = '🌙';
+        themeToggle.setAttribute('aria-label', 'Switch to dark theme');
+    }
+}
+
+// Update year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Close popup when clicking outside of popup-content
+window.addEventListener("click", function (event) {
+    const popup = document.getElementById("myPopup");
+    if (!popup) return;
+    
+    const popupContent = popup.querySelector(".popup-content");
+
+    if (popup.style.display === "flex" &&
+        !popupContent.contains(event.target) &&
+        !event.target.closest("button[onclick='togglePopup()']")) {
+        popup.style.display = "none";
+    }
+});
+
+// Copy text functionality
+let currentlySelectedElement = null;
+let highlightTimeout = null;
+
+function copyText(event, element) {
+    const text = element.querySelector('p').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        showCopyNotification(event, "Copied!");
+        
+        // NO highlight when copying via click
+    });
+}
+
+function showCopyNotification(event, message) {
+    const notification = document.createElement("div");
+    notification.className = "notification";
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    const offsetX = -35;
+    const offsetY = -60;
+    let posX = event.clientX + offsetX;
+    let posY = event.clientY + offsetY;
+    const notificationWidth = 100;
+    const notificationHeight = 30;
+    const maxX = window.innerWidth - notificationWidth - 10;
+    const maxY = window.innerHeight - notificationHeight - 10;
+    posX = Math.min(posX, maxX);
+    posY = Math.min(posY, maxY);
+    notification.style.left = posX + "px";
+    notification.style.top = posY + "px";
+
+    notification.classList.add("show");
+    setTimeout(() => {
+        notification.classList.add("hide");
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 1500);
+}
+
+// Quick Access Popup Functions
+function togglePopup() {
+    const popup = document.getElementById("myPopup");
+    if (popup) {
+        popup.style.display = popup.style.display === "flex" ? "none" : "flex";
+    }
+}
+
+function hidePopup() {
+    const popup = document.getElementById("myPopup");
+    if (popup) {
+        popup.style.display = "none";
+    }
+}
+
+// Function to show different sections (for single-page navigation)
+function showSection(sectionName) {
+    // Hide all sections
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Show the selected section
+    const targetSection = document.getElementById(sectionName + '-section');
+    if (targetSection) {
+        targetSection.classList.add('active');
+    }
+    
+    // Reset selection state
+    resetSelection();
+}
+
+// Enhanced Search functionality
+const searchInput = document.getElementById('search-input');
+const searchResults = document.getElementById('search-results');
+
+// Map of section IDs to their display names
+const sectionNames = {
+    'router-section': 'Router ',
+    'account-section': 'Accounts Related Issue',
+    'slow-section': 'Slow Internet Connection',
+    'tv-section': 'IPTV Related Issue',
+    'myworldlink-section': 'MyWorldLink',
+    'urgentclose-section': 'Urgent '
+};
+
+let currentSelectedResultIndex = -1;
+let searchResultItems = [];
+let currentHeaderRemarks = [];
+let isHeaderSelected = false; 
+let currentNavigationIndex = -1; 
+
+function findHeaderForRemark(remarkElement) {
+    let currentElement = remarkElement.previousElementSibling;
+    
+    // Traverse backwards to find the nearest header
+    while (currentElement) {
+        if (currentElement.tagName === 'P' && 
+            currentElement.parentElement.classList.contains('text-container')) {
+            return currentElement.textContent.trim();
+        }
+        currentElement = currentElement.previousElementSibling;
+    }
+    
+    return 'General';
+}
+
+// Function to select element for copying with TEMPORARY highlight (2.5 seconds)
+function selectForCopy(element) {
+    // Clear any existing timeout
+    if (highlightTimeout) {
+        clearTimeout(highlightTimeout);
+    }
+    
+    // Remove previous selection
+    if (currentlySelectedElement) {
+        currentlySelectedElement.classList.remove('selected-for-copy');
+    }
+    
+    // Set new selection
+    currentlySelectedElement = element;
+    element.classList.add('selected-for-copy');
+    
+    // Scroll to element
+    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+    // Remove highlight after 2.5 seconds
+    highlightTimeout = setTimeout(() => {
+        if (currentlySelectedElement) {
+            currentlySelectedElement.classList.remove('selected-for-copy');
+            currentlySelectedElement = null;
+        }
+    }, 1000);
+}
+
+// Function to copy currently selected text
+function copySelectedText() {
+    if (currentlySelectedElement) {
+        const text = currentlySelectedElement.querySelector('p').textContent;
+        navigator.clipboard.writeText(text).then(() => {
+            // Show copy notification
+            showCopyNotification({ clientX: 100, clientY: 100 }, "Copied to clipboard!");
+        });
+    }
+}
+
+// Function to reset selection completely
+function resetSelection() {
+    if (highlightTimeout) {
+        clearTimeout(highlightTimeout);
+        highlightTimeout = null;
+    }
+    
+    if (currentlySelectedElement) {
+        currentlySelectedElement.classList.remove('selected-for-copy');
+        currentlySelectedElement = null;
+    }
+}
+
+// Search function
+function performSearch(query) {
+    if (!query.trim()) {
+        searchResults.style.display = 'none';
+        currentSelectedResultIndex = -1;
+        isHeaderSelected = false;
+        return;
+    }
+
+    const results = [];
+    const sections = document.querySelectorAll('.section');
+    
+    sections.forEach(section => {
+        const sectionId = section.id;
+        const sectionName = sectionNames[sectionId] || sectionId;
+        
+        // Search in subsection titles (text-container > p elements) - FIRST PRIORITY
+        const subsectionTitles = section.querySelectorAll('.text-container > p');
+        subsectionTitles.forEach(title => {
+            const text = title.textContent.toLowerCase();
+            if (text.includes(query.toLowerCase())) {
+                results.push({
+                    sectionId: sectionId,
+                    sectionName: sectionName,
+                    headerName: title.textContent.trim(),
+                    text: title.textContent,
+                    element: title,
+                    type: 'subsection',
+                    priority: 1 // Highest priority
+                });
+            }
+        });
+        
+        // Search in text blocks - SECOND PRIORITY
+        const textBlocks = section.querySelectorAll('.text-block');
+        textBlocks.forEach(block => {
+            const text = block.querySelector('p').textContent.toLowerCase();
+            if (text.includes(query.toLowerCase())) {
+                const headerName = findHeaderForRemark(block);
+                results.push({
+                    sectionId: sectionId,
+                    sectionName: sectionName,
+                    headerName: headerName,
+                    text: block.querySelector('p').textContent,
+                    element: block,
+                    type: 'content',
+                    priority: 2 // Lower priority
+                });
+            }
+        });
+    });
+
+    // Sort by priority (subsection first, then content)
+    results.sort((a, b) => a.priority - b.priority);
+    
+    displaySearchResults(results, query);
+}
+
+// Display search results
+function displaySearchResults(results, query) {
+    searchResults.innerHTML = '';
+    searchResultItems = [];
+    currentHeaderRemarks = [];
+    isHeaderSelected = false;
+    currentNavigationIndex = -1;
+    
+    if (results.length === 0) {
+        searchResults.innerHTML = '<div class="no-results">No results found</div>';
+    } else {
+        results.forEach((result, index) => {
+            const resultItem = document.createElement('div');
+            resultItem.className = 'search-result-item';
+            resultItem.setAttribute('tabindex', '0'); // Make it focusable
+            resultItem.setAttribute('data-index', index);
+            
+            // Add type indicator and appropriate name
+            let typeIndicator = '';
+            let nameDisplay = '';
+            
+            if (result.type === 'subsection') {
+                typeIndicator = '<div class="result-type">Header</div>';
+                nameDisplay = `<div class="section-name">${result.sectionName}</div>`;
+            } else {
+                typeIndicator = '<div class="result-type">Remarks</div>';
+                nameDisplay = `
+                    <div class="section-name">${result.sectionName}</div>
+                    <div class="header-name">${result.headerName}</div>
+                `;
+            }
+            
+            resultItem.innerHTML = `
+                ${typeIndicator}
+                ${nameDisplay}
+                <div class="result-text">${highlightText(result.text, query)}</div>
+            `;
+            
+            resultItem.addEventListener('click', () => {
+                selectSearchResult(result, index);
+            });
+            
+            resultItem.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    selectSearchResult(result, index);
+                }
+            });
+            
+            searchResults.appendChild(resultItem);
+            searchResultItems.push(resultItem);
+        });
+        currentSelectedResultIndex = -1;
+    }
+    
+    searchResults.style.display = 'block';
+}
+
+function selectSearchResult(result, index) {
+    // Clear previous highlights and navigation state
+    resetNavigationState();
+    
+    // Show the section
+    showSection(result.sectionId.replace('-section', ''));
+    
+    // If it's a header, ONLY highlight the header, don't select remarks
+    if (result.type === 'subsection') {
+        isHeaderSelected = true;
+        currentHeaderRemarks = getRemarksForHeader(result.element);
+        currentNavigationIndex = -1; // Don't select any remark initially
+        
+        // Highlight ONLY the header with temporary blue highlight
+        selectForCopy(result.element);
+        
+        // Scroll header into view
+        result.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+        // It's a remark - select it for copying with temporary blue highlight
+        selectForCopy(result.element);
+    }
+    
+    searchResults.style.display = 'none';
+    searchInput.value = '';
+}
+
+function getRemarksForHeader(headerElement) {
+    const remarks = [];
+    let currentElement = headerElement.nextElementSibling;
+    
+    // Get all text blocks until next header or end of container
+    while (currentElement && currentElement.classList && currentElement.classList.contains('text-block')) {
+        remarks.push(currentElement);
+        currentElement = currentElement.nextElementSibling;
+    }
+    
+    return remarks;
+}
+
+function navigateHeaderRemarks(direction) {
+    if (currentHeaderRemarks.length === 0) return;
+    
+    // Navigate
+    if (direction === 'up') {
+        currentNavigationIndex = Math.max(0, currentNavigationIndex - 1);
+    } else if (direction === 'down') {
+        currentNavigationIndex = Math.min(currentHeaderRemarks.length - 1, currentNavigationIndex + 1);
+    }
+    
+    // Select new remark with temporary blue highlight
+    selectForCopy(currentHeaderRemarks[currentNavigationIndex]);
+}
+
+function resetNavigationState() {
+    // Remove selection from all remarks
+    resetSelection();
+    
+    isHeaderSelected = false;
+    currentNavigationIndex = -1;
+    currentHeaderRemarks = [];
+}
+
+function highlightText(text, query) {
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+}
+
+function navigateSearchResults(direction) {
+    if (searchResultItems.length === 0) return;
+    
+    // Remove selection from current item
+    if (currentSelectedResultIndex >= 0) {
+        searchResultItems[currentSelectedResultIndex].classList.remove('selected');
+    }
+    
+    // Navigate
+    if (direction === 'up') {
+        currentSelectedResultIndex = Math.max(0, currentSelectedResultIndex - 1);
+    } else if (direction === 'down') {
+        currentSelectedResultIndex = Math.min(searchResultItems.length - 1, currentSelectedResultIndex + 1);
+    }
+    
+    // Select new item
+    if (currentSelectedResultIndex >= 0) {
+        searchResultItems[currentSelectedResultIndex].classList.add('selected');
+        searchResultItems[currentSelectedResultIndex].focus();
+        searchResultItems[currentSelectedResultIndex].scrollIntoView({
+            block: 'nearest',
+            behavior: 'smooth'
+        });
+    }
+}
+
+// Event listeners
+searchInput.addEventListener('input', (e) => {
+    performSearch(e.target.value);
+});
+
+searchInput.addEventListener('focus', () => {
+    if (searchResults.children.length > 0) {
+        searchResults.style.display = 'block';
+    }
+});
+
+document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.style.display = 'none';
+        currentSelectedResultIndex = -1;
+        resetNavigationState();
+    }
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' && e.target !== searchInput) return;
+    
+    switch(e.key) {
+        case '/':
+            e.preventDefault();
+            searchInput.focus();
+            break;
+            
+        case 'Shift':
+            if (searchResults.style.display === 'block') {
+                searchResults.style.display = 'none';
+                currentSelectedResultIndex = -1;
+                resetNavigationState();
+            } else if (document.getElementById('keyboardHelp').style.display === 'block') {
+                hideKeyboardHelp();
+            }
+            break;
+            
+        case '?':
+            e.preventDefault();
+            toggleKeyboardHelp();
+            break;
+            
+        case 'ArrowUp':
+            if (searchResults.style.display === 'block') {
+                e.preventDefault();
+                if (isHeaderSelected && currentHeaderRemarks.length > 0) {
+                    navigateHeaderRemarks('up');
+                } else {
+                    navigateSearchResults('up');
+                }
+            }
+            break;
+            
+        case 'ArrowDown':
+            if (searchResults.style.display === 'block') {
+                e.preventDefault();
+                if (isHeaderSelected && currentHeaderRemarks.length > 0) {
+                    navigateHeaderRemarks('down');
+                } else {
+                    navigateSearchResults('down');
+                }
+            }
+            break;
+            
+        case 'PageUp':
+            if (isHeaderSelected && currentHeaderRemarks.length > 0) {
+                e.preventDefault();
+                navigateHeaderRemarks('up');
+            }
+            break;
+            
+        case 'PageDown':
+            if (isHeaderSelected && currentHeaderRemarks.length > 0) {
+                e.preventDefault();
+                navigateHeaderRemarks('down');
+            }
+            break;
+            
+        case 'Enter':
+            if (currentlySelectedElement) {
+                e.preventDefault();
+                copySelectedText();
+            } else if (searchResults.style.display === 'block' && currentSelectedResultIndex >= 0) {
+                e.preventDefault();
+                const resultIndex = parseInt(searchResultItems[currentSelectedResultIndex].getAttribute('data-index'));
+                // We need to simulate the result object here
+                const results = [];
+                document.querySelectorAll('.section').forEach(section => {
+                    const sectionId = section.id;
+                    const sectionName = sectionNames[sectionId] || sectionId;
+                    
+                    const subsectionTitles = section.querySelectorAll('.text-container > p');
+                    subsectionTitles.forEach(title => {
+                        results.push({
+                            sectionId: sectionId,
+                            sectionName: sectionName,
+                            headerName: title.textContent.trim(),
+                            text: title.textContent,
+                            element: title,
+                            type: 'subsection',
+                            priority: 1
+                        });
+                    });
+                    
+                    const textBlocks = section.querySelectorAll('.text-block');
+                    textBlocks.forEach(block => {
+                        const headerName = findHeaderForRemark(block);
+                        results.push({
+                            sectionId: sectionId,
+                            sectionName: sectionName,
+                            headerName: headerName,
+                            text: block.querySelector('p').textContent,
+                            element: block,
+                            type: 'content',
+                            priority: 2
+                        });
+                    });
+                });
+                
+                results.sort((a, b) => a.priority - b.priority);
+                
+                if (results[resultIndex]) {
+                    selectSearchResult(results[resultIndex], resultIndex);
+                }
+            }
+            break;
+    }
+});
+
+function toggleKeyboardHelp() {
+    const help = document.getElementById('keyboardHelp');
+    const overlay = document.getElementById('overlay');
+    
+    if (help.style.display === 'block') {
+        hideKeyboardHelp();
+    } else {
+        help.style.display = 'block';
+        overlay.style.display = 'block';
+    }
+}
+
+function hideKeyboardHelp() {
+    document.getElementById('keyboardHelp').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+    </script>
+</body>
+</html>
