@@ -1653,7 +1653,7 @@ function copySelectedText() {
         const text = currentlySelectedElement.querySelector('p').textContent;
         navigator.clipboard.writeText(text).then(() => {
             // Show copy notification
-            showCopyNotification({ clientX: 100, clientY: 100 }, "Copied to clipboard!");
+            showCopyNotification({ clientX: 100, clientY: 100 }, "Copied!");
         });
     }
 }
@@ -2031,3 +2031,4 @@ function hideKeyboardHelp() {
 </body>
 
 </html>
+
