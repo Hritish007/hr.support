@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HR Support</title>
-    <link rel="icon" href="img/welcom.jpg" />
+     <link rel="icon" href="img/welcom.jpg" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/trys.css">
     <script src="script.js"></script>
-
     <style>
         /* Base Styles */
         * {
@@ -138,7 +137,7 @@
         }
 
         body.dark-theme .search-input:focus {
-            border-color: #1677ff;
+            border-color: #303131;
             box-shadow: 0 0 10px rgba(22, 119, 255, 0.5);
         }
 
@@ -150,7 +149,7 @@
         }
 
         body.light-theme .search-input:focus {
-            border-color: #1677ff;
+            border-color: #525253;
             box-shadow: 0 0 10px rgba(22, 119, 255, 0.3);
         }
 
@@ -224,7 +223,7 @@
             font-weight: bold;
             font-size: 0.85rem;
             margin-bottom: 3px;
-            color: #ffd700; /*Searchh sub header*/
+            color: #faad14; /*Searchh sub header*/
         }
 
         .search-result-item .result-text {
@@ -432,14 +431,14 @@
 
         /* Dark Theme Section Titles linee */
         body.dark-theme .text-container > p {
-            color: #ffd700;
+            color: #faad14;
             border-bottom-color: #0665d1;
             text-shadow: none;
         }
 
         /* Light Theme Section Titles linee */
         body.light-theme .text-container > p {
-            color: #ffd700;
+            color: #faad14;
             border-bottom-color: #0665d1;
             text-shadow: none;
         }
@@ -1008,12 +1007,69 @@
         }
 
         /* Mark styling for highlighted search terms */
-        mark {
-            background-color: #d8d8d7;
-            color: #000;
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
+        /* Mark highlighting for search results */
+mark {
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+/* Dark Theme Mark */
+body.dark-theme mark {
+    background: linear-gradient(135deg, #747474, #ffed4e);
+    color: #000000;
+    box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme mark:hover {
+    background: linear-gradient(135deg, #ffed4e, #ffff80);
+    box-shadow: 0 2px 6px rgba(255, 215, 0, 0.5);
+    transform: translateY(-1px);
+}
+
+/* Light Theme Mark */
+body.light-theme mark {
+    background: linear-gradient(135deg, #1677ff, #4096ff);
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(22, 119, 255, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+body.light-theme mark:hover {
+    background: linear-gradient(135deg, #4096ff, #69b1ff);
+    box-shadow: 0 2px 6px rgba(22, 119, 255, 0.4);
+    transform: translateY(-1px);
+}
+
+/* Animation for search highlight appearance */
+@keyframes highlightPop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Apply animation to marks in search results */
+.search-result-item mark {
+    animation: highlightPop 0.3s ease-out;
+}
+
+/* Selection styles for marked text */
+body.dark-theme mark::selection {
+    background: rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+body.light-theme mark::selection {
+    background: rgba(255, 255, 255, 0.3);
+    color: #000000;
+}
         /* Selection highlight for navigation */
 .text-block.selected-for-copy {
     border-left-color: #1677ff !important;
@@ -1092,6 +1148,253 @@ body.light-theme .text-block.temporary-highlight {
         box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
     }
 }
+        /* Date Calculator Styles */
+        .date-popup-container {
+            background: inherit;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        body.dark-theme .date-popup-container {
+            background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
+            border-color: #444;
+        }
+
+        body.light-theme .date-popup-container {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border-color: #e2e8f0;
+        }
+
+        .date-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .date-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        .date-group {
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid;
+        }
+
+        body.dark-theme .date-group {
+            background: linear-gradient(135deg, #333, #2a2a2a);
+            border-color: #444;
+        }
+
+        body.light-theme .date-group {
+            background: linear-gradient(135deg, #ffffff, #f7fafc);
+            border-color: #e2e8f0;
+        }
+
+        .date-group h2 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            color: #1677ff;
+            text-align: center;
+        }
+
+        .fields {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+
+        .fields > div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .label {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .date-group input[readonly] {
+            width: 70px;
+            padding: 8px;
+            text-align: center;
+            border: 1px solid;
+            border-radius: 5px;
+            background: inherit;
+            font-size: 1rem;
+        }
+
+        body.dark-theme .date-group input[readonly] {
+            border-color: #555;
+            color: #ffffff;
+        }
+
+        body.light-theme .date-group input[readonly] {
+            border-color: #cbd5e0;
+            color: #2d3748;
+        }
+
+        .today-link {
+            margin-left: 90px;
+            color: #ffd700;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: 0.3s ease;
+
+        }
+
+        .today-link:hover {
+        color: #faad14;
+        transform: scale(1.05);
+}
+        .paste-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid;
+        }
+
+        body.dark-theme .paste-section {
+            border-top-color: #444;
+        }
+
+        body.light-theme .paste-section {
+            border-top-color: #e2e8f0;
+        }
+
+        .paste-info {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            text-align: center;
+            color: #888;
+        }
+
+        .paste-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background: inherit;
+        }
+
+        body.dark-theme .paste-input {
+            border-color: #555;
+            color: #ffffff;
+        }
+
+        body.light-theme .paste-input {
+            border-color: #cbd5e0;
+            color: #2d3748;
+        }
+
+        .paste-button {
+            width: 100%;
+            padding: 10px;
+            background: #1677ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .paste-button:hover {
+            background: #0056cc;
+            transform: scale(1.02);
+        }
+
+        #duration-result {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        body.dark-theme #duration-result {
+            background: linear-gradient(135deg, #333, #2a2a2a);
+            border: 1px solid #444;
+            color: #ffd700;
+        }
+
+        body.light-theme #duration-result {
+            background: linear-gradient(135deg, #ffffff, #f7fafc);
+            border: 1px solid #e2e8f0;
+            color: #ffd700;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-container {
+                margin-right: 0;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            .nav-links a img {
+                width: 40px;
+            }
+
+            .section {
+                padding: 20px;
+                margin: 10px 0;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .text-container > p {
+                font-size: 1.1rem;
+            }
+
+            .text-block {
+                padding: 15px;
+            }
+
+            .text-block p {
+                font-size: 0.9rem;
+            }
+
+            .popup-content {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+
+            .popup-content h2 {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body class="dark-theme">
@@ -1099,7 +1402,7 @@ body.light-theme .text-block.temporary-highlight {
         <nav class="navbar container">
             <a class="navbar-brand" href="pin" target="_blank">HR Support</a>
             <div class="search-container">
-                <input type="text" class="search-input" id="search-input" placeholder="Search for content...">
+                <input type="text" class="search-input" id="search-input" placeholder="Search for HR Content... "autocomplete="off">
                 <div class="search-results" id="search-results"></div>
             </div>
             <div class="nav-links">
@@ -1120,7 +1423,7 @@ body.light-theme .text-block.temporary-highlight {
      <main class="container" id="main-content">
         <!-- Router Section -->
         <section id="router-section" class="section active">
-            <p><strong class="section-title">Router</strong></p><br>
+            <p><strong class="section-title">Router </strong></p><br>
             <div class="text-container">
                 <p><strong>ONU Status Offline</strong></p>
                 <div class="text-block" onclick="copyText(event, this)">
@@ -1145,7 +1448,7 @@ body.light-theme .text-block.temporary-highlight {
                     <p>Disconnection problem seen, The router was already connected to the wall socket, please do needful, asap.</p>
                 </div>
                 
-                <p><strong>General</strong></p>
+                <p><strong>General Query</strong></p>
                 <div class="text-block" onclick="copyText(event, this)">
                     <p>Client is requesting for cable management. Please proceed accordingly.</p>
                 </div>
@@ -1160,9 +1463,9 @@ body.light-theme .text-block.temporary-highlight {
 
         <!-- Account Section -->
         <section id="account-section" class="section">
-            <p><strong class="section-title">Account</strong></p><br>
+            <p><strong class="section-title">Account </strong></p><br>
             <div class="text-container">
-                <p><strong>Accound Extend</strong></p>
+                <p><strong>Account Extend</strong></p>
                 <div class="text-block" onclick="copyText(event, this)">
                     <p>Account extended for 1 day. Suggested to use My WorldLink app and also suggested to pay.</p>
                 </div>
@@ -1181,7 +1484,7 @@ body.light-theme .text-block.temporary-highlight {
                     <p>Account enabled for once and also suggested to say.</p>
                 </div>
 
-                <p><strong>Acound Status</strong></p>
+                <p><strong>Account Status Query</strong></p>
                 <div class="text-block" onclick="copyText(event, this)">
                     <p>As per client, he/she was offered a 1-month bonus after payment. Payment done, but it hasn't been added. Please proceed accordingly.</p>
                 </div>
@@ -1328,6 +1631,7 @@ body.light-theme .text-block.temporary-highlight {
                 <h4>For Android Users</h4>
                 
             <span class="comment"><b>Note: If client have andriod verson 12 or higher simply follow iPhone/Windows/PC steps.<br></strong></b><strong>
+                <strong>Steps:</strong><br>
             1. Go to Wi-Fi Settings and select the SSID "myWorldLink".<br>
             2. Click on “myWorldLink” SSID from the list.<br>
             3. Now Click on “Advance Options<br>
@@ -1347,7 +1651,7 @@ body.light-theme .text-block.temporary-highlight {
 
              <div id="notes-container">
                 <strong><h4>For Iphone Users</h4></strong>
-                
+            <strong>Steps:</strong><br>
             1. Go to Settings and Select Wi-Fi<br>
             2. Select “myWorldLink” SSID from the list.<br>
             3. Type your WorldLink account “Username & Password”<br>
@@ -1417,6 +1721,70 @@ body.light-theme .text-block.temporary-highlight {
                 </div>
             </div>
         </section>
+        <!-- Hidden Date Calculator Section -->
+        <section id="date-calculator-section" class="section" style="display: none;">
+            <p><strong class="section-title">📅 Date Calculator</strong></p>
+            <div class="text-container">
+                <div class="date-popup-container">
+                    <div class="date-popup-content">
+                        <div class="date-container">
+                            <div class="date-group">
+                                <h2>Start Date</h2>
+                                <div class="fields">
+                                    <div>
+                                        <label class="label">Day:</label>
+                                        <input id="start-day" placeholder="" readonly>
+                                    </div>
+                                    <div>
+                                        <label class="label">Month:</label>
+                                        <input id="start-month" placeholder="" readonly>
+                                    </div>
+                                    <div>
+                                        <label class="label">Year:</label>
+                                        <input id="start-year" placeholder="" readonly>
+                                    </div>
+                                </div>
+                                <span class="today-link" onclick="setToday('start')">📌 Set Today</span>
+                                
+                                <div class="paste-section">
+                                    <div class="paste-info">Paste date from your system:</div>
+                                    <input type="text" id="start-paste-input" class="paste-input" placeholder="Paste date here (e.g., 16-SEP-2025 16:57)">
+                                    <button class="paste-button" onclick="parseAndSetDate('start')">📋 Apply Date</button>
+                                </div>
+                            </div>
+
+                            <div class="date-group">
+                                <h2>End Date</h2>
+                                <div class="fields">
+                                    <div>
+                                        <label class="label">Day:</label>
+                                        <input id="end-day" placeholder="" readonly>
+                                    </div>
+                                    <div>
+                                        <label class="label">Month:</label>
+                                        <input id="end-month" placeholder="" readonly>
+                                    </div>
+                                    <div>
+                                        <label class="label">Year:</label>
+                                        <input id="end-year" placeholder="" readonly>
+                                    </div>
+                                </div>
+                                <span class="today-link" onclick="setToday('end')">📌 Set Today</span>
+                                
+                                <div class="paste-section">
+                                    <div class="paste-info">Paste date from your system:</div>
+                                    <input type="text" id="end-paste-input" class="paste-input" placeholder="Paste date here (e.g., 16-SEP-2025 16:57)">
+                                    <button class="paste-button" onclick="parseAndSetDate('end')">📋 Apply Date</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="duration-result">Duration: 0 days</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
 
         <!-- Quick Access Popup -->
@@ -1446,23 +1814,8 @@ body.light-theme .text-block.temporary-highlight {
         © <span id="year">2025</span> HritishShaqya. Keep learning and Enjoying.
     </footer>
 
-    <!-- Keyboard Help Modal -->
-    <div class="overlay" id="overlay"></div>
-    <div class="keyboard-help" id="keyboardHelp">
-        <h3>Keyboard Shortcuts</h3>
-        <ul>
-            <li><kbd>?</kbd> - Show/hide this help</li>
-            <li><kbd>Shift</kbd> - Close search or help</li>
-            <li><kbd>↑</kbd>/<kbd>↓</kbd> - Navigate search results</li>
-            <li><kbd>Page Up</kbd>/<kbd>Page Down</kbd> - Navigate remarks under selected header</li>
-            <li><kbd>Enter</kbd> - Copy selected remark</li>
-            <li><kbd>/</kbd> - Focus search input</li>
-        </ul>
-        <button onclick="hideKeyboardHelp()" style="margin-top: 15px; padding:  15px; background: #1677ff; color: white; border: none; border-radius: 4px; cursor: pointer;">X</button>
-    </div>
-
     <script>
-    // Theme Toggle Functionality
+       // Theme Toggle Functionality
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
@@ -1519,8 +1872,6 @@ function copyText(event, element) {
     const text = element.querySelector('p').textContent;
     navigator.clipboard.writeText(text).then(() => {
         showCopyNotification(event, "Copied!");
-        
-        // NO highlight when copying via click
     });
 }
 
@@ -1567,17 +1918,35 @@ function hidePopup() {
     }
 }
 
-// Function to show different sections (for single-page navigation)
+// Section names including hidden sections
+const sectionNames = {
+    'router-section': 'Router',
+    'account-section': 'Account',
+    'slow-section': 'Slow Connection',
+    'tv-section': 'IPTV',
+    'myworldlink-section': 'MyWorldLink',
+    'urgentclose-section': 'Urgent',
+    'date-calculator-section': 'Time Duration'
+};
+
+// Function to show different sections
 function showSection(sectionName) {
     // Hide all sections
     document.querySelectorAll('.section').forEach(section => {
         section.classList.remove('active');
+        section.style.display = 'none';
     });
     
     // Show the selected section
     const targetSection = document.getElementById(sectionName + '-section');
     if (targetSection) {
         targetSection.classList.add('active');
+        targetSection.style.display = 'block';
+        
+        // Initialize date calculator if it's the date calculator section
+        if (sectionName === 'date-calculator') {
+            initializeDateCalculator();
+        }
     }
     
     // Reset selection state
@@ -1588,21 +1957,9 @@ function showSection(sectionName) {
 const searchInput = document.getElementById('search-input');
 const searchResults = document.getElementById('search-results');
 
-// Map of section IDs to their display names
-const sectionNames = {
-    'router-section': 'Router ',
-    'account-section': 'Accounts Related Issue',
-    'slow-section': 'Slow Internet Connection',
-    'tv-section': 'IPTV Related Issue',
-    'myworldlink-section': 'MyWorldLink',
-    'urgentclose-section': 'Urgent '
-};
-
 let currentSelectedResultIndex = -1;
 let searchResultItems = [];
-let currentHeaderRemarks = [];
-let isHeaderSelected = false; 
-let currentNavigationIndex = -1; 
+let allSearchResults = [];
 
 function findHeaderForRemark(remarkElement) {
     let currentElement = remarkElement.previousElementSibling;
@@ -1619,7 +1976,7 @@ function findHeaderForRemark(remarkElement) {
     return 'General';
 }
 
-// Function to select element for copying with TEMPORARY highlight (2.5 seconds)
+// Function to select element for copying with TEMPORARY highlight
 function selectForCopy(element) {
     // Clear any existing timeout
     if (highlightTimeout) {
@@ -1644,18 +2001,7 @@ function selectForCopy(element) {
             currentlySelectedElement.classList.remove('selected-for-copy');
             currentlySelectedElement = null;
         }
-    }, 1000);
-}
-
-// Function to copy currently selected text
-function copySelectedText() {
-    if (currentlySelectedElement) {
-        const text = currentlySelectedElement.querySelector('p').textContent;
-        navigator.clipboard.writeText(text).then(() => {
-            // Show copy notification
-            showCopyNotification({ clientX: 100, clientY: 100 }, "Copied!");
-        });
-    }
+    }, 2500);
 }
 
 // Function to reset selection completely
@@ -1671,44 +2017,57 @@ function resetSelection() {
     }
 }
 
-// Search function
+// Search function with CORRECT priority system
 function performSearch(query) {
     if (!query.trim()) {
         searchResults.style.display = 'none';
         currentSelectedResultIndex = -1;
-        isHeaderSelected = false;
         return;
     }
 
     const results = [];
     const sections = document.querySelectorAll('.section');
+    const queryLower = query.toLowerCase();
     
     sections.forEach(section => {
         const sectionId = section.id;
         const sectionName = sectionNames[sectionId] || sectionId;
         
-        // Search in subsection titles (text-container > p elements) - FIRST PRIORITY
+        // PRIORITY 1: HEADERS - Subsection titles
         const subsectionTitles = section.querySelectorAll('.text-container > p');
         subsectionTitles.forEach(title => {
             const text = title.textContent.toLowerCase();
-            if (text.includes(query.toLowerCase())) {
+            if (text.includes(queryLower)) {
                 results.push({
                     sectionId: sectionId,
                     sectionName: sectionName,
                     headerName: title.textContent.trim(),
                     text: title.textContent,
                     element: title,
-                    type: 'subsection',
+                    type: 'header',
                     priority: 1 // Highest priority
                 });
             }
         });
         
-        // Search in text blocks - SECOND PRIORITY
+        // PRIORITY 2: HIDDEN - Only for Date Calculator section
+        if (sectionId === 'date-calculator-section' && sectionName.toLowerCase().includes(queryLower)) {
+            results.push({
+                sectionId: sectionId,
+                sectionName: sectionName,
+                headerName: 'Date Calculator',
+                text: sectionName,
+                element: section.querySelector('.section-title') || section,
+                type: 'hidden',
+                priority: 2 // Medium priority - ONLY for Date Calculator
+            });
+        }
+        
+        // PRIORITY 3: REMARKS - Actual remark content
         const textBlocks = section.querySelectorAll('.text-block');
         textBlocks.forEach(block => {
             const text = block.querySelector('p').textContent.toLowerCase();
-            if (text.includes(query.toLowerCase())) {
+            if (text.includes(queryLower)) {
                 const headerName = findHeaderForRemark(block);
                 results.push({
                     sectionId: sectionId,
@@ -1716,26 +2075,23 @@ function performSearch(query) {
                     headerName: headerName,
                     text: block.querySelector('p').textContent,
                     element: block,
-                    type: 'content',
-                    priority: 2 // Lower priority
+                    type: 'remarks',
+                    priority: 3 // Lowest priority
                 });
             }
         });
     });
 
-    // Sort by priority (subsection first, then content)
+    // Sort by priority (headers first, then hidden, then remarks)
     results.sort((a, b) => a.priority - b.priority);
-    
+    allSearchResults = results; // Store for navigation
     displaySearchResults(results, query);
 }
 
-// Display search results
+// Display search results with CORRECT categorization
 function displaySearchResults(results, query) {
     searchResults.innerHTML = '';
     searchResultItems = [];
-    currentHeaderRemarks = [];
-    isHeaderSelected = false;
-    currentNavigationIndex = -1;
     
     if (results.length === 0) {
         searchResults.innerHTML = '<div class="no-results">No results found</div>';
@@ -1743,29 +2099,41 @@ function displaySearchResults(results, query) {
         results.forEach((result, index) => {
             const resultItem = document.createElement('div');
             resultItem.className = 'search-result-item';
-            resultItem.setAttribute('tabindex', '0'); // Make it focusable
+            resultItem.setAttribute('tabindex', '0');
             resultItem.setAttribute('data-index', index);
             
-            // Add type indicator and appropriate name
             let typeIndicator = '';
-            let nameDisplay = '';
+            let resultHTML = '';
             
-            if (result.type === 'subsection') {
-                typeIndicator = '<div class="result-type">Header</div>';
-                nameDisplay = `<div class="section-name">${result.sectionName}</div>`;
+            // Add type indicator based on priority
+            if (result.type === 'header') {
+                typeIndicator = '<div class="result-type">HEADER</div>';
+                // For HEADER: Show only section-name and header-name (yellow)
+                resultHTML = `
+                    ${typeIndicator}
+                    <div class="section-name">${result.sectionName}</div>
+                    <div class="header-name">${highlightText(result.headerName, query)}</div>
+                `;
+            } else if (result.type === 'hidden') {
+                typeIndicator = '<div class="result-type">HIDDEN</div>';
+                // For HIDDEN: Show only section-name and result-text
+                resultHTML = `
+                    ${typeIndicator}
+                    <div class="section-name">${result.sectionName}</div>
+                    <div class="result-text">${highlightText(result.text, query)}</div>
+                `;
             } else {
-                typeIndicator = '<div class="result-type">Remarks</div>';
-                nameDisplay = `
+                typeIndicator = '<div class="result-type">REMARKS</div>';
+                // For REMARKS: Show all three (section-name, header-name, result-text)
+                resultHTML = `
+                    ${typeIndicator}
                     <div class="section-name">${result.sectionName}</div>
                     <div class="header-name">${result.headerName}</div>
+                    <div class="result-text">${highlightText(result.text, query)}</div>
                 `;
             }
             
-            resultItem.innerHTML = `
-                ${typeIndicator}
-                ${nameDisplay}
-                <div class="result-text">${highlightText(result.text, query)}</div>
-            `;
+            resultItem.innerHTML = resultHTML;
             
             resultItem.addEventListener('click', () => {
                 selectSearchResult(result, index);
@@ -1787,69 +2155,38 @@ function displaySearchResults(results, query) {
 }
 
 function selectSearchResult(result, index) {
-    // Clear previous highlights and navigation state
-    resetNavigationState();
+    // Clear previous highlights
+    resetSelection();
     
     // Show the section
     showSection(result.sectionId.replace('-section', ''));
     
-    // If it's a header, ONLY highlight the header, don't select remarks
-    if (result.type === 'subsection') {
-        isHeaderSelected = true;
-        currentHeaderRemarks = getRemarksForHeader(result.element);
-        currentNavigationIndex = -1; // Don't select any remark initially
+    // Select the element with temporary blue highlight
+    selectForCopy(result.element);
+    
+    // COPY ONLY IF IT'S A REMARK (text-block)
+    if (result.type === 'remarks') {
+        const textToCopy = result.element.querySelector('p').textContent;
         
-        // Highlight ONLY the header with temporary blue highlight
-        selectForCopy(result.element);
-        
-        // Scroll header into view
-        result.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    } else {
-        // It's a remark - select it for copying with temporary blue highlight
-        selectForCopy(result.element);
+        // Copy to clipboard and show notification
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            // Create synthetic event for notification positioning
+            const syntheticEvent = {
+                clientX: window.innerWidth / 2,
+                clientY: window.innerHeight / 2
+            };
+            showCopyNotification(syntheticEvent, "Copied!");
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
     }
     
     searchResults.style.display = 'none';
     searchInput.value = '';
 }
 
-function getRemarksForHeader(headerElement) {
-    const remarks = [];
-    let currentElement = headerElement.nextElementSibling;
-    
-    // Get all text blocks until next header or end of container
-    while (currentElement && currentElement.classList && currentElement.classList.contains('text-block')) {
-        remarks.push(currentElement);
-        currentElement = currentElement.nextElementSibling;
-    }
-    
-    return remarks;
-}
-
-function navigateHeaderRemarks(direction) {
-    if (currentHeaderRemarks.length === 0) return;
-    
-    // Navigate
-    if (direction === 'up') {
-        currentNavigationIndex = Math.max(0, currentNavigationIndex - 1);
-    } else if (direction === 'down') {
-        currentNavigationIndex = Math.min(currentHeaderRemarks.length - 1, currentNavigationIndex + 1);
-    }
-    
-    // Select new remark with temporary blue highlight
-    selectForCopy(currentHeaderRemarks[currentNavigationIndex]);
-}
-
-function resetNavigationState() {
-    // Remove selection from all remarks
-    resetSelection();
-    
-    isHeaderSelected = false;
-    currentNavigationIndex = -1;
-    currentHeaderRemarks = [];
-}
-
 function highlightText(text, query) {
+    if (!query) return text;
     const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
     return text.replace(regex, '<mark>$1</mark>');
 }
@@ -1874,19 +2211,18 @@ function navigateSearchResults(direction) {
         searchResultItems[currentSelectedResultIndex].classList.add('selected');
         searchResultItems[currentSelectedResultIndex].focus();
         searchResultItems[currentSelectedResultIndex].scrollIntoView({
-            block: 'nearest',
-            behavior: 'smooth'
+            block: 'nearest'
         });
     }
 }
 
-// Event listeners
+// Event listeners for search
 searchInput.addEventListener('input', (e) => {
     performSearch(e.target.value);
 });
 
 searchInput.addEventListener('focus', () => {
-    if (searchResults.children.length > 0) {
+    if (searchInput.value.trim() && searchResults.children.length > 0) {
         searchResults.style.display = 'block';
     }
 });
@@ -1895,12 +2231,12 @@ document.addEventListener('click', (e) => {
     if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
         searchResults.style.display = 'none';
         currentSelectedResultIndex = -1;
-        resetNavigationState();
     }
 });
 
-// Keyboard shortcuts
+// Keyboard shortcuts for search
 document.addEventListener('keydown', (e) => {
+    // Only process if not typing in an input (except search input)
     if (e.target.tagName === 'INPUT' && e.target !== searchInput) return;
     
     switch(e.key) {
@@ -1913,122 +2249,192 @@ document.addEventListener('keydown', (e) => {
             if (searchResults.style.display === 'block') {
                 searchResults.style.display = 'none';
                 currentSelectedResultIndex = -1;
-                resetNavigationState();
-            } else if (document.getElementById('keyboardHelp').style.display === 'block') {
-                hideKeyboardHelp();
             }
-            break;
-            
-        case '?':
-            e.preventDefault();
-            toggleKeyboardHelp();
             break;
             
         case 'ArrowUp':
             if (searchResults.style.display === 'block') {
                 e.preventDefault();
-                if (isHeaderSelected && currentHeaderRemarks.length > 0) {
-                    navigateHeaderRemarks('up');
-                } else {
-                    navigateSearchResults('up');
-                }
+                navigateSearchResults('up');
             }
             break;
             
         case 'ArrowDown':
             if (searchResults.style.display === 'block') {
                 e.preventDefault();
-                if (isHeaderSelected && currentHeaderRemarks.length > 0) {
-                    navigateHeaderRemarks('down');
-                } else {
-                    navigateSearchResults('down');
-                }
-            }
-            break;
-            
-        case 'PageUp':
-            if (isHeaderSelected && currentHeaderRemarks.length > 0) {
-                e.preventDefault();
-                navigateHeaderRemarks('up');
-            }
-            break;
-            
-        case 'PageDown':
-            if (isHeaderSelected && currentHeaderRemarks.length > 0) {
-                e.preventDefault();
-                navigateHeaderRemarks('down');
+                navigateSearchResults('down');
             }
             break;
             
         case 'Enter':
-            if (currentlySelectedElement) {
+            if (searchResults.style.display === 'block' && currentSelectedResultIndex >= 0) {
                 e.preventDefault();
-                copySelectedText();
-            } else if (searchResults.style.display === 'block' && currentSelectedResultIndex >= 0) {
-                e.preventDefault();
-                const resultIndex = parseInt(searchResultItems[currentSelectedResultIndex].getAttribute('data-index'));
-                // We need to simulate the result object here
-                const results = [];
-                document.querySelectorAll('.section').forEach(section => {
-                    const sectionId = section.id;
-                    const sectionName = sectionNames[sectionId] || sectionId;
-                    
-                    const subsectionTitles = section.querySelectorAll('.text-container > p');
-                    subsectionTitles.forEach(title => {
-                        results.push({
-                            sectionId: sectionId,
-                            sectionName: sectionName,
-                            headerName: title.textContent.trim(),
-                            text: title.textContent,
-                            element: title,
-                            type: 'subsection',
-                            priority: 1
-                        });
-                    });
-                    
-                    const textBlocks = section.querySelectorAll('.text-block');
-                    textBlocks.forEach(block => {
-                        const headerName = findHeaderForRemark(block);
-                        results.push({
-                            sectionId: sectionId,
-                            sectionName: sectionName,
-                            headerName: headerName,
-                            text: block.querySelector('p').textContent,
-                            element: block,
-                            type: 'content',
-                            priority: 2
-                        });
-                    });
-                });
-                
-                results.sort((a, b) => a.priority - b.priority);
-                
-                if (results[resultIndex]) {
-                    selectSearchResult(results[resultIndex], resultIndex);
+                const result = allSearchResults[currentSelectedResultIndex];
+                if (result) {
+                    selectSearchResult(result, currentSelectedResultIndex);
                 }
             }
             break;
     }
 });
 
-function toggleKeyboardHelp() {
-    const help = document.getElementById('keyboardHelp');
-    const overlay = document.getElementById('overlay');
+// Date Calculator Functions
+const monthMap = {
+    "JAN": "01", "FEB": "02", "MAR": "03", "APR": "04", "MAY": "05", "JUN": "06",
+    "JUL": "07", "AUG": "08", "SEP": "09", "OCT": "10", "NOV": "11", "DEC": "12"
+};
+
+// Set current date to inputs
+function setToday(type) {
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
     
-    if (help.style.display === 'block') {
-        hideKeyboardHelp();
+    // Set individual date fields
+    document.getElementById(`${type}-day`).value = day;
+    document.getElementById(`${type}-month`).value = month;
+    document.getElementById(`${type}-year`).value = year;
+    
+    // Also populate the paste input field with formatted date
+    const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", 
+                       "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    const formattedDate = `${day}-${monthNames[now.getMonth()]}-${year}`;
+    document.getElementById(`${type}-paste-input`).value = formattedDate;
+    
+    updateDuration();
+}
+
+// Parse pasted date text and fill fields
+function parseAndSetDate(type) {
+    const pasteInput = document.getElementById(`${type}-paste-input`);
+    const dateString = pasteInput.value.trim().toUpperCase();
+
+    if (!dateString) {
+        alert('⚠️ Enter a date to Apply.');
+        return;
+    }
+
+    let day, month, year;
+
+    // Try common formats
+    // Example 1: 16-SEP-2025 16:57
+    const match1 = dateString.match(/(\d{1,2})[-/ ]([A-Z]{3})[-/ ](\d{4})/);
+    // Example 2: 2025-11-10 or 2025/11/10
+    const match2 = dateString.match(/(\d{4})[-/ ](\d{1,2})[-/ ](\d{1,2})/);
+
+    if (match1) {
+        day = match1[1].padStart(2, '0');
+        month = monthMap[match1[2]];
+        year = match1[3];
+    } else if (match2) {
+        year = match2[1];
+        month = match2[2].padStart(2, '0');
+        day = match2[3].padStart(2, '0');
     } else {
-        help.style.display = 'block';
-        overlay.style.display = 'block';
+        alert("⚠️ Unrecognized date format. Try formats like '16-SEP-2025' or '2025-11-10'.");
+        return;
+    }
+
+    // Update fields
+    document.getElementById(`${type}-day`).value = day;
+    document.getElementById(`${type}-month`).value = month;
+    document.getElementById(`${type}-year`).value = year;
+
+    updateDuration();
+}
+
+// Compute total duration in days
+function updateDuration() {
+    const sDay = parseInt(document.getElementById('start-day').value);
+    const sMonth = parseInt(document.getElementById('start-month').value);
+    const sYear = parseInt(document.getElementById('start-year').value);
+    const eDay = parseInt(document.getElementById('end-day').value);
+    const eMonth = parseInt(document.getElementById('end-month').value);
+    const eYear = parseInt(document.getElementById('end-year').value);
+
+    if (!sDay || !sMonth || !sYear || !eDay || !eMonth || !eYear) {
+        document.getElementById('duration-result').textContent = 'Duration: 0y 0m 0d [0 days]';
+        return;
+    }
+
+    const start = new Date(sYear, sMonth - 1, sDay);
+    const end = new Date(eYear, eMonth - 1, eDay);
+    const diffMs = end - start;
+
+    const result = document.getElementById('duration-result');
+    if (isNaN(diffMs)) {
+        result.textContent = '⚠️ Invalid date(s)';
+        result.style.color = '#ff5555';
+        return;
+    }
+
+    const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    if (days < 0) {
+        result.textContent = '⚠️ End date must be after start date';
+        result.style.color = '#ff5555';
+    } else {
+        // Calculate years, months, and days
+        let years = eYear - sYear;
+        let months = eMonth - sMonth;
+        let daysDiff = eDay - sDay;
+
+        // Adjust for negative days
+        if (daysDiff < 0) {
+            months--;
+            // Get days in previous month
+            const prevMonth = new Date(eYear, eMonth - 1, 0);
+            daysDiff += prevMonth.getDate();
+        }
+
+        // Adjust for negative months
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        result.textContent = `Duration: ${years}y ${months}m ${daysDiff}d [${days} days]`;
+        result.style.color = '#faad14';
     }
 }
+//<script>
+    let timeout;
 
-function hideKeyboardHelp() {
-    document.getElementById('keyboardHelp').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
+    function resetTimer() {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+        window.location.href = 'welcome'; // Redirect after 15 mins
+        }, 14 * 60 * 1000); // 14 minutes in milliseconds
+    }
+
+    // Reset timer on any user interaction
+    ['click', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+        window.addEventListener(event, resetTimer, false);
+    });
+
+    // Start the timer initially
+    resetTimer();
+    //<script>
+
+// Initialize Date Calculator
+function initializeDateCalculator() {
+    // Set today's date as default for both start and end
+   // setToday('start');
+  //setToday('end');
+    
+    // Add event listeners to date inputs for auto-update
+    const dateInputs = document.querySelectorAll('#date-calculator-section input[type="number"]');
+    dateInputs.forEach(input => {
+        input.addEventListener('input', updateDuration);
+    });
 }
+
+// Initialize the page
+document.addEventListener('DOMContentLoaded', function() {
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+});
     </script>
 </body>
-
 </html>
-
