@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HR Support</title>
-    <link rel="icon" href="img/welcom.jpg" />
+     <link rel="icon" href="img/welcom.jpg" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/trys.css">
     <script src="script.js"></script>
     <style>
-        /* Base Styles */
-        * {
+
+* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -29,7 +29,7 @@
             color: #ffffff;
         }
 
-        /* Light Theme */
+
         body.light-theme {
             background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
             color: #2d3748;
@@ -41,7 +41,7 @@
             padding: 20px;
         }
 
-        /* Navbar Styles - Fixed position removed */
+
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -50,18 +50,17 @@
             transition: all 0.4s ease;
             border-bottom: 3px solid;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            /* Removed sticky/fixed positioning */
             z-index: 1000;
         }
 
-        /* Dark Theme Navbar */
+
         body.dark-theme .navbar {
             background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
             border-bottom-color: #ffffff;
             box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
         }
 
-        /* Light Theme Navbar */
+
         body.light-theme .navbar {
             background: linear-gradient(135deg, #ffffff, #f8fafc);
             border-bottom-color: #1b70c0;
@@ -78,12 +77,12 @@
             transition: all 0.3s ease;
         }
 
-.navbar-brand:focus, 
-.navbar-brand:active {
-    outline: none !important;
-    box-shadow: none !important;
-    border: none !important;
-}
+        .navbar-brand:focus, 
+        .navbar-brand:active {
+            outline: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
 
         /* Dark Theme Brand/ header */
         body.dark-theme .navbar-brand {
@@ -91,7 +90,7 @@
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
-        /* Light Theme Brand */
+
         body.light-theme .navbar-brand {
             color: #1677ff;
             text-shadow: 0 0 10px rgba(49, 130, 206, 0.3);
@@ -112,6 +111,132 @@
             text-shadow: 0 0 20px rgba(49, 130, 206, 0.5);
         }
 
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-right: 15px;
+        }
+
+        .search-input {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 2px solid;
+            width: 314px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+
+        body.dark-theme .search-input {
+            background: #333;
+            color: #ffffff;
+            border-color: #555;
+        }
+
+        body.dark-theme .search-input:focus {
+            border-color: #303131;
+            box-shadow: 0 0 10px rgba(22, 119, 255, 0.5);
+        }
+
+
+        body.light-theme .search-input {
+            background: #ffffff;
+            color: #2d3748;
+            border-color: #cbd5e0;
+        }
+
+        body.light-theme .search-input:focus {
+            border-color: #525253;
+            box-shadow: 0 0 10px rgba(22, 119, 255, 0.3);
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: inherit;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1001;
+            display: none;
+            margin-top: 5px;
+            border: 1px solid;
+        }
+
+
+        body.dark-theme .search-results {
+            background: #2a2a2a;
+            border-color: #555;
+        }
+
+
+        body.light-theme .search-results {
+            background: #ffffff;
+            border-color: #e2e8f0;
+        }
+
+        .search-result-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid;
+            transition: all 0.2s ease;
+        }
+
+
+        body.dark-theme .search-result-item {
+            border-bottom-color: #444;
+            color: #e0e0e0;
+        }
+
+        body.dark-theme .search-result-item:hover {
+            background: #3a3a3a;
+        }
+
+
+        body.light-theme .search-result-item {
+            border-bottom-color: #e2e8f0;
+            color: #4a5568;
+        }
+
+        body.light-theme .search-result-item:hover {
+            background: #f7fafc;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item .section-name {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #1677ff;
+        }
+
+        .search-result-item .header-name {
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-bottom: 3px;
+            color: #faad14; /*Searchh sub header*/
+        }
+
+        .search-result-item .result-text {
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .no-results {
+            padding: 15px;
+            text-align: center;
+            color: #888;
+        }
+
         .nav-links {
             display: flex;
             align-items: center;
@@ -130,7 +255,7 @@
             padding: 2px;
         }
 
-        /* Dark Theme Nav Images */
+
         body.dark-theme .nav-links a img {
             border: 2px solid transparent;
         }
@@ -141,7 +266,7 @@
             box-shadow: 0 0 15px rgba(126, 126, 126, 0.5);
         }
 
-        /* Light Theme Nav Images */
+
         body.light-theme .nav-links a img {
             border: 2px solid transparent;
         }
@@ -162,7 +287,7 @@
             font-weight: bold;
         }
 
-        /* Dark Theme Buttons */
+
         body.dark-theme .nav-links button {
             background: linear-gradient(180deg,#000000, #ffffff, #000000);
             color: #1a1a1a;
@@ -174,7 +299,7 @@
             transform: scale(1.1);
         }
 
-        /* Light Theme Buttons */
+
         body.light-theme .nav-links button {
             background: linear-gradient(180deg, #4882b9, #fdfdfd, #4882b9);
             color: white;
@@ -190,7 +315,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Dark Theme Toggle */
+
         body.dark-theme #theme-toggle {
             background: linear-gradient(180deg, #ffd700, #ff6b00);
             color: #1a1a1a;
@@ -201,7 +326,7 @@
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
         }
 
-        /* Light Theme Toggle */
+
         body.light-theme #theme-toggle {
             background: linear-gradient(180deg, #4a5568, #2d3748);
             color: #f7fafc;
@@ -212,7 +337,6 @@
             box-shadow: 0 0 20px rgba(74, 85, 104, 0.5);
         }
 
-        /* Main Content Styles */
         main {
             padding: 40px 0;
         }
@@ -230,16 +354,16 @@
         }
 
         .section.active {
-            display: block; /* Show active section */
+            display: block; 
         }
 
-        /* Dark Theme Section */
+
         body.dark-theme .section {
             background: linear-gradient(135deg, #202020, #2e2e2e);
             border-color: #444;
         }
 
-        /* Light Theme Section */
+
         body.light-theme .section {
             background: linear-gradient(135deg, #ffffff, #f8fafc);
             border-color: #e2e8f0;
@@ -256,12 +380,12 @@
             animation: shimmer 3s infinite linear;
         }
 
-        /* Dark Theme Shimmer */
+
         body.dark-theme .section::before {
             background: linear-gradient(90deg, #805ad5, #805ad5,#805ad5, #805ad5);
         }
 
-        /* Light Theme Shimmer */
+
         body.light-theme .section::before {
             background: linear-gradient(90deg, #805ad5, #805ad5, #805ad5, #805ad5);
         }
@@ -278,19 +402,19 @@
             transition: all 0.4s ease;
         }
 
-        /* Dark Theme Title */
+
         body.dark-theme .section-title {
             color: #1677ff;
             text-shadow:  none;
         }
 
-        /* Light Theme Title */
+
         body.light-theme .section-title {
             color: #1677ff;
             text-shadow: 0 0 10px rgba(49, 130, 206, 0.3);
         }
 
-        /* Text Container Styles */
+
         .text-container {
             margin-top: 20px;
         }
@@ -304,21 +428,21 @@
             transition: all 0.4s ease;
         }
 
-        /* Dark Theme Section Titles */
+
         body.dark-theme .text-container > p {
-            color: #1677ff;
+            color: #faad14;
             border-bottom-color: #0665d1;
             text-shadow: none;
         }
 
-        /* Light Theme Section Titles */
+
         body.light-theme .text-container > p {
-            color: #1677ff;
+            color: #faad14;
             border-bottom-color: #0665d1;
             text-shadow: none;
         }
 
-        /* Text Block Styles */
+
         .text-block {
             padding: 20px;
             margin: 15px 0;
@@ -331,7 +455,7 @@
             border: 1px solid;
         }
 
-        /* Dark Theme Text Blocks */
+
         body.dark-theme .text-block {
             background: linear-gradient(135deg, #333, #2a2a2a);
             border-left-color: #ffffff;
@@ -339,7 +463,7 @@
             color: #e0e0e0;
         }
 
-        /* Light Theme Text Blocks */
+
         body.light-theme .text-block {
             background: linear-gradient(135deg, #ffffff, #f7fafc);
             border-left-color: #000000;
@@ -351,13 +475,13 @@
             transform: translateY(-2px);
         }
 
-        /* Dark Theme Text Block Hover */
+
         body.dark-theme .text-block:hover {
             background: linear-gradient(135deg, #3a3a3a, #2f2f2f);
             box-shadow: 0 4px 10px rgba(0, 255, 255, 0.1);
         }
 
-        /* Light Theme Text Block Hover */
+
         body.light-theme .text-block:hover {
             background: linear-gradient(135deg, #f0f4f8, #e6fffa);
             box-shadow: 0 4px 10px rgba(49, 130, 206, 0.1);
@@ -370,7 +494,19 @@
             transition: color 0.1s ease;
         }
 
-        /* Notification Styles */
+
+        .text-block.selected-for-copy {
+            border-left-color: #1677ff !important;
+            background: linear-gradient(135deg, #3a3a3a, #2f2f2f) !important;
+            box-shadow: 0 0 15px rgba(22, 119, 255, 0.4) !important;
+        }
+
+        body.light-theme .text-block.selected-for-copy {
+            background: linear-gradient(135deg, #e6f3ff, #d4e7ff) !important;
+            box-shadow: 0 0 15px rgba(22, 119, 255, 0.3) !important;
+        }
+
+
         .notification {
             position: fixed;
             padding: 8px 16px;
@@ -405,7 +541,7 @@
             box-shadow: 0 2px 10px rgba(49, 130, 206, 0.3);
         }
 
-        /* Quick Access Popup Styles */
+
         .popup {
             display: none;
             position: fixed;
@@ -420,12 +556,12 @@
             transition: all 0.4s ease;
         }
 
-        /* Dark Theme Popup */
+
         body.dark-theme .popup {
             background: rgba(0, 0, 0, 0.9);
         }
 
-        /* Light Theme Popup */
+
         body.light-theme .popup {
             background: rgba(255, 255, 255, 0.9);
         }
@@ -443,14 +579,14 @@
             transition: all 0.4s ease;
         }
 
-        /* Dark Theme Popup Content */
+
         body.dark-theme .popup-content {
             background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
             border-color: #ffffff;
             box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
         }
 
-        /* Light Theme Popup Content */
+
         body.light-theme .popup-content {
             background: linear-gradient(135deg, #ffffff, #f8fafc);
             border-color: #000000;
@@ -475,13 +611,13 @@
             transition: all 0.4s ease;
         }
 
-        /* Dark Theme Popup Title */
+
         body.dark-theme .popup-content h2 {
             color: #ffffff;
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
-        /* Light Theme Popup Title */
+
         body.light-theme .popup-content h2 {
             color: #000000;
             text-shadow: 0 0 10px rgba(49, 130, 206, 0.3);
@@ -505,7 +641,7 @@
             justify-content: center;
         }
 
-        /* Dark Theme Close Button */
+
         body.dark-theme .close-btn {
             color: #ffffff;
         }
@@ -515,7 +651,7 @@
             color: #1a1a1a;
         }
 
-        /* Light Theme Close Button */
+
         body.light-theme .close-btn {
             color: #000000;
         }
@@ -542,14 +678,14 @@
             overflow: hidden;
         }
 
-        /* Dark Theme Bookmarks */
+
         body.dark-theme .bookmark {
             background: linear-gradient(135deg, #333, #2a2a2a);
             color: #ffffff;
             border-color: #444;
         }
 
-        /* Light Theme Bookmarks */
+
         body.light-theme .bookmark {
             background: linear-gradient(135deg, #ffffff, #f7fafc);
             color: #000000;
@@ -560,7 +696,7 @@
             transform: translateX(5px);
         }
 
-        /* Dark Theme Bookmark Hover */
+
         body.dark-theme .bookmark:hover {
             background: linear-gradient(135deg, #ffffff, #00b3b3);
             color: #1a1a1a;
@@ -568,7 +704,7 @@
             border-color: #ffffff;
         }
 
-        /* Light Theme Bookmark Hover */
+
         body.light-theme .bookmark:hover {
             background: linear-gradient(135deg, #000000, #2b6cb0);
             color: white;
@@ -576,7 +712,7 @@
             border-color: #000000;
         }
 
-        /* Footer Styles */
+
         .footer {
             text-align: center;
             padding: 30px 20px;
@@ -586,14 +722,14 @@
             transition: all 0.4s ease;
         }
 
-        /* Dark Theme Footer */
+
         body.dark-theme .footer {
             background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
             border-top-color: #444;
             color: #888;
         }
 
-        /* Light Theme Footer */
+
         body.light-theme .footer {
             background: linear-gradient(135deg, #ffffff, #f8fafc);
             border-top-color: #e2e8f0;
@@ -605,17 +741,17 @@
             transition: color 0.4s ease;
         }
 
-        /* Dark Theme Year */
+
         body.dark-theme #year {
             color: #ffffff;
         }
 
-        /* Light Theme Year */
+
         body.light-theme #year {
             color: #000000;
         }
 
-        /* Responsive Design */
+
         @media (max-width: 768px) {
             .navbar {
                 padding: 1rem;
@@ -627,6 +763,16 @@
                 gap: 10px;
                 flex-wrap: wrap;
                 justify-content: center;
+            }
+
+            .search-container {
+                margin-right: 0;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+
+            .search-input {
+                width: 100%;
             }
 
             .nav-links a img {
@@ -699,7 +845,7 @@
             }
         }
 
-        /* Scrollbar Styling */
+
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -708,12 +854,12 @@
             transition: all 0.4s ease;
         }
 
-        /* Dark Theme Scrollbar */
+
         body.dark-theme ::-webkit-scrollbar-track {
             background: #2a2a2a;
         }
 
-        /* Light Theme Scrollbar */
+
         body.light-theme ::-webkit-scrollbar-track {
             background: #f7fafc;
         }
@@ -723,7 +869,7 @@
             transition: all 0.4s ease;
         }
 
-        /* Dark Theme Scrollbar Thumb */
+
         body.dark-theme ::-webkit-scrollbar-thumb {
             background: linear-gradient(135deg, #ffffff, #00b3b3);
         }
@@ -732,7 +878,7 @@
             background: linear-gradient(135deg, #00e6e6, #008080);
         }
 
-        /* Light Theme Scrollbar Thumb */
+
         body.light-theme ::-webkit-scrollbar-thumb {
             background: linear-gradient(135deg, #000000, #2b6cb0);
         }
@@ -741,24 +887,24 @@
             background: linear-gradient(135deg, #2b6cb0, #2c5282);
         }
 
-        /* Selection Color */
+
         ::selection {
             transition: all 0.4s ease;
         }
 
-        /* Dark Theme Selection */
+
         body.dark-theme ::selection {
             background: rgba(0, 255, 255, 0.3);
             color: white;
         }
 
-        /* Light Theme Selection */
+
         body.light-theme ::selection {
             background: rgba(49, 130, 206, 0.3);
             color: #2d3748;
         }
 
-        /* Focus Styles for Accessibility */
+
         button:focus,
         a:focus,
         .text-block:focus {
@@ -767,18 +913,486 @@
             transition: all 0.3s ease;
         }
 
-        /* Dark Theme Focus */
+
         body.dark-theme button:focus,
         body.dark-theme a:focus,
         body.dark-theme .text-block:focus {
             outline-color: #ffffff;
         }
 
-        /* Light Theme Focus */
+
         body.light-theme button:focus,
         body.light-theme a:focus,
         body.light-theme .text-block:focus {
             outline-color: #000000;
+        }
+
+
+        .result-type {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+
+        .search-result-item.selected {
+            background-color: rgba(22, 119, 255, 0.2);
+        }
+
+
+        .keyboard-help {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 10000;
+            display: none;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .keyboard-help h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .keyboard-help ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .keyboard-help li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .keyboard-help kbd {
+            background: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 2px 6px;
+            margin-right: 10px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+            display: none;
+        }
+
+        body.dark-theme .keyboard-help {
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        body.dark-theme .keyboard-help kbd {
+            background: #444;
+            border-color: #666;
+            color: #fff;
+        }
+
+
+
+        mark {
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+
+body.dark-theme mark {
+    background: linear-gradient(135deg, #747474, #ffed4e);
+    color: #000000;
+    box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme mark:hover {
+    background: linear-gradient(135deg, #ffed4e, #ffff80);
+    box-shadow: 0 2px 6px rgba(255, 215, 0, 0.5);
+    transform: translateY(-1px);
+}
+
+
+body.light-theme mark {
+    background: linear-gradient(135deg, #1677ff, #4096ff);
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(22, 119, 255, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+body.light-theme mark:hover {
+    background: linear-gradient(135deg, #4096ff, #69b1ff);
+    box-shadow: 0 2px 6px rgba(22, 119, 255, 0.4);
+    transform: translateY(-1px);
+}
+
+
+@keyframes highlightPop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+.search-result-item mark {
+    animation: highlightPop 0.3s ease-out;
+}
+
+
+body.dark-theme mark::selection {
+    background: rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+body.light-theme mark::selection {
+    background: rgba(255, 255, 255, 0.3);
+    color: #000000;
+}
+
+.text-block.selected-for-copy {
+    border-left-color: #1677ff !important;
+    background: linear-gradient(135deg, #3a3a3a, #2f2f2f) !important;
+    box-shadow: 0 0 15px rgba(22, 119, 255, 0.4) !important;
+}
+
+body.light-theme .text-block.selected-for-copy {
+    background: linear-gradient(135deg, #e6f3ff, #d4e7ff) !important;
+    box-shadow: 0 0 15px rgba(22, 119, 255, 0.3) !important;
+}
+
+
+.text-block.temporary-highlight {
+    animation: temporary-highlight 2.5s ease-in-out;
+    border-left-color: #ffd700;
+}
+
+@keyframes temporary-highlight {
+    0% { 
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+        border-left-color: #ffd700;
+    }
+    50% { 
+        box-shadow: 0 0 0 10px rgba(255, 215, 0, 0.3);
+        border-left-color: #ffd700;
+    }
+    100% { 
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+        border-left-color: #ffffff;
+    }
+}
+
+body.light-theme .text-block.temporary-highlight {
+    animation: temporary-highlight-light 2.5s ease-in-out;
+}
+
+@keyframes temporary-highlight-light {
+    0% { 
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+        border-left-color: #ffd700;
+    }
+    50% { 
+        box-shadow: 0 0 0 10px rgba(255, 215, 0, 0.3);
+        border-left-color: #ffd700;
+    }
+    100% { 
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+        border-left-color: #000000;
+    }
+}
+
+
+.text-container > p.selected-for-copy {
+    background: rgba(22, 119, 255, 0.2) !important;
+    padding: 10px;
+    border-radius: 8px;
+    border-bottom-color: #ffd700 !important;
+}
+
+.text-container > p.temporary-highlight {
+    animation: header-highlight 2.5s ease-in-out;
+}
+
+@keyframes header-highlight {
+    0% { 
+        background: rgba(255, 215, 0, 0.3);
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+    }
+    50% { 
+        background: rgba(255, 215, 0, 0.5);
+        box-shadow: 0 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+    100% { 
+        background: rgba(22, 119, 255, 0.2);
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+    }
+}
+
+.date-popup-container {
+            background: inherit;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        body.dark-theme .date-popup-container {
+            background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
+            border-color: #444;
+        }
+
+        body.light-theme .date-popup-container {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border-color: #e2e8f0;
+        }
+
+        .date-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .date-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        .date-group {
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid;
+        }
+
+        body.dark-theme .date-group {
+            background: linear-gradient(135deg, #333, #2a2a2a);
+            border-color: #444;
+        }
+
+        body.light-theme .date-group {
+            background: linear-gradient(135deg, #ffffff, #f7fafc);
+            border-color: #e2e8f0;
+        }
+
+        .date-group h2 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            color: #1677ff;
+            text-align: center;
+        }
+
+        .fields {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+
+        .fields > div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .label {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .date-group input[readonly] {
+            width: 70px;
+            padding: 8px;
+            text-align: center;
+            border: 1px solid;
+            border-radius: 5px;
+            background: inherit;
+            font-size: 1rem;
+        }
+
+        body.dark-theme .date-group input[readonly] {
+            border-color: #555;
+            color: #ffffff;
+        }
+
+        body.light-theme .date-group input[readonly] {
+            border-color: #cbd5e0;
+            color: #2d3748;
+        }
+
+        .today-link {
+            margin-left: 90px;
+            color: #ffd700;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: 0.3s ease;
+
+        }
+
+        .today-link:hover {
+        color: #faad14;
+        transform: scale(1.05);
+}
+        .paste-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid;
+        }
+
+        body.dark-theme .paste-section {
+            border-top-color: #444;
+        }
+
+        body.light-theme .paste-section {
+            border-top-color: #e2e8f0;
+        }
+
+        .paste-info {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            text-align: center;
+            color: #888;
+        }
+
+        .paste-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background: inherit;
+        }
+
+        body.dark-theme .paste-input {
+            border-color: #555;
+            color: #ffffff;
+        }
+
+        body.light-theme .paste-input {
+            border-color: #cbd5e0;
+            color: #2d3748;
+        }
+
+        .paste-button {
+            width: 100%;
+            padding: 10px;
+            background: #1677ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .paste-button:hover {
+            background: #0056cc;
+            transform: scale(1.02);
+        }
+
+        #duration-result {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        body.dark-theme #duration-result {
+            background: linear-gradient(135deg, #333, #2a2a2a);
+            border: 1px solid #444;
+            color: #ffd700;
+        }
+
+        body.light-theme #duration-result {
+            background: linear-gradient(135deg, #ffffff, #f7fafc);
+            border: 1px solid #e2e8f0;
+            color: #ffd700;
+        }
+
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-container {
+                margin-right: 0;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            .nav-links a img {
+                width: 40px;
+            }
+
+            .section {
+                padding: 20px;
+                margin: 10px 0;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .text-container > p {
+                font-size: 1.1rem;
+            }
+
+            .text-block {
+                padding: 15px;
+            }
+
+            .text-block p {
+                font-size: 0.9rem;
+            }
+
+            .popup-content {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+
+            .popup-content h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -786,26 +1400,31 @@
     <header>
         <nav class="navbar container">
             <a class="navbar-brand" href="pin" target="_blank">HR Support</a>
+            <div class="search-container">
+                <input type="text" class="search-input" id="search-input" placeholder="Search for HR Content... "autocomplete="off">
+                <div class="search-results" id="search-results"></div>
+            </div>
             <div class="nav-links">
                 <button onclick="togglePopup()">⚡</button>
-                <!-- Navigation buttons with onclick handlers -->
+
                 <a onclick="showSection('router')"><img src="img/router.jpg" alt="router" width="50"></a>
                 <a onclick="showSection('account')"><img src="img/account.jpg" alt="account" width="50"></a>
                 <a onclick="showSection('slow')"><img src="img/slow.jpg" alt="slow" width="50"></a>
                 <a onclick="showSection('tv')"><img src="img/iptv.jpg" alt="TV" width="50"></a>
                 <a onclick="showSection('myworldlink')"><img src="img/myworldlink.jpg" alt="myworldlink" width="50"></a>
                 <a onclick="showSection('urgentclose')"><img src="img/urgent.jpg" alt="urgentclose" style="width: 45px; height: auto;"></a>
+                
                 <button id="theme-toggle" aria-label="Switch to light theme">🌙</button>
             </div>
         </nav>
     </header>
 
-    <main class="container" id="main-content">
-        <!-- Router Section -->
+     <main class="container" id="main-content">
+
         <section id="router-section" class="section active">
-            <p><strong class="section-title">Router</strong></p><br>
+            <p><strong class="section-title">Router </strong></p><br>
             <div class="text-container">
-                <p><strong>Offline Case</strong></p>
+                <p><strong>ONU Status Offline</strong></p>
                 <div class="text-block" onclick="copyText(event, this)">
                     <p>Light not verified. Please do the needful.</p>
                 </div>
@@ -828,7 +1447,7 @@
                     <p>Disconnection problem seen, The router was already connected to the wall socket, please do needful, asap.</p>
                 </div>
                 
-                <p><strong>General</strong></p>
+                <p><strong>General Query</strong></p>
                 <div class="text-block" onclick="copyText(event, this)">
                     <p>Client is requesting for cable management. Please proceed accordingly.</p>
                 </div>
@@ -841,9 +1460,9 @@
             </div>
         </section>
 
-        <!-- Account Section -->
+
         <section id="account-section" class="section">
-            <p><strong class="section-title">Account</strong></p><br>
+            <p><strong class="section-title">Account </strong></p><br>
             <div class="text-container">
                 <p><strong>Account Extend</strong></p>
                 <div class="text-block" onclick="copyText(event, this)">
@@ -908,7 +1527,7 @@
             </div>
         </section>
 
-        <!-- Slow Section -->
+
         <section id="slow-section" class="section">
             <p><strong class="section-title">Slow Connection</strong></p><br>
             <div class="text-container">
@@ -947,7 +1566,7 @@
             </div>
         </section>
 
-        <!-- TV Section -->
+
         <section id="tv-section" class="section">
             <p><strong class="section-title">IPTV</strong></p><br>
             <div class="text-container">
@@ -1004,13 +1623,14 @@
             </div>
         </section>
 
-        <!-- MyWorldLink Section -->
+
         <section id="myworldlink-section" class="section">
             <p><strong class="section-title">MyWorldLink</strong></p><br>
             <div class="text-container">
                 <h4>For Android Users</h4>
                 
             <span class="comment"><b>Note: If client have andriod verson 12 or higher simply follow iPhone/Windows/PC steps.<br></strong></b><strong>
+                <strong>Steps:</strong><br>
             1. Go to Wi-Fi Settings and select the SSID "myWorldLink".<br>
             2. Click on “myWorldLink” SSID from the list.<br>
             3. Now Click on “Advance Options<br>
@@ -1030,7 +1650,7 @@
 
              <div id="notes-container">
                 <strong><h4>For Iphone Users</h4></strong>
-                
+            <strong>Steps:</strong><br>
             1. Go to Settings and Select Wi-Fi<br>
             2. Select “myWorldLink” SSID from the list.<br>
             3. Type your WorldLink account “Username & Password”<br>
@@ -1042,9 +1662,9 @@
             </div>
         </section>
 
-        <!-- Urgent Close Section -->
+
         <section id="urgentclose-section" class="section">
-            <p><strong class="section-title">Urgent Close</strong></p><br>
+            <p><strong class="section-title">Urgent</strong></p><br>
             <div class="text-container">
                 <p><strong>TT close/update</strong></p>
                 <div class="text-block" onclick="copyText(event, this)">
@@ -1101,12 +1721,76 @@
             </div>
         </section>
 
-        <!-- Quick Access Popup -->
+        <section id="date-calculator-section" class="section" style="display: none;">
+            <p><strong class="section-title">📅 Date Calculator</strong></p>
+            <div class="text-container">
+                <div class="date-popup-container">
+                    <div class="date-popup-content">
+                        <div class="date-container">
+                            <div class="date-group">
+                                <h2>Start Date</h2>
+                                <div class="fields">
+                                    <div>
+                                        <label class="label">Day:</label>
+                                        <input id="start-day" placeholder="" readonly>
+                                    </div>
+                                    <div>
+                                        <label class="label">Month:</label>
+                                        <input id="start-month" placeholder="" readonly>
+                                    </div>
+                                    <div>
+                                        <label class="label">Year:</label>
+                                        <input id="start-year" placeholder="" readonly>
+                                    </div>
+                                </div>
+                                <span class="today-link" onclick="setToday('start')">📌 Set Today</span>
+                                
+                                <div class="paste-section">
+                                    <div class="paste-info">Paste date from your system:</div>
+                                    <input type="text" id="start-paste-input" class="paste-input" placeholder="Paste date here (e.g., 16-SEP-2025 16:57)">
+                                    <button class="paste-button" onclick="parseAndSetDate('start')">📋 Apply Date</button>
+                                </div>
+                            </div>
+
+                            <div class="date-group">
+                                <h2>End Date</h2>
+                                <div class="fields">
+                                    <div>
+                                        <label class="label">Day:</label>
+                                        <input id="end-day" placeholder="" readonly>
+                                    </div>
+                                    <div>
+                                        <label class="label">Month:</label>
+                                        <input id="end-month" placeholder="" readonly>
+                                    </div>
+                                    <div>
+                                        <label class="label">Year:</label>
+                                        <input id="end-year" placeholder="" readonly>
+                                    </div>
+                                </div>
+                                <span class="today-link" onclick="setToday('end')">📌 Set Today</span>
+                                
+                                <div class="paste-section">
+                                    <div class="paste-info">Paste date from your system:</div>
+                                    <input type="text" id="end-paste-input" class="paste-input" placeholder="Paste date here (e.g., 16-SEP-2025 16:57)">
+                                    <button class="paste-button" onclick="parseAndSetDate('end')">📋 Apply Date</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="duration-result">Duration: 0 days</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
         <div class="popup" id="myPopup">
             <div class="popup-content">
                 <span class="close-btn" onclick="hidePopup()">&times;</span>
                 <h2>⚡ Quick Access</h2>
-                <a class="bookmark" href="https://epayment.worldlink.com.np/new/internet-payment" target="_blank" rel="noopener noreferrer">E-payment</a>
+      <a class="bookmark" href="https://epayment.worldlink.com.np/new/internet-payment" target="_blank" rel="noopener noreferrer">E-payment</a>
       <a class="bookmark" href="https://docs.google.com/spreadsheets/u/0/d/e/2PACX-1vTLhXrudNQookJuRHAIbUeIuAX1vLtSyQPe_QSgmtCfS-ArswcqBEMO_TIwUj9lEQatlapGn-XtgNdJ/pubhtml?pli=1" target="_blank" rel="noopener noreferrer">Department No.</a>
       <a class="bookmark" href="https://docs.google.com/spreadsheets/d/1yCLvefgWU_SnU3OIPX_GBJWorQFRE1SASISzv6SJLbM/edit?pli=1&gid=1621541645#gid=1621541645" target="_blank" rel="noopener noreferrer">Branch Location</a>
       <a class="bookmark" href="https://docs.google.com/spreadsheets/d/1yCLvefgWU_SnU3OIPX_GBJWorQFRE1SASISzv6SJLbM/edit?gid=1438794880#gid=1438794880" target="_blank" rel="noopener noreferrer">Packages Details</a>
@@ -1119,7 +1803,7 @@
       <a class="bookmark" href="https://webtv.nettv.com.np/login" target="_blank" rel="noopener noreferrer">Nettv/login</a>
       <a class="bookmark" href="http://nagios-olt-01.wlink.com.np/nagios/" target="_blank" rel="noopener noreferrer">Nagios</a>
       <a class="bookmark" href="https://ameyoapp.wlink.com.np:8443/app/#!home" target="_blank" rel="noopener noreferrer">Ameyoapp</a>
-    
+      
             </div>
         </div>
     </main>
@@ -1129,158 +1813,563 @@
     </footer>
 
     <script>
-        // Theme Toggle Functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
 
-        // Check for saved theme preference or use system preference
-        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        body.classList.add(savedTheme + '-theme');
-        updateThemeToggle(savedTheme);
+const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+body.classList.add(savedTheme + '-theme');
+updateThemeToggle(savedTheme);
 
-        themeToggle.addEventListener('click', () => {
-            const isDark = body.classList.contains('dark-theme');
-            if (isDark) {
-                body.classList.replace('dark-theme', 'light-theme');
-                localStorage.setItem('theme', 'light');
-                updateThemeToggle('light');
-            } else {
-                body.classList.replace('light-theme', 'dark-theme');
-                localStorage.setItem('theme', 'dark');
-                updateThemeToggle('dark');
-            }
-        });
+themeToggle.addEventListener('click', () => {
+    const isDark = body.classList.contains('dark-theme');
+    if (isDark) {
+        body.classList.replace('dark-theme', 'light-theme');
+        localStorage.setItem('theme', 'light');
+        updateThemeToggle('light');
+    } else {
+        body.classList.replace('light-theme', 'dark-theme');
+        localStorage.setItem('theme', 'dark');
+        updateThemeToggle('dark');
+    }
+});
 
-        function updateThemeToggle(theme) {
-            if (theme === 'dark') {
-                themeToggle.textContent = '☀️';
-                themeToggle.setAttribute('aria-label', 'Switch to light theme');
-            } else {
-                themeToggle.textContent = '🌙';
-                themeToggle.setAttribute('aria-label', 'Switch to dark theme');
-            }
+function updateThemeToggle(theme) {
+    if (theme === 'dark') {
+        themeToggle.textContent = '☀️';
+        themeToggle.setAttribute('aria-label', 'Switch to light theme');
+    } else {
+        themeToggle.textContent = '🌙';
+        themeToggle.setAttribute('aria-label', 'Switch to dark theme');
+    }
+}
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+window.addEventListener("click", function (event) {
+    const popup = document.getElementById("myPopup");
+    if (!popup) return;
+    
+    const popupContent = popup.querySelector(".popup-content");
+
+    if (popup.style.display === "flex" &&
+        !popupContent.contains(event.target) &&
+        !event.target.closest("button[onclick='togglePopup()']")) {
+        popup.style.display = "none";
+    }
+});
+
+let currentlySelectedElement = null;
+let highlightTimeout = null;
+
+function copyText(event, element) {
+    const text = element.querySelector('p').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        showCopyNotification(event, "Copied!");
+    });
+}
+
+function showCopyNotification(event, message) {
+    const notification = document.createElement("div");
+    notification.className = "notification";
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    const offsetX = -35;
+    const offsetY = -60;
+    let posX = event.clientX + offsetX;
+    let posY = event.clientY + offsetY;
+    const notificationWidth = 100;
+    const notificationHeight = 30;
+    const maxX = window.innerWidth - notificationWidth - 10;
+    const maxY = window.innerHeight - notificationHeight - 10;
+    posX = Math.min(posX, maxX);
+    posY = Math.min(posY, maxY);
+    notification.style.left = posX + "px";
+    notification.style.top = posY + "px";
+
+    notification.classList.add("show");
+    setTimeout(() => {
+        notification.classList.add("hide");
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 1500);
+}
+
+function togglePopup() {
+    const popup = document.getElementById("myPopup");
+    if (popup) {
+        popup.style.display = popup.style.display === "flex" ? "none" : "flex";
+    }
+}
+
+function hidePopup() {
+    const popup = document.getElementById("myPopup");
+    if (popup) {
+        popup.style.display = "none";
+    }
+}
+
+const sectionNames = {
+    'router-section': 'Router',
+    'account-section': 'Account',
+    'slow-section': 'Slow Connection',
+    'tv-section': 'IPTV',
+    'myworldlink-section': 'MyWorldLink',
+    'urgentclose-section': 'Urgent',
+    'date-calculator-section': 'Time Duration'
+};
+
+function showSection(sectionName) {
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+        section.style.display = 'none';
+    });
+    
+    const targetSection = document.getElementById(sectionName + '-section');
+    if (targetSection) {
+        targetSection.classList.add('active');
+        targetSection.style.display = 'block';
+        
+        if (sectionName === 'date-calculator') {
+            initializeDateCalculator();
         }
+    }
+    
+    resetSelection();
+}
 
-        // Update year
-        document.getElementById('year').textContent = new Date().getFullYear();
+const searchInput = document.getElementById('search-input');
+const searchResults = document.getElementById('search-results');
 
-        // Close popup when clicking outside of popup-content
-        window.addEventListener("click", function (event) {
-            const popup = document.getElementById("myPopup");
-            if (!popup) return;
-            
-            const popupContent = popup.querySelector(".popup-content");
+let currentSelectedResultIndex = -1;
+let searchResultItems = [];
+let allSearchResults = [];
 
-            if (popup.style.display === "flex" &&
-                !popupContent.contains(event.target) &&
-                !event.target.closest("button[onclick='togglePopup()']")) {
-                popup.style.display = "none";
-            }
-        });
+function findHeaderForRemark(remarkElement) {
+    let currentElement = remarkElement.previousElementSibling;
+    
+    while (currentElement) {
+        if (currentElement.tagName === 'P' && 
+            currentElement.parentElement.classList.contains('text-container')) {
+            return currentElement.textContent.trim();
+        }
+        currentElement = currentElement.previousElementSibling;
+    }
+    
+    return 'General';
+}
 
-        // Copy text to clipboard with notification near cursor
-        function copyText(event, element) {
-            const text = element.querySelector("p").textContent;
-            navigator.clipboard
-                .writeText(text)
-                .then(() => {
-                    const notification = document.createElement("div");
-                    notification.className = "notification";
-                    notification.textContent = "Copied!";
-                    document.body.appendChild(notification);
+function selectForCopy(element) {
+    if (highlightTimeout) {
+        clearTimeout(highlightTimeout);
+    }
+    
+    if (currentlySelectedElement) {
+        currentlySelectedElement.classList.remove('selected-for-copy');
+    }
+    
+    currentlySelectedElement = element;
+    element.classList.add('selected-for-copy');
+    
+    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+    highlightTimeout = setTimeout(() => {
+        if (currentlySelectedElement) {
+            currentlySelectedElement.classList.remove('selected-for-copy');
+            currentlySelectedElement = null;
+        }
+    }, 2500);
+}
 
-                    const offsetX = -35;
-                    const offsetY = -60;
-                    let posX = event.clientX + offsetX;
-                    let posY = event.clientY + offsetY;
-                    const notificationWidth = 100;
-                    const notificationHeight = 30;
-                    const maxX = window.innerWidth - notificationWidth - 10;
-                    const maxY = window.innerHeight - notificationHeight - 10;
-                    posX = Math.min(posX, maxX);
-                    posY = Math.min(posY, maxY);
-                    notification.style.left = posX + "px";
-                    notification.style.top = posY + "px";
+function resetSelection() {
+    if (highlightTimeout) {
+        clearTimeout(highlightTimeout);
+        highlightTimeout = null;
+    }
+    
+    if (currentlySelectedElement) {
+        currentlySelectedElement.classList.remove('selected-for-copy');
+        currentlySelectedElement = null;
+    }
+}
 
-                    notification.classList.add("show");
-                    setTimeout(() => {
-                        notification.classList.add("hide");
-                        setTimeout(() => {
-                            notification.remove();
-                        }, 300);
-                    }, 1500);
-                })
-                .catch((err) => {
-                    console.error("Failed to copy text: ", err);
+function performSearch(query) {
+    if (!query.trim()) {
+        searchResults.style.display = 'none';
+        currentSelectedResultIndex = -1;
+        return;
+    }
+
+    const results = [];
+    const sections = document.querySelectorAll('.section');
+    const queryLower = query.toLowerCase();
+    
+    sections.forEach(section => {
+        const sectionId = section.id;
+        const sectionName = sectionNames[sectionId] || sectionId;
+        
+        const subsectionTitles = section.querySelectorAll('.text-container > p');
+        subsectionTitles.forEach(title => {
+            const text = title.textContent.toLowerCase();
+            if (text.includes(queryLower)) {
+                results.push({
+                    sectionId: sectionId,
+                    sectionName: sectionName,
+                    headerName: title.textContent.trim(),
+                    text: title.textContent,
+                    element: title,
+                    type: 'header',
+                    priority: 1 
                 });
-        }
-
-        // Quick Access Popup Functions
-        function togglePopup() {
-            const popup = document.getElementById("myPopup");
-            if (popup) {
-                popup.style.display = popup.style.display === "flex" ? "none" : "flex";
             }
+        });
+        
+        
+        if (sectionId === 'date-calculator-section' && sectionName.toLowerCase().includes(queryLower)) {
+            results.push({
+                sectionId: sectionId,
+                sectionName: sectionName,
+                headerName: 'Date Calculator',
+                text: sectionName,
+                element: section.querySelector('.section-title') || section,
+                type: 'hidden',
+                priority: 2 
+            });
         }
-
-        function hidePopup() {
-            const popup = document.getElementById("myPopup");
-            if (popup) {
-                popup.style.display = "none";
+        
+       
+        const textBlocks = section.querySelectorAll('.text-block');
+        textBlocks.forEach(block => {
+            const text = block.querySelector('p').textContent.toLowerCase();
+            if (text.includes(queryLower)) {
+                const headerName = findHeaderForRemark(block);
+                results.push({
+                    sectionId: sectionId,
+                    sectionName: sectionName,
+                    headerName: headerName,
+                    text: block.querySelector('p').textContent,
+                    element: block,
+                    type: 'remarks',
+                    priority: 3 
+                });
             }
-        }
+        });
+    });
 
-        // Notification function
-        function showNotification() {
-            alert("Welcome to The HR Time Management(HTM) System.");
-        }
+    results.sort((a, b) => a.priority - b.priority);
+    allSearchResults = results; 
+    displaySearchResults(results, query);
+}
 
-        // Function to show different sections (for single-page navigation)
-        function showSection(sectionName) {
-            // Hide all sections
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
+function displaySearchResults(results, query) {
+    searchResults.innerHTML = '';
+    searchResultItems = [];
+    
+    if (results.length === 0) {
+        searchResults.innerHTML = '<div class="no-results">No results found</div>';
+    } else {
+        results.forEach((result, index) => {
+            const resultItem = document.createElement('div');
+            resultItem.className = 'search-result-item';
+            resultItem.setAttribute('tabindex', '0');
+            resultItem.setAttribute('data-index', index);
+            
+            let typeIndicator = '';
+            let resultHTML = '';
+            
+            if (result.type === 'header') {
+                typeIndicator = '<div class="result-type">HEADER</div>';
+                resultHTML = `
+                    ${typeIndicator}
+                    <div class="section-name">${result.sectionName}</div>
+                    <div class="header-name">${highlightText(result.headerName, query)}</div>
+                `;
+            } else if (result.type === 'hidden') {
+                typeIndicator = '<div class="result-type">HIDDEN</div>';
+                resultHTML = `
+                    ${typeIndicator}
+                    <div class="section-name">${result.sectionName}</div>
+                    <div class="result-text">${highlightText(result.text, query)}</div>
+                `;
+            } else {
+                typeIndicator = '<div class="result-type">REMARKS</div>';
+                resultHTML = `
+                    ${typeIndicator}
+                    <div class="section-name">${result.sectionName}</div>
+                    <div class="header-name">${result.headerName}</div>
+                    <div class="result-text">${highlightText(result.text, query)}</div>
+                `;
+            }
+            
+            resultItem.innerHTML = resultHTML;
+            
+            resultItem.addEventListener('click', () => {
+                selectSearchResult(result, index);
             });
             
-            // Show the selected section
-            const targetSection = document.getElementById(sectionName + '-section');
-            if (targetSection) {
-                targetSection.classList.add('active');
+            resultItem.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    selectSearchResult(result, index);
+                }
+            });
+            
+            searchResults.appendChild(resultItem);
+            searchResultItems.push(resultItem);
+        });
+        currentSelectedResultIndex = -1;
+    }
+    
+    searchResults.style.display = 'block';
+}
+
+function selectSearchResult(result, index) {
+    resetSelection();
+    
+    showSection(result.sectionId.replace('-section', ''));
+    
+    selectForCopy(result.element);
+    
+    if (result.type === 'remarks') {
+        const textToCopy = result.element.querySelector('p').textContent;
+        
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const syntheticEvent = {
+                clientX: window.innerWidth / 2,
+                clientY: window.innerHeight / 2
+            };
+            showCopyNotification(syntheticEvent, "Copied!");
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+    }
+    
+    searchResults.style.display = 'none';
+    searchInput.value = '';
+}
+
+function highlightText(text, query) {
+    if (!query) return text;
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+}
+
+function navigateSearchResults(direction) {
+    if (searchResultItems.length === 0) return;
+    
+    if (currentSelectedResultIndex >= 0) {
+        searchResultItems[currentSelectedResultIndex].classList.remove('selected');
+    }
+    
+    if (direction === 'up') {
+        currentSelectedResultIndex = Math.max(0, currentSelectedResultIndex - 1);
+    } else if (direction === 'down') {
+        currentSelectedResultIndex = Math.min(searchResultItems.length - 1, currentSelectedResultIndex + 1);
+    }
+    
+    if (currentSelectedResultIndex >= 0) {
+        searchResultItems[currentSelectedResultIndex].classList.add('selected');
+        searchResultItems[currentSelectedResultIndex].focus();
+        searchResultItems[currentSelectedResultIndex].scrollIntoView({
+            block: 'nearest'
+        });
+    }
+}
+
+searchInput.addEventListener('input', (e) => {
+    performSearch(e.target.value);
+});
+
+searchInput.addEventListener('focus', () => {
+    if (searchInput.value.trim() && searchResults.children.length > 0) {
+        searchResults.style.display = 'block';
+    }
+});
+
+document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.style.display = 'none';
+        currentSelectedResultIndex = -1;
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' && e.target !== searchInput) return;
+    
+    switch(e.key) {
+        case '/':
+            e.preventDefault();
+            searchInput.focus();
+            break;
+            
+        case 'Shift':
+            if (searchResults.style.display === 'block') {
+                searchResults.style.display = 'none';
+                currentSelectedResultIndex = -1;
             }
+            break;
+            
+        case 'ArrowUp':
+            if (searchResults.style.display === 'block') {
+                e.preventDefault();
+                navigateSearchResults('up');
+            }
+            break;
+            
+        case 'ArrowDown':
+            if (searchResults.style.display === 'block') {
+                e.preventDefault();
+                navigateSearchResults('down');
+            }
+            break;
+            
+        case 'Enter':
+            if (searchResults.style.display === 'block' && currentSelectedResultIndex >= 0) {
+                e.preventDefault();
+                const result = allSearchResults[currentSelectedResultIndex];
+                if (result) {
+                    selectSearchResult(result, currentSelectedResultIndex);
+                }
+            }
+            break;
+    }
+});
+
+const monthMap = {
+    "JAN": "01", "FEB": "02", "MAR": "03", "APR": "04", "MAY": "05", "JUN": "06",
+    "JUL": "07", "AUG": "08", "SEP": "09", "OCT": "10", "NOV": "11", "DEC": "12"
+};
+
+function setToday(type) {
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
+    
+    document.getElementById(`${type}-day`).value = day;
+    document.getElementById(`${type}-month`).value = month;
+    document.getElementById(`${type}-year`).value = year;
+    
+    const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", 
+                       "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    const formattedDate = `${day}-${monthNames[now.getMonth()]}-${year}`;
+    document.getElementById(`${type}-paste-input`).value = formattedDate;
+    
+    updateDuration();
+}
+
+function parseAndSetDate(type) {
+    const pasteInput = document.getElementById(`${type}-paste-input`);
+    const dateString = pasteInput.value.trim().toUpperCase();
+
+    if (!dateString) {
+        alert('⚠️ Enter a date to Apply.');
+        return;
+    }
+
+    let day, month, year;
+
+    const match1 = dateString.match(/(\d{1,2})[-/ ]([A-Z]{3})[-/ ](\d{4})/);
+    const match2 = dateString.match(/(\d{4})[-/ ](\d{1,2})[-/ ](\d{1,2})/);
+
+    if (match1) {
+        day = match1[1].padStart(2, '0');
+        month = monthMap[match1[2]];
+        year = match1[3];
+    } else if (match2) {
+        year = match2[1];
+        month = match2[2].padStart(2, '0');
+        day = match2[3].padStart(2, '0');
+    } else {
+        alert("⚠️ Unrecognized date format. Try formats like '16-SEP-2025' or '2025-11-10'.");
+        return;
+    }
+
+    document.getElementById(`${type}-day`).value = day;
+    document.getElementById(`${type}-month`).value = month;
+    document.getElementById(`${type}-year`).value = year;
+
+    updateDuration();
+}
+
+function updateDuration() {
+    const sDay = parseInt(document.getElementById('start-day').value);
+    const sMonth = parseInt(document.getElementById('start-month').value);
+    const sYear = parseInt(document.getElementById('start-year').value);
+    const eDay = parseInt(document.getElementById('end-day').value);
+    const eMonth = parseInt(document.getElementById('end-month').value);
+    const eYear = parseInt(document.getElementById('end-year').value);
+
+    if (!sDay || !sMonth || !sYear || !eDay || !eMonth || !eYear) {
+        document.getElementById('duration-result').textContent = 'Duration: 0y 0m 0d [0 days]';
+        return;
+    }
+
+    const start = new Date(sYear, sMonth - 1, sDay);
+    const end = new Date(eYear, eMonth - 1, eDay);
+    const diffMs = end - start;
+
+    const result = document.getElementById('duration-result');
+    if (isNaN(diffMs)) {
+        result.textContent = '⚠️ Invalid date(s)';
+        result.style.color = '#ff5555';
+        return;
+    }
+
+    const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    if (days < 0) {
+        result.textContent = '⚠️ End date must be after start date';
+        result.style.color = '#ff5555';
+    } else {
+        let years = eYear - sYear;
+        let months = eMonth - sMonth;
+        let daysDiff = eDay - sDay;
+
+        if (daysDiff < 0) {
+            months--;
+            const prevMonth = new Date(eYear, eMonth - 1, 0);
+            daysDiff += prevMonth.getDate();
         }
 
-                //<script>
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        result.textContent = `Duration: ${years}y ${months}m ${daysDiff}d [${days} days]`;
+        result.style.color = '#faad14';
+    }
+}
     let timeout;
 
     function resetTimer() {
         clearTimeout(timeout);
         timeout = setTimeout(() => {
-        window.location.href = 'welcome'; // Redirect after 15 mins
-        }, 14 * 60 * 1000); // 14 minutes in milliseconds
+        window.location.href = 'welcome';
+        }, 14 * 60 * 1000); 
     }
 
-    // Reset timer on any user interaction
     ['click', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
         window.addEventListener(event, resetTimer, false);
     });
 
-    // Start the timer initially
     resetTimer();
-    //<script>
 
-        // Make functions globally available
-        window.copyText = copyText;
-        window.togglePopup = togglePopup;
-        window.hidePopup = hidePopup;
-        window.showNotification = showNotification;
-        window.showSection = showSection;
+function initializeDateCalculator() {
+    // Set today's date as default for both start and end
+   // setToday('start');
+  //setToday('end');
+    
+    const dateInputs = document.querySelectorAll('#date-calculator-section input[type="number"]');
+    dateInputs.forEach(input => {
+        input.addEventListener('input', updateDuration);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('year').textContent = new Date().getFullYear();
+});
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
