@@ -18,10 +18,9 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        background: #f8fafc; /* fallback for light */
+        background: #f8fafc; 
     }
 
-    /* GLOBAL SCROLLBAR */
     ::-webkit-scrollbar {
         width: 8px;
         height: 6px;
@@ -44,7 +43,6 @@
         width: 100%;
     }
 
-    /* ========== HEADER (single line) ========== */
     .header-one-line {
         display: flex;
         align-items: center;
@@ -60,12 +58,11 @@
     }
 
     body.dark .header-one-line {
-        background: #0a0a0f;        /* deep blackish background — no white padding anywhere */
+        background: #0a0a0f;        
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        backdrop-filter: none;       /* clean solid dark surface */
+        backdrop-filter: none;      
     }
 
-    /* left side container */
     .header-left {
         display: flex;
         align-items: center;
@@ -108,7 +105,6 @@
         color: #a5b4fc;
     }
 
-    /* TABS SCROLL AREA */
     .tabs-scroll {
         display: flex;
         align-items: center;
@@ -199,7 +195,6 @@
         color: #ffc5c5;
     }
 
-    /* RIGHT SIDE ACTION BUTTONS */
     .header-right {
         display: flex;
         align-items: center;
@@ -264,7 +259,6 @@
         background: #2c2c3a;
     }
 
-    /* STATUS BAR — DARK THEME: pure dark background, no white */
     .status-bar {
         display: flex;
         justify-content: space-between;
@@ -277,7 +271,7 @@
     }
 
     body.dark .status-bar {
-        background: #050508;      /* near-black background — no white padding */
+        background: #050508;      
         border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         color: #a0aec0;
     }
@@ -308,7 +302,6 @@
         color: #cbd5e6;
     }
 
-    /* EDITOR WRAPPER — NO EXTERNAL WHITE SPACES IN DARK MODE */
     .editor-wrapper {
         flex: 1;
         position: relative;
@@ -317,7 +310,7 @@
     }
 
     body.dark .editor-wrapper {
-        background: #010104;    /* deepest black background for entire editor area */
+        background: #010104;    
     }
 
     textarea {
@@ -338,9 +331,8 @@
         box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
     }
 
-    /* DARK TEXTAREA — complete dark background, black surface, no white margins */
     body.dark textarea {
-        background: #000000;      /* solid dark surface matching header */
+        background: #000000;      
         color: #eef2ff;
         border-color: #2a2a32;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
@@ -356,7 +348,6 @@
         box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25);
     }
 
-    /* TOAST - LIGHT THEME (default) */
 .toast-msg {
     position: fixed;
     bottom: 24px;
@@ -382,7 +373,6 @@
     border: 0.5px solid rgba(0,0,0,0.08);
 }
 
-/* DARK THEME */
 body.dark .toast-msg {
     background:rgba(255, 255, 255, 0.9);  
     color: #0f172a;
@@ -391,7 +381,6 @@ body.dark .toast-msg {
     border: 0.5px solid rgba(255,255,255,0.1);
 }
 
-/* SHOW ANIMATION */
 .toast-msg.show {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
@@ -401,7 +390,6 @@ body.dark .toast-msg {
 <body class="light">
 
 <div class="app-container">
-    <!-- SINGLE-LINE HEADER: tabs on left, actions on right — fully dark in dark mode -->
     <div class="header-one-line">
         <div class="header-left">
             <div class="logo-area">
@@ -420,7 +408,6 @@ body.dark .toast-msg {
         </div>
     </div>
 
-    <!-- status bar: dark background uniform -->
     <div class="status-bar">
         <div class="stats">
             <div class="stat-item"><span class="stat-label">Chars:</span> <span id="charCount" class="stat-value">0</span></div>
@@ -442,7 +429,6 @@ body.dark .toast-msg {
 
 <script>
     (function() {
-        // ---------- Data Model ----------
         let notes = [];
         let activeNoteId = null;
         let nextId = 1;
