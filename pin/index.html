@@ -1167,6 +1167,41 @@
                 });
             }, 500);
         });
+        window.addEventListener("load", function () {
+  const popup = document.createElement("div");
+
+  popup.innerText = "Please note that the page you are viewing will be removed soon.";
+
+  popup.style.position = "fixed";
+  popup.style.top = "15px";
+  popup.style.left = "50%";
+  popup.style.transform = "translateX(-50%) translateY(-20px)";
+  popup.style.background = "linear-gradient(135deg,#007BFF)";
+  popup.style.color = "#fff";
+  popup.style.padding = "15px 25px";
+  popup.style.borderRadius = "10px";
+  popup.style.fontFamily = "Arial, sans-serif";
+  popup.style.fontSize = "14px";
+  popup.style.boxShadow = "0 0 10px rgba(0,150,255,0.5)";
+  popup.style.border = "1px solid rgba(255,255,255,0.3)";
+  popup.style.opacity = "0";
+  popup.style.transition = "all 0.4s ease";
+  popup.style.zIndex = "9999";
+
+  document.body.appendChild(popup);
+
+  setTimeout(() => {
+    popup.style.opacity = "1";
+    popup.style.transform = "translateX(-50%) translateY(0)";
+  }, 100);
+
+  setTimeout(() => {
+    popup.style.opacity = "0";
+    popup.style.transform = "translateX(-50%) translateY(-20px)";
+    
+    setTimeout(() => popup.remove(), 400); 
+  }, 10000);
+});
     </script>
 </body>
 </html>
