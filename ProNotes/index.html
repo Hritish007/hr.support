@@ -1,839 +1,1229 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>ProNotes | HR Support</title>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HR Support | Pin & Notes</title>
+    <link rel="icon" href="img/welcom.jpg" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231677ff'%3E%3Cpath d='M16,9V7L12,3H8V9H6V12H8V21H10V12H12V9H16Z' /%3E%3C/svg%3E">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-        transition: background-color 0.2s ease, color 0.2s ease;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        background: #f8fafc; 
-    }
+        :root[data-theme="light"] {
+            --primary: #1677ff;
+            --primary-hover: #4096ff;
+            --bg: #ffffff;
+            --surface: #f8f9fa;
+            --text: #1f2937;
+            --text-secondary: #5b6e8c;
+            --border: #e2e8f0;
+            --border-focus: #1677ff;
+            --error: #ff4d4f;
+            --success: #52c41a;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+            --radius: 12px;
+            --transition: all 0.2s ease;
+        }
 
-    ::-webkit-scrollbar {
-        width: 8px;
-        height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
-        border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
-    }
+        :root[data-theme="dark"] {
+            --primary: #1677ff;
+            --primary-hover: #3c8cff;
+            --bg: #0f0f0f;
+            --surface: #1c1c1e;
+            --text: #ededed;
+            --text-secondary: #a1a1aa;
+            --border: #2c2c2e;
+            --border-focus: #1677ff;
+            --error: #ff7875;
+            --success: #49aa19;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --radius: 12px;
+        }
 
-    .app-container {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        width: 100%;
-    }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            transition: background 0.2s, color 0.2s;
+        }
 
-    .header-one-line {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: rgba(255, 255, 255, 0.96);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-        backdrop-filter: blur(8px);
-        padding: 0.4rem 1rem 0.4rem 1.5rem;
-        gap: 1rem;
-        min-height: 52px;
-        transition: background 0.2s, border-color 0.2s;
-        flex-wrap: nowrap;
-    }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
-    body.dark .header-one-line {
-        background: #0a0a0f;        
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        backdrop-filter: none;      
-    }
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            z-index: 50;
+        }
 
-    .header-left {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        flex: 1;
-        min-width: 0;
-        overflow-x: auto;
-        scrollbar-width: thin;
-    }
+        .navbar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.9rem 0;
+            gap: 16px;
+        }
 
-    .logo-area {
-        display: flex;
-        align-items: baseline;
-        gap: 0.4rem;
-        flex-shrink: 0;
-    }
+        .brand {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), #5b8cff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            cursor: default;
+            letter-spacing: -0.3px;
+        }
 
-    .logo {
-        font-weight: 700;
-        font-size: 1.25rem;
-        letter-spacing: -0.3px;
-        background: linear-gradient(135deg, #818cf8, #a78bfa);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-    }
+        .section-tabs {
+            display: flex;
+            gap: none;
+            background: var(--surface);
+            border-radius: 40px;
+            padding: 4px;
+            border: 1px solid var(--border);
+        }
 
-    .badge {
-        font-size: 0.65rem;
-        font-weight: 500;
-        background: #eef2ff;
-        color: #4f46e5;
-        padding: 0.15rem 0.45rem;
-        border-radius: 30px;
-        white-space: nowrap;
-    }
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 24px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 32px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
 
-    body.dark .badge {
-        background: #1f1f2c;
-        color: #a5b4fc;
-    }
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 2px 6px rgba(22, 119, 255, 0.2);
+        }
 
-    .tabs-scroll {
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-        overflow-x: auto;
-        scrollbar-width: thin;
-        flex: 1;
-        min-width: 120px;
-    }
-    .tabs-scroll::-webkit-scrollbar {
-        height: 3px;
-    }
+        .right-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
 
-    .tab-item {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        padding: 0.4rem 0.9rem 0.4rem 1rem;
-        font-size: 0.8rem;
-        font-weight: 500;
-        border-radius: 40px;
-        cursor: pointer;
-        background: transparent;
-        color: #334155;
-        transition: all 0.15s;
-        white-space: nowrap;
-        flex-shrink: 0;
-        border: 1px solid transparent;
-    }
+        .timer {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg);
+            padding: 6px 12px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
 
-    body.dark .tab-item {
-        color: #e2e8f0;
-        background: transparent;
-    }
+        #themeToggle {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
 
-    .tab-item.active {
-        background: #4f46e5;
-        color: white;
-        box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
-        border-color: rgba(255,255,255,0.1);
-    }
+        .section {
+            display: none;
+            animation: fade 0.25s ease;
+        }
 
-    body.dark .tab-item.active {
-        background: #6366f1;
-        color: #ffffff;
-    }
+        .section.active-section {
+            display: block;
+        }
 
-    .tab-title {
-        max-width: 140px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(6px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
 
-    .tab-close {
-        background: rgba(0,0,0,0.06);
-        border: none;
-        font-size: 0.85rem;
-        cursor: pointer;
-        color: #5b6e8c;
-        border-radius: 30px;
-        width: 20px;
-        height: 20px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.1s;
-        margin-left: 4px;
-        font-weight: 600;
-    }
-    .tab-item.active .tab-close {
-        background: rgba(255,255,255,0.2);
-        color: #f1f5f9;
-    }
-    .tab-close:hover {
-        background: #e2e8f0;
-        color: #ef4444;
-    }
-    body.dark .tab-close {
-        background: #1e1e2c;
-        color: #94a3b8;
-    }
-    body.dark .tab-close:hover {
-        background: #2d2d3a;
-        color: #f87171;
-    }
-    .tab-item.active .tab-close:hover {
-        background: rgba(255,80,80,0.3);
-        color: #ffc5c5;
-    }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: none;
+            margin: 28px 0;
+            box-shadow: var(--shadow);
+        }
 
-    .header-right {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        flex-shrink: 0;
-    }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            gap: 12px;
+        }
 
-    .tool-btn {
-        background: transparent;
-        border: none;
-        padding: 0.4rem 0.9rem;
-        font-size: 0.8rem;
-        font-weight: 500;
-        border-radius: 40px;
-        cursor: pointer;
-        transition: all 0.2s;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-        color: #1e293b;
-        white-space: nowrap;
-    }
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-left: 15px;
+        }
 
-    body.dark .tool-btn {
-        color: #e2e8f0;
-        background: transparent;
-    }
+        /* Status Bar Styles */
+        .status-bar {
+            background: var(--bg);
+            border-radius: 40px;
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
 
-    .tool-btn:hover {
-        background: #f1f5f9;
-    }
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: baseline;
+        }
 
-    body.dark .tool-btn:hover {
-        background: #1f1f2a;
-    }
+        .stat-item {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            font-size: 0.8rem;
+        }
 
-    .primary-btn {
-        background: #4f46e5;
-        color: white !important;
-    }
-    .primary-btn:hover {
-        background: #4338ca;
-        transform: translateY(-1px);
-    }
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
 
-    .danger-btn {
-        background: #ef4444;
-        color: white !important;
-    }
-    .danger-btn:hover {
-        background: #dc2626;
-    }
+        .stat-value {
+            color: var(--primary);
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--surface);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
 
-    .divider {
-        width: 1px;
-        height: 26px;
-        background: #e2e8f0;
-        margin: 0 0.2rem;
-    }
+        .pin-rows-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
 
-    body.dark .divider {
-        background: #2c2c3a;
-    }
+        .pin-row {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            transition: var(--transition);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 16px;
+        }
 
-    .status-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.35rem 1.5rem;
-        font-size: 0.7rem;
-        background: #f1f5f9;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-        transition: background 0.2s, color 0.2s;
-    }
+        .pin-row:hover {
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
 
-    body.dark .status-bar {
-        background: #050508;      
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        color: #a0aec0;
-    }
+        .field {
+            flex: 1;
+            min-width: 160px;
+        }
 
-    .stats {
-        display: flex;
-        gap: 1rem;
-    }
+        .field label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
 
-    .stat-item {
-        display: flex;
-        gap: 0.3rem;
-        align-items: baseline;
-    }
+        .field input {
+            width: 100%;
+            padding: 10px 12px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
 
-    .stat-label {
-        font-weight: 500;
-        opacity: 0.7;
-    }
+        .field input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.2);
+        }
 
-    .stat-value {
-        font-weight: 600;
-        font-family: 'JetBrains Mono', monospace;
-    }
+        .field input.error {
+            border-color: var(--error);
+        }
 
-    body.dark .stat-value,
-    body.dark .stat-label {
-        color: #cbd5e6;
-    }
+        .error-msg {
+            font-size: 0.7rem;
+            color: var(--error);
+            margin-top: 4px;
+            display: none;
+        }
 
-    .editor-wrapper {
-        flex: 1;
-        position: relative;
-        padding: 1rem 1.5rem 1.5rem 1.5rem;
-        background: inherit;
-    }
+        .solved-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--surface);
+            padding: 0 12px;
+            border-radius: 40px;
+            height: 42px;
+        }
 
-    body.dark .editor-wrapper {
-        background: #010104;    
-    }
+        .solved-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--success);
+            cursor: pointer;
+        }
 
-    textarea {
-        width: 100%;
-        height: 100%;
-        padding: 1.2rem 1.5rem;
-        font-size: 0.95rem;
-        line-height: 1.6;
-        border-radius: 22px;
-        border: 1px solid transparent;
-        outline: none;
-        resize: none;
-        font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
-        font-weight: 450;
-        transition: all 0.2s ease;
-        background: #ffffff;
-        color: #0f172a;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
-    }
+        .delete-pin-btn {
+            background: var(--error);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: not-allowed;
+            opacity: 0.5;
+            transition: 0.2s;
+            margin-bottom: 5px;
+        }
 
-    body.dark textarea {
-        background: #000000;      
-        color: #eef2ff;
-        border-color: #2a2a32;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-    }
+        .delete-pin-btn.enabled {
+            opacity: 1;
+            cursor: pointer;
+        }
 
-    textarea:focus {
-        border-color: #4f46e5;
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-    }
+        .delete-pin-btn.enabled:hover {
+            background: #d9363e;
+            transform: scale(0.98);
+        }
 
-    body.dark textarea:focus {
-        border-color: #818cf8;
-        box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25);
-    }
+        .copy-icon-small {
+            cursor: pointer;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            transition: 0.2s;
+        }
 
-.toast-msg {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
+        .copy-icon-small:hover {
+            color: var(--primary);
+        }
 
-    background: rgba(30, 30, 40, 0.96);
-    color: #f1f5f9;  
+        .add-row-btn {
+            margin-top: 20px;
+            background: transparent;
+            border: 1px dashed var(--border);
+            border-radius: 60px;
+            padding: 10px;
+            width: 100%;
+            font-weight: 500;
+            color: var(--primary);
+            cursor: pointer;
+            transition: 0.2s;
+        }
 
-    padding: 0.5rem 1.2rem;
-    border-radius: 40px;
-    font-size: 0.8rem;
-    font-weight: 500;
+        .add-row-btn:hover {
+            background: rgba(22, 119, 255, 0.05);
+            border-color: var(--primary);
+        }
 
-    opacity: 0;
-    transition: opacity 0.2s, transform 0.2s;
+        .note-editor {
+            background: var(--bg);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 20px;
+        }
 
-    pointer-events: none;
-    z-index: 1000;
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            justify-content: flex-end;
+        }
 
-    backdrop-filter: blur(12px);
-    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.15);
-    border: 0.5px solid rgba(0,0,0,0.08);
-}
+        .copy-note-btn, .preload-note-btn, .reset-note-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: var(--text);
+            transition: var(--transition);
+            font-weight: 500;
+        }
 
-body.dark .toast-msg {
-    background:rgba(255, 255, 255, 0.9);  
-    color: #0f172a;
+        .preload-note-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
 
-    backdrop-filter: blur(8px);
-    border: 0.5px solid rgba(255,255,255,0.1);
-}
+        .preload-note-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
 
-.toast-msg.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-</style>
+        .reset-note-btn {
+            background: var(--error);
+            color: white;
+            border: none;
+        }
+
+        .reset-note-btn:hover {
+            background: #d9363e;
+            transform: translateY(-1px);
+        }
+
+        .copy-note-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        textarea {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 18px;
+            font-size: 0.95rem;
+            color: var(--text);
+            resize: vertical;
+            font-family: monospace;
+            line-height: 1.6;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 12px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .toast {
+            background: var(--surface);
+            border-left: 4px solid var(--primary);
+            padding: 12px 16px;
+            border-radius: 14px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
+            display: flex;
+            gap: 12px;
+            min-width: 240px;
+        }
+
+        @media (max-width: 780px) {
+            .navbar { flex-direction: column; align-items: stretch; }
+            .section-tabs { justify-content: center; }
+            .pin-row { flex-direction: column; align-items: stretch; }
+            .solved-wrapper { justify-content: space-between; }
+            .card-header { flex-direction: column; align-items: flex-start; }
+            .status-bar { width: 100%; justify-content: center; }
+            .stats { justify-content: space-between; width: 100%; gap: 12px; }
+            .action-buttons { flex-direction: column; }
+            .action-buttons button { width: 100%; }
+        }
+    </style>
 </head>
-<body class="light">
-
-<div class="app-container">
-    <div class="header-one-line">
-        <div class="header-left">
-            <div class="logo-area">
-                <span class="logo">ProNotes</span>
-                <span class="badge">HR Support</span>
-            </div>
-            <div class="tabs-scroll" id="tabsContainer"></div>
-        </div>
-        <div class="header-right">
-            <button class="tool-btn" id="newTabBtn" title="New empty note (⌘/Ctrl+N)">📄 New</button>
-            <button class="tool-btn" id="loadDefaultBtn" title="Open new tab with load template (⌘/Ctrl+L)">💾 Load</button>
-            <button class="tool-btn" id="copyBtn" title="Copy current note (⌘/Ctrl+C)">📋 Copy</button>
-            <button class="tool-btn danger-btn" id="deleteCurrentBtn" title="Delete current tab ">🗑️ Delete</button>
-            <div class="divider"></div>
-            <button class="tool-btn primary-btn" id="toggleMode">🌙 Dark</button>
-        </div>
-    </div>
-
-    <div class="status-bar">
-        <div class="stats">
-            <div class="stat-item"><span class="stat-label">Chars:</span> <span id="charCount" class="stat-value">0</span></div>
-            <div class="stat-item"><span class="stat-label">Words:</span> <span id="wordCount" class="stat-value">0</span></div>
-            <div class="stat-item"><span class="stat-label">Lines:</span> <span id="lineCount" class="stat-value">0</span></div>
-            <div class="stat-item"><span class="stat-label">Saved:</span> <span id="lastSaved" class="stat-value">—</span></div>
-        </div>
-        <div class="stats">
-            <div class="stat-item"><span class="stat-label">⏎ autosave</span></div>
-        </div>
-    </div>
-
-    <div class="editor-wrapper">
-        <textarea id="notepad" placeholder="Write your notes here... each note auto-saves."></textarea>
-    </div>
-</div>
-
-<div id="toastMsg" class="toast-msg">✨ Ready</div>
+<body>
+<div class="toast-container" id="toastContainer"></div>
+<header>
+    <div class="container">
+        <div class="navbar">
+            <div class="brand" onclick="openHR()">HR Support</div>
 
 <script>
-    (function() {
-        let notes = [];
-        let activeNoteId = null;
-        let nextId = 1;
-        
-        const textarea = document.getElementById('notepad');
-        const charSpan = document.getElementById('charCount');
-        const wordSpan = document.getElementById('wordCount');
-        const lineSpan = document.getElementById('lineCount');
-        const lastSavedSpan = document.getElementById('lastSaved');
-        const toggleBtn = document.getElementById('toggleMode');
-        const newTabBtn = document.getElementById('newTabBtn');
-        const copyBtn = document.getElementById('copyBtn');
-        const loadDefaultBtn = document.getElementById('loadDefaultBtn');
-        const deleteCurrentBtn = document.getElementById('deleteCurrentBtn');
-        const tabsContainer = document.getElementById('tabsContainer');
-        const body = document.body;
-        const toastEl = document.getElementById('toastMsg');
-        
-        let autoSaveTimer = null;
-        
-        function showToast(message, duration = 1600) {
-            toastEl.textContent = message;
-            toastEl.classList.add('show');
-            if (window.toastTimeout) clearTimeout(window.toastTimeout);
-            window.toastTimeout = setTimeout(() => {
-                toastEl.classList.remove('show');
-            }, duration);
+function openHR() {
+    window.open("https://hritish007.github.io/hr.support/", "HR Support");
+}
+</script>
+            <div class="section-tabs">
+                <button class="tab-btn active" data-section="notes">📝 Notes</button>
+                <button class="tab-btn " data-section="pin">📌 Issues</button>
+
+            </div>
+            <div class="right-actions">
+                <div class="timer" id="currentTime">--:--:--</div>
+                <div class="timer" id="sessionTimer">00:00:00</div>
+                <button id="themeToggle" aria-label="Dark mode">🌙</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <div id="pinSection" class="section">
+        <div class="card">
+            <div class="card-header">
+                <h2> Pinned Issues <i class="fa-solid fa-bookmark"></i></h2>
+            </div>
+            <div id="pinRowsContainer" class="pin-rows-container"></div>
+            <button id="addPinRowBtn" class="add-row-btn"><i class="fas fa-plus-circle"></i> Add new issue</button>
+        </div>
+    </div>
+
+    <div id="notesSection" class="section active-section">
+        <div class="card">
+            <div class="card-header">
+                <h2> WeNotes<i class="fa-solid fa-pen"></i></h2>
+                <div class="status-bar">
+                    <div class="stats">
+                        <div class="stat-item"><span class="stat-label">Chars:</span> <span id="charCount" class="stat-value">0</span></div>
+                        <div class="stat-item"><span class="stat-label">Words:</span> <span id="wordCount" class="stat-value">0</span></div>
+                        <div class="stat-item"><span class="stat-label">Lines:</span> <span id="lineCount" class="stat-value">0</span></div>
+                        <div class="stat-item"><span class="stat-label">Saved:</span> <span id="lastSaved" class="stat-value">—</span></div>
+                        <button id="preloadNoteBtn" class="preload-note-btn"><i class="fas fa-download"></i> Preload</button>
+                    </div>
+                </div>
+            </div>
+            <div class="note-editor">
+                <textarea id="globalNote" rows="16" placeholder="Write your Notes here..."></textarea>
+                <div class="action-buttons">
+                    <button id="copyNoteBtn" class="copy-note-btn"><i class="far fa-copy"></i> Copy Note</button>
+                    
+                    <button id="resetNoteBtn" class="reset-note-btn"><i class="fas fa-trash-alt"></i> Reset Note</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer">© <span id="year"></span> HritishShaqya — Secure pin & notes</footer>
+
+<script>
+   // ---------- UTILITY FUNCTIONS ----------
+function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+}
+
+// Single toast management - only one toast visible at a time
+let activeToast = null;
+let toastHideTimeout = null;
+
+function showToast({ title, message, type = "info", duration = 3500, isTypingToast = false }) {
+    const container = document.getElementById("toastContainer");
+    if (!container) return;
+    
+    // Remove existing toast if any
+    if (activeToast) {
+        activeToast.remove();
+        activeToast = null;
+    }
+    
+    // Clear any pending hide timeout
+    if (toastHideTimeout) {
+        clearTimeout(toastHideTimeout);
+        toastHideTimeout = null;
+    }
+    
+    // Create new toast
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    
+    const icon = type === "success" ? "✅" : type === "error" ? "❌" : type === "warning" ? "⚠️" : "🖋️";
+    let borderColor = "#1677ff";
+    if (type === "success") borderColor = "#52c41a";
+    if (type === "error") borderColor = "#ff4d4f";
+    if (type === "warning") borderColor = "#faad14";
+    
+    toast.style.borderLeftColor = borderColor;
+    
+    // Apply theme-aware styling for typing toast
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    if (isTypingToast) {
+        if (isDark) {
+            toast.style.backgroundColor = "#1f2a3e";
+            toast.style.color = "#e8edf5";
+            toast.style.boxShadow = "0 4px 12px rgba(0,0,0,0.3)";
+        } else {
+            toast.style.backgroundColor = "#e6f7ff";
+            toast.style.color = "#1a1a1a";
+            toast.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
         }
-        
-        function getNextEmptyNoteTitle() {
-            const existing = notes.filter(n => n.title && n.title.match(/^📄\s*\d+/));
-            let maxNum = 0;
-            existing.forEach(n => {
-                const match = n.title.match(/📄\s*(\d+)/);
-                if (match) maxNum = Math.max(maxNum, parseInt(match[1], 10));
-            });
-            return `📄 ${maxNum + 1}`;
+    }
+    
+    toast.innerHTML = `<span>${icon}</span><div><strong>${title}</strong><div style="font-size:0.8rem;">${message}</div></div>`;
+    container.appendChild(toast);
+    activeToast = toast;
+    
+    // Set timeout to remove toast
+    toastHideTimeout = setTimeout(() => {
+        if (activeToast) {
+            activeToast.remove();
+            activeToast = null;
         }
-        
-        function deriveTitleFromContent(content, currentTitle, noteId) {
-            const trimmed = content.trim();
-            if (trimmed === "") {
-                const existingOthers = notes.filter(n => n.id !== noteId && n.title && n.title.startsWith('📄'));
-                let maxNum = 0;
-                existingOthers.forEach(n => {
-                    const match = n.title.match(/📄\s*(\d+)/);
-                    if (match) maxNum = Math.max(maxNum, parseInt(match[1], 10));
-                });
-                const newNum = maxNum + 1;
-                return `📄 ${newNum}`;
-            }
-            const firstLine = trimmed.split(/\r?\n/)[0];
-            let clean = firstLine.replace(/^#+/, '').trim();
-            if (clean.length === 0) clean = firstLine.substring(0, 32);
-            if (clean.length > 30) clean = clean.substring(0, 28) + '..';
-            return clean || "Note";
+        toastHideTimeout = null;
+    }, duration);
+}
+
+// ---------- GLOBALS ----------
+const pageKey = window.location.pathname.split("/").pop() || "index";
+const STORAGE_PIN = `pins_${pageKey}`;
+const STORAGE_NOTE = `note_${pageKey}`;
+const STORAGE_NOTE_TIMESTAMP = `note_${pageKey}_timestamp`;
+
+let pinRowsData = [];
+let lastSavedTimestamp = null;
+
+// Typing timers
+let typingTimer = null;
+let isTypingActive = false;
+
+// DOM elements
+const pinContainer = document.getElementById("pinRowsContainer");
+const addPinBtn = document.getElementById("addPinRowBtn");
+const noteTextarea = document.getElementById("globalNote");
+const copyNoteBtn = document.getElementById("copyNoteBtn");
+const resetNoteBtn = document.getElementById("resetNoteBtn");
+const preloadNoteBtn = document.getElementById("preloadNoteBtn");
+const charCountSpan = document.getElementById("charCount");
+const wordCountSpan = document.getElementById("wordCount");
+const lineCountSpan = document.getElementById("lineCount");
+const lastSavedSpan = document.getElementById("lastSaved");
+
+// Update note statistics (chars, words, lines)
+function updateNoteStats() {
+    const text = noteTextarea.value;
+    const chars = text.length;
+    const words = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
+    const lines = text === "" ? 0 : text.split(/\r?\n/).length;
+    
+    charCountSpan.innerText = chars;
+    wordCountSpan.innerText = words;
+    lineCountSpan.innerText = lines;
+}
+
+// Update last saved display
+function updateLastSavedDisplay() {
+    if (lastSavedTimestamp) {
+        const date = new Date(lastSavedTimestamp);
+        const timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        lastSavedSpan.innerText = timeStr;
+    } else {
+        lastSavedSpan.innerText = "—";
+    }
+}
+
+// Persistence functions for pins
+function persistPins(showSaveToast = true) {
+    localStorage.setItem(STORAGE_PIN, JSON.stringify(pinRowsData));
+    if (showSaveToast) {
+        showToast({ title: "Auto-saved", message: "Pin section saved", type: "success", duration: 2000 });
+    }
+}
+
+function loadPinsFromStorage() {
+    const raw = localStorage.getItem(STORAGE_PIN);
+    if (raw) {
+        try {
+            pinRowsData = JSON.parse(raw);
+            if (!Array.isArray(pinRowsData)) pinRowsData = [];
+        } catch(e) { 
+            pinRowsData = []; 
         }
-        
-        function persistAll() {
-            const store = {
-                notes: notes.map(n => ({ id: n.id, title: n.title, content: n.content, lastUpdated: n.lastUpdated })),
-                activeId: activeNoteId,
-                nextId: nextId
-            };
-            localStorage.setItem('proNotes_oneline_tabs', JSON.stringify(store));
+    }
+    if (!pinRowsData.length) {
+        pinRowsData = [];
+    }
+}
+
+// Validation UI helpers
+function validateFieldUI(idx, fieldType, isValid) {
+    const rowDiv = pinContainer.querySelector(`.pin-row[data-idx="${idx}"]`);
+    if (!rowDiv) return;
+    if (fieldType === "username") {
+        const input = rowDiv.querySelector(".pin-username");
+        const errDiv = rowDiv.querySelector(`#err-user-${idx}`);
+        if (isValid) { 
+            input.classList.remove("error"); 
+            if (errDiv) errDiv.style.display = "none"; 
+        } else { 
+            input.classList.add("error"); 
+            if (errDiv) errDiv.style.display = "block"; 
         }
-        
-        function updateStats() {
-            const content = textarea.value;
-            const charCount = content.length;
-            const words = content.trim() === '' ? [] : content.trim().split(/\s+/);
-            const wordCount = content.trim() === '' ? 0 : words.length;
-            const lines = content.split(/\r?\n/);
-            let lineCount = lines.length;
-            if (content.length === 0) lineCount = 0;
-            charSpan.textContent = charCount.toLocaleString();
-            wordSpan.textContent = wordCount.toLocaleString();
-            lineSpan.textContent = lineCount.toLocaleString();
+    } else if (fieldType === "phone") {
+        const input = rowDiv.querySelector(".pin-phone");
+        const errDiv = rowDiv.querySelector(`#err-phone-${idx}`);
+        if (isValid) { 
+            input.classList.remove("error"); 
+            if (errDiv) errDiv.style.display = "none"; 
+        } else { 
+            input.classList.add("error"); 
+            if (errDiv) errDiv.style.display = "block"; 
         }
-        
-        function updateLastSavedUI() {
-            const date = new Date();
-            const formatted = date.toLocaleTimeString([], { hour: '2-digit', minute:'2-digit', second:'2-digit' });
-            lastSavedSpan.textContent = formatted;
+    } else if (fieldType === "issue") {
+        const input = rowDiv.querySelector(".pin-issue");
+        const errDiv = rowDiv.querySelector(`#err-issue-${idx}`);
+        if (isValid) { 
+            input.classList.remove("error"); 
+            if (errDiv) errDiv.style.display = "none"; 
+        } else { 
+            input.classList.add("error"); 
+            if (errDiv) errDiv.style.display = "block"; 
         }
+    }
+}
+
+// Handle Enter key navigation
+function handleEnterKey(e, currentField, idx) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
         
-        function saveCurrentNote() {
-            if (!activeNoteId) return;
-            const idx = notes.findIndex(n => n.id === activeNoteId);
-            if (idx !== -1) {
-                const newContent = textarea.value;
-                notes[idx].content = newContent;
-                notes[idx].lastUpdated = Date.now();
-                const newTitle = deriveTitleFromContent(newContent, notes[idx].title, activeNoteId);
-                notes[idx].title = newTitle;
-                persistAll();
-                renderTabs();
-                updateLastSavedUI();
-            }
-        }
-        
-        function scheduleAutoSave() {
-            if (autoSaveTimer) clearTimeout(autoSaveTimer);
-            autoSaveTimer = setTimeout(() => {
-                saveCurrentNote();
-            }, 700);
-        }
-        
-        function loadNoteIntoEditor(noteId) {
-            const note = notes.find(n => n.id === noteId);
-            if (!note) return;
-            activeNoteId = note.id;
-            textarea.value = note.content;
-            updateStats();
-            updateLastSavedUI();
-            renderTabs();
-            textarea.focus();
-        }
-        
-        function createEmptyNote() {
-            const newId = nextId++;
-            const newTitle = getNextEmptyNoteTitle();
-            const newNote = {
-                id: newId,
-                title: newTitle,
-                content: "",
-                lastUpdated: Date.now()
-            };
-            notes.push(newNote);
-            activeNoteId = newId;
-            textarea.value = "";
-            updateStats();
-            saveCurrentNote();
-            renderTabs();
-            showToast(`✨ New "${newTitle}" created`, 1300);
-            textarea.focus();
-        }
-        
-        function createLoadMessageTab() {
-            const loadMessage = `Username: 
-Issue: _____, it's urgent, please process this ASAP, pending form _____
-Called Number: 
-Branch Name: `;
-            
-            const newId = nextId++;
-            const firstLineRaw = loadMessage.split(/\r?\n/)[0].replace(/^#+/, '').trim();
-            const derivedTitle = firstLineRaw.length > 28 ? firstLineRaw.substring(0, 26)+'..' : (firstLineRaw || "Load Message");
-            const newNote = {
-                id: newId,
-                title: derivedTitle,
-                content: loadMessage,
-                lastUpdated: Date.now()
-            };
-            notes.push(newNote);
-            activeNoteId = newId;
-            textarea.value = loadMessage;
-            updateStats();
-            saveCurrentNote();
-            renderTabs();
-            showToast(`💾 Loaded urgent template`, 1800);
-            textarea.focus();
-        }
-        
-        function deleteCurrentTab() {
-            if (!activeNoteId) return;
-            if (notes.length === 1) {
-                const confirmDel = confirm("Last note. Delete and create a fresh empty note?");
-                if (!confirmDel) return;
-                notes = [];
-                const freshId = nextId++;
-                const freshNote = {
-                    id: freshId,
-                    title: "📄 1",
-                    content: "",
-                    lastUpdated: Date.now()
-                };
-                notes.push(freshNote);
-                activeNoteId = freshId;
-                textarea.value = "";
-                updateStats();
-                persistAll();
-                renderTabs();
-                showToast("Last tab replaced", 1400);
-                return;
-            }
-            const current = notes.find(n => n.id === activeNoteId);
-            if (!current) return;
-            const confirmDel = confirm(`Delete tab "${current.title}"?`);
-            if (!confirmDel) return;
-            const idx = notes.findIndex(n => n.id === activeNoteId);
-            if (idx !== -1) {
-                notes.splice(idx, 1);
-                if (notes.length > 0) {
-                    activeNoteId = notes[0].id;
-                    loadNoteIntoEditor(activeNoteId);
+        if (currentField === 'username') {
+            const phoneInput = pinContainer.querySelector(`.pin-row[data-idx="${idx}"] .pin-phone`);
+            if (phoneInput) phoneInput.focus();
+        } else if (currentField === 'phone') {
+            const issueInput = pinContainer.querySelector(`.pin-row[data-idx="${idx}"] .pin-issue`);
+            if (issueInput) issueInput.focus();
+        } else if (currentField === 'issue') {
+            const allValid = validateAllRowsBeforeAdd();
+            if (allValid && pinRowsData.length > 0) {
+                if (idx === pinRowsData.length - 1) {
+                    addNewPinRow();
                 } else {
-                    const fallbackId = nextId++;
-                    const fallback = { id: fallbackId, title: "📄 New", content: "", lastUpdated: Date.now() };
-                    notes.push(fallback);
-                    activeNoteId = fallback.id;
-                    textarea.value = "";
-                    updateStats();
+                    const nextRowUsername = pinContainer.querySelector(`.pin-row[data-idx="${idx + 1}"] .pin-username`);
+                    if (nextRowUsername) nextRowUsername.focus();
                 }
-                persistAll();
-                renderTabs();
-                showToast(`🗑️ Deleted "${current.title}"`, 1300);
-            }
-        }
-        
-        async function copyCurrentNote() {
-            if (!activeNoteId) return;
-            try {
-                await navigator.clipboard.writeText(textarea.value);
-                showToast("📋 Copied ", 1200);
-            } catch(e) {
-                textarea.select();
-                document.execCommand('copy');
-                showToast("Copied (fallback)", 1200);
-                textarea.blur();
-            }
-        }
-        
-        function renderTabs() {
-            if (!tabsContainer) return;
-            tabsContainer.innerHTML = '';
-            notes.forEach(note => {
-                const tabDiv = document.createElement('div');
-                tabDiv.className = 'tab-item';
-                if (activeNoteId === note.id) tabDiv.classList.add('active');
-                const titleSpan = document.createElement('span');
-                titleSpan.className = 'tab-title';
-                let displayTitle = note.title || 'Untitled';
-                if (displayTitle.length > 28) displayTitle = displayTitle.slice(0, 26) + '..';
-                titleSpan.textContent = displayTitle;
-                const closeBtn = document.createElement('button');
-                closeBtn.className = 'tab-close';
-                closeBtn.innerHTML = '✕';
-                closeBtn.title = 'Close tab';
-                closeBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (notes.length === 1) {
-                        showToast("Cannot close last tab; use Delete button", 1400);
-                        return;
-                    }
-                    const confirmDel = confirm(`Close "${note.title}"?`);
-                    if (!confirmDel) return;
-                    const wasActive = (activeNoteId === note.id);
-                    notes = notes.filter(n => n.id !== note.id);
-                    if (wasActive && notes.length > 0) {
-                        activeNoteId = notes[0].id;
-                        loadNoteIntoEditor(activeNoteId);
-                    } else if (notes.length === 0) {
-                        const freshId = nextId++;
-                        const fresh = { id: freshId, title: "📄 1", content: "", lastUpdated: Date.now() };
-                        notes.push(fresh);
-                        activeNoteId = fresh.id;
-                        textarea.value = "";
-                        updateStats();
-                    }
-                    persistAll();
-                    renderTabs();
-                    if (activeNoteId) loadNoteIntoEditor(activeNoteId);
-                    showToast("Tab closed", 1000);
-                });
-                tabDiv.appendChild(titleSpan);
-                tabDiv.appendChild(closeBtn);
-                tabDiv.addEventListener('click', () => {
-                    if (activeNoteId === note.id) return;
-                    saveCurrentNote();
-                    loadNoteIntoEditor(note.id);
-                });
-                tabsContainer.appendChild(tabDiv);
-            });
-            if (tabsContainer.scrollTo) {
-                const activeTab = tabsContainer.querySelector('.tab-item.active');
-                if (activeTab) activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-            }
-        }
-        
-        function initTheme() {
-            const stored = localStorage.getItem('proNotes_theme');
-            if (stored === 'dark') {
-                body.classList.add('dark');
-                body.classList.remove('light');
-                toggleBtn.innerHTML = '☀️ Light';
             } else {
-                body.classList.add('light');
-                body.classList.remove('dark');
-                toggleBtn.innerHTML = '🌙 Dark';
+                showToast({ title: "Validation Error", message: "Please fill all fields correctly", type: "warning", duration: 3000 });
             }
         }
+    }
+}
+
+// Handle typing for any input - shows typing toast and schedules auto-save
+function handleTyping(saveFunction, sectionName) {
+    // Clear existing timer
+    if (typingTimer) {
+        clearTimeout(typingTimer);
+    }
+    
+    // Show typing toast if not already showing
+    if (!isTypingActive) {
+        isTypingActive = true;
+        showToast({ 
+            title: "You are typing...", 
+            message: `In the ${sectionName} section`, 
+            type: "info", 
+            duration: 30000, // Long duration, will be replaced
+            isTypingToast: true 
+        });
+    }
+    
+    // Set timer to save after typing stops (500ms delay)
+    typingTimer = setTimeout(() => {
+        // Typing has stopped - save now
+        saveFunction(true);
+        isTypingActive = false;
+        typingTimer = null;
+    }, 500);
+}
+
+// Pin field handlers
+function handlePinFieldInput(e, fieldType, sectionName) {
+    const idx = parseInt(e.target.getAttribute("data-rowidx"));
+    let val = e.target.value;
+    
+    if (fieldType === 'username') {
+        val = val.toLowerCase().replace(/\s/g, '');
+        e.target.value = val;
+        pinRowsData[idx].username = val;
+        validateFieldUI(idx, "username", val.trim() !== "");
+    } else if (fieldType === 'phone') {
+        val = val.replace(/[^0-9]/g, '');
+        e.target.value = val;
+        pinRowsData[idx].phone = val;
+        validateFieldUI(idx, "phone", /^\d{7,15}$/.test(val));
+    } else if (fieldType === 'issue') {
+        pinRowsData[idx].issue = val;
+        validateFieldUI(idx, "issue", val.trim() !== "");
+    }
+    
+    // Save to storage immediately but don't show toast yet
+    localStorage.setItem(STORAGE_PIN, JSON.stringify(pinRowsData));
+    
+    // Handle typing indicator and delayed save toast
+    handleTyping(() => {
+        // This function runs when typing stops
+        showToast({ title: "Auto-saved", message: "Pin section changes saved", type: "success", duration: 2000 });
+    }, "pin section");
+}
+
+function handleUsernameInput(e) {
+    handlePinFieldInput(e, 'username', 'pin');
+}
+
+function handlePhoneInput(e) {
+    handlePinFieldInput(e, 'phone', 'pin');
+}
+
+function handleIssueInput(e) {
+    handlePinFieldInput(e, 'issue', 'pin');
+}
+
+function handleUsernameKeydown(e) {
+    const idx = parseInt(e.target.getAttribute("data-rowidx"));
+    handleEnterKey(e, 'username', idx);
+}
+
+function handlePhoneKeydown(e) {
+    const idx = parseInt(e.target.getAttribute("data-rowidx"));
+    handleEnterKey(e, 'phone', idx);
+}
+
+function handleIssueKeydown(e) {
+    const idx = parseInt(e.target.getAttribute("data-rowidx"));
+    handleEnterKey(e, 'issue', idx);
+}
+
+function handleSolvedToggle(e) {
+    const idx = parseInt(e.target.getAttribute("data-rowidx"));
+    const isChecked = e.target.checked;
+    pinRowsData[idx].solved = isChecked;
+    const deleteBtn = pinContainer.querySelector(`.delete-pin-btn[data-rowidx="${idx}"]`);
+    if (deleteBtn) {
+        if (isChecked) {
+            deleteBtn.disabled = false;
+            deleteBtn.classList.add("enabled");
+        } else {
+            deleteBtn.disabled = true;
+            deleteBtn.classList.remove("enabled");
+        }
+    }
+    persistPins(true);
+}
+
+function handleDeleteClick(e) {
+    const idx = parseInt(e.target.getAttribute("data-rowidx"));
+    if (!pinRowsData[idx]?.solved) {
+        showToast({ title: "Cannot delete", message: "Mark as solved first", type: "warning", duration: 3000 });
+        return;
+    }
+    
+    pinRowsData.splice(idx, 1);
+    persistPins(true);
+    renderAllPins();
+    showToast({ title: "Deleted", message: "Issue row removed", type: "success", duration: 2000 });
+}
+
+function validateAllRowsBeforeAdd() {
+    let ok = true;
+    for (let i = 0; i < pinRowsData.length; i++) {
+        const uValid = pinRowsData[i].username.trim() !== "";
+        const pValid = /^\d{7,15}$/.test(pinRowsData[i].phone);
+        const iValid = pinRowsData[i].issue.trim() !== "";
+        if (!uValid || !pValid || !iValid) ok = false;
+        validateFieldUI(i, "username", uValid);
+        validateFieldUI(i, "phone", pValid);
+        validateFieldUI(i, "issue", iValid);
+    }
+    return ok;
+}
+
+function addNewPinRow() {
+    const allValid = validateAllRowsBeforeAdd();
+    if (!allValid && pinRowsData.length > 0) {
+        showToast({ title: "Validation Error", message: "Please fix errors in existing rows", type: "warning", duration: 3000 });
+        return;
+    }
+    pinRowsData.push({ username: "", phone: "", issue: "", solved: false });
+    renderAllPins();
+    persistPins(false);
+    showToast({ title: "New row added", message: "New issue field created", type: "success", duration: 2000 });
+    setTimeout(() => {
+        const lastRow = pinContainer.lastElementChild;
+        if (lastRow && lastRow.querySelector(".pin-username")) {
+            lastRow.querySelector(".pin-username").focus();
+        }
+    }, 50);
+}
+
+function renderAllPins() {
+    pinContainer.innerHTML = "";
+    
+    if (pinRowsData.length === 0) {
+        const emptyDiv = document.createElement("div");
+        emptyDiv.className = "empty-state";
+        emptyDiv.style.textAlign = "center";
+        emptyDiv.style.padding = "60px 20px";
+        emptyDiv.style.background = "var(--card-bg)";
+        emptyDiv.style.borderRadius = "12px";
+        emptyDiv.style.border = "1px solid var(--border-color)";
         
-        function toggleTheme() {
-            if (body.classList.contains('light')) {
-                body.classList.remove('light');
-                body.classList.add('dark');
-                localStorage.setItem('proNotes_theme', 'dark');
-                toggleBtn.innerHTML = '☀️ Light';
-                showToast('Dark mode', 1000);
-            } else {
-                body.classList.remove('dark');
-                body.classList.add('light');
-                localStorage.setItem('proNotes_theme', 'light');
-                toggleBtn.innerHTML = '🌙 Dark';
-                showToast('Light mode', 900);
+        emptyDiv.innerHTML = `
+            <i class="fas fa-inbox" style="font-size: 64px; opacity: 0.4; margin-bottom: 16px; display: inline-block;"></i>
+            <h3 style="margin: 0 0 8px 0; color: var(--text-color);">No pinned issues</h3>
+            <p style="margin: 0; color: var(--text-secondary);">Click "Add new issue" to start.</p>
+        `;
+        
+        pinContainer.appendChild(emptyDiv);
+        return;
+    }
+    
+    pinRowsData.forEach((row, idx) => {
+        const rowDiv = document.createElement("div");
+        rowDiv.className = "pin-row";
+        rowDiv.setAttribute("data-idx", idx);
+        rowDiv.innerHTML = `
+            <div class="field">
+                <label><i class="fas fa-user"></i> Username <i class="fas fa-copy copy-icon-small" data-copy-type="username" data-rowidx="${idx}" style="margin-left:6px;"></i></label>
+                <input type="text" class="pin-username" data-rowidx="${idx}" value="${escapeHtml(row.username)}" placeholder="username" autocomplete="off">
+                <div class="error-msg" id="err-user-${idx}">Username is required</div>
+            </div>
+            <div class="field">
+                <label><i class="fas fa-phone-alt"></i> Phone <i class="fas fa-copy copy-icon-small" data-copy-type="phone" data-rowidx="${idx}"></i></label>
+                <input type="tel" class="pin-phone" data-rowidx="${idx}" value="${escapeHtml(row.phone)}" placeholder="7-15 digits" maxlength="15">
+                <div class="error-msg" id="err-phone-${idx}">Phone number must be 7-15 digits</div>
+            </div>
+            <div class="field">
+                <label><i class="fa-solid fa-anchor-circle-exclamation"></i> Issue <i class="fas fa-copy copy-icon-small" data-copy-type="issue" data-rowidx="${idx}"></i></label>
+                <input type="text" class="pin-issue" data-rowidx="${idx}" value="${escapeHtml(row.issue)}" placeholder="describe the problem">
+                <div class="error-msg" id="err-issue-${idx}">Issue description is required</div>
+            </div>
+            <div class="solved-wrapper">
+                <input type="checkbox" class="solved-checkbox" data-rowidx="${idx}" ${row.solved ? "checked" : ""}>
+                <label style="font-size:0.85rem;">Solved</label>
+            </div>
+            <button class="delete-pin-btn ${row.solved ? 'enabled' : ''}" data-rowidx="${idx}" ${!row.solved ? 'disabled' : ''}>🗑 Delete</button>
+        `;
+        pinContainer.appendChild(rowDiv);
+    });
+
+    document.querySelectorAll(".pin-username").forEach(inp => {
+        inp.addEventListener("input", handleUsernameInput);
+        inp.addEventListener("keydown", handleUsernameKeydown);
+    });
+    document.querySelectorAll(".pin-phone").forEach(inp => {
+        inp.addEventListener("input", handlePhoneInput);
+        inp.addEventListener("keydown", handlePhoneKeydown);
+    });
+    document.querySelectorAll(".pin-issue").forEach(inp => {
+        inp.addEventListener("input", handleIssueInput);
+        inp.addEventListener("keydown", handleIssueKeydown);
+    });
+    document.querySelectorAll(".solved-checkbox").forEach(cb => cb.addEventListener("change", handleSolvedToggle));
+    document.querySelectorAll(".delete-pin-btn").forEach(btn => btn.addEventListener("click", handleDeleteClick));
+    document.querySelectorAll(".copy-icon-small").forEach(icon => icon.addEventListener("click", handleCopyField));
+
+    pinRowsData.forEach((row, idx) => {
+        validateFieldUI(idx, "username", row.username.trim() !== "");
+        validateFieldUI(idx, "phone", /^\d{7,15}$/.test(row.phone));
+        validateFieldUI(idx, "issue", row.issue.trim() !== "");
+    });
+}
+
+function handleCopyField(e) {
+    const idx = parseInt(e.target.getAttribute("data-rowidx"));
+    const type = e.target.getAttribute("data-copy-type");
+    let copyValue = "";
+    if (type === "username") copyValue = pinRowsData[idx].username;
+    else if (type === "phone") copyValue = pinRowsData[idx].phone;
+    else copyValue = pinRowsData[idx].issue;
+    if (!copyValue) { 
+        showToast({ title: "Empty", message: "Nothing to copy", type: "warning", duration: 2000 }); 
+        return; 
+    }
+    navigator.clipboard.writeText(copyValue).then(() => {
+        showToast({ title: "Copied!", message: `${type} copied`, type: "success", duration: 1500 });
+    }).catch(() => showToast({ title: "Error", message: "Copy failed", type: "error", duration: 2000 }));
+}
+
+// NOTES functions with typing indicator and delayed auto-save
+function loadNote() {
+    const saved = localStorage.getItem(STORAGE_NOTE);
+    if (saved !== null) {
+        noteTextarea.value = saved;
+        const savedTimestamp = localStorage.getItem(STORAGE_NOTE_TIMESTAMP);
+        if (savedTimestamp) {
+            lastSavedTimestamp = parseInt(savedTimestamp);
+        } else {
+            lastSavedTimestamp = Date.now();
+        }
+    } else {
+        noteTextarea.value = "";
+        lastSavedTimestamp = null;
+    }
+    updateNoteStats();
+    updateLastSavedDisplay();
+}
+
+function saveNoteWithTimestamp(showAutoSaveToast = true) {
+    localStorage.setItem(STORAGE_NOTE, noteTextarea.value);
+    lastSavedTimestamp = Date.now();
+    localStorage.setItem(STORAGE_NOTE_TIMESTAMP, lastSavedTimestamp);
+    updateLastSavedDisplay();
+    updateNoteStats();
+    
+    lastSavedSpan.style.opacity = '0.7';
+    setTimeout(() => {
+        lastSavedSpan.style.opacity = '1';
+    }, 200);
+    
+    if (showAutoSaveToast) {
+        showToast({ title: "Auto-saved", message: "Your notes have been saved", type: "success", duration: 2000 });
+    }
+}
+
+function handleNoteInput() {
+    updateNoteStats();
+    
+    // Save to storage immediately but don't show toast yet
+    localStorage.setItem(STORAGE_NOTE, noteTextarea.value);
+    
+    // Handle typing indicator and delayed save toast
+    handleTyping(() => {
+        // Update timestamp and show save toast when typing stops
+        lastSavedTimestamp = Date.now();
+        localStorage.setItem(STORAGE_NOTE_TIMESTAMP, lastSavedTimestamp);
+        updateLastSavedDisplay();
+        showToast({ title: "Auto-saved", message: "Your notes have been saved", type: "success", duration: 2000 });
+    }, "notes");
+}
+
+function resetNote() {
+    if (confirm("⚠️ Reset the note? This action will erase all current content and cannot be undone.")) {
+        // Clear any ongoing typing timer
+        if (typingTimer) {
+            clearTimeout(typingTimer);
+            typingTimer = null;
+        }
+        isTypingActive = false;
+        
+        noteTextarea.value = "";
+        saveNoteWithTimestamp(false);
+        updateNoteStats();
+        showToast({ title: "Note reset", message: "Your note has been cleared", type: "error", duration: 3000 });
+    }
+}
+
+function preloadTemplate() {
+    const template = `Username: ______
+Issue: ______
+Time Duration: Pending since ______
+Client Status: Client is frustrated due to delay.
+Called Number: ______
+Branch Name: ______`;
+    
+    const hasContent = noteTextarea.value.trim() !== "";
+    let proceed = true;
+    
+    if (hasContent) {
+        proceed = confirm(`⚠️ PRELOAD WARNING\n\nThis action will REPLACE your current notes with the Priority Template.\n⚠️ Your existing notes will be lost if you preload.\n\nDo you want to continue?`);
+    }
+    
+    if (proceed) {
+        // Clear any ongoing typing timer
+        if (typingTimer) {
+            clearTimeout(typingTimer);
+            typingTimer = null;
+        }
+        isTypingActive = false;
+        
+        noteTextarea.value = template;
+        saveNoteWithTimestamp(false);
+        updateNoteStats();
+        showToast({ 
+            title: "Template Loaded", 
+            message: "Notes replaced with Priority One.", 
+            type: "success",
+            duration: 4000
+        });
+    } else {
+        showToast({ title: "Cancelled", message: "Preload cancelled, your notes remain unchanged", type: "info", duration: 3000 });
+    }
+}
+
+function copyNoteToClipboard() {
+    const text = noteTextarea.value;
+    if (!text.trim()) { 
+        showToast({ title: "Empty", message: "Nothing to copy", type: "warning", duration: 2000 }); 
+        return; 
+    }
+    navigator.clipboard.writeText(text).then(() => {
+        showToast({ title: "Note copied", message: "Entire note copied to clipboard", type: "success", duration: 2000 });
+    }).catch(() => showToast({ title: "Failed", message: "Could not copy", type: "error", duration: 2000 }));
+}
+
+// Timer functions
+function updateCurrentTime() {
+    const now = new Date();
+    const timeElement = document.getElementById("currentTime");
+    if (timeElement) {
+        timeElement.innerText = now.toLocaleTimeString('en-GB');
+    }
+}
+
+let sessionStart = Date.now();
+let sessionInterval;
+
+function updateSessionTimer() {
+    const elapsed = Math.floor((Date.now() - sessionStart) / 1000);
+    const h = Math.floor(elapsed / 3600).toString().padStart(2, '0');
+    const m = Math.floor((elapsed % 3600) / 60).toString().padStart(2, '0');
+    const s = (elapsed % 60).toString().padStart(2, '0');
+    const timerElement = document.getElementById("sessionTimer");
+    if (timerElement) {
+        timerElement.innerText = `${h}:${m}:${s}`;
+    }
+}
+
+function initTimers() {
+    updateCurrentTime();
+    setInterval(updateCurrentTime, 1000);
+    sessionInterval = setInterval(updateSessionTimer, 1000);
+    document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) {
+            const current = document.getElementById("sessionTimer")?.innerText;
+            if (current) {
+                const parts = current.split(':');
+                const elapsedSeconds = parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[1]);
+                sessionStart = Date.now() - (elapsedSeconds * 1000);
             }
         }
-        
-        function loadInitial() {
-            const stored = localStorage.getItem('proNotes_oneline_tabs');
-            if (stored) {
-                try {
-                    const data = JSON.parse(stored);
-                    if (data.notes && Array.isArray(data.notes) && data.notes.length > 0) {
-                        notes = data.notes;
-                        activeNoteId = data.activeId;
-                        nextId = data.nextId || (Math.max(...notes.map(n=>n.id), 0) + 1);
-                        if (!notes.some(n => n.id === activeNoteId)) activeNoteId = notes[0].id;
-                        loadNoteIntoEditor(activeNoteId);
-                        renderTabs();
-                        return;
-                    }
-                } catch(e) {}
-            }
-            const defaultId = nextId++;
-            const defaultNote = {
-                id: defaultId,
-                title: "📄 1",
-                content: "",
-                lastUpdated: Date.now()
-            };
-            notes = [defaultNote];
-            activeNoteId = defaultId;
-            textarea.value = "";
-            updateStats();
-            persistAll();
-            renderTabs();
+    });
+}
+
+// Theme functions with CSS for typing toast
+function initTheme() {
+    const html = document.documentElement;
+    const savedTheme = localStorage.getItem("theme") || "light";
+    html.setAttribute("data-theme", savedTheme);
+    
+    // Inject CSS for typing toast theme support
+    const style = document.createElement('style');
+    style.textContent = `
+        .toast {
+            transition: all 0.2s ease;
+            backdrop-filter: blur(8px);
         }
-        
-        function handleKeys(e) {
-            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-                e.preventDefault();
-                saveCurrentNote();
-                showToast("✓ Saved", 900);
-                return;
-            }
-            if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
-                e.preventDefault();
-                createEmptyNote();
-                return;
-            }
-            if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
-                e.preventDefault();
-                createLoadMessageTab();
-                return;
-            }
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'D') {
-                e.preventDefault();
-                deleteCurrentTab();
-                return;
-            }
-            if ((e.ctrlKey || e.metaKey) && e.key === 'd' && !e.shiftKey) {
-                e.preventDefault();
-                toggleTheme();
-                return;
-            }
+        html[data-theme="dark"] .toast {
+            background: rgba(30, 35, 48, 0.95);
+            color: #e8edf5;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
-        
-        function bindEvents() {
-            textarea.addEventListener('input', () => {
-                updateStats();
-                scheduleAutoSave();
-            });
-            textarea.addEventListener('keyup', updateStats);
-            textarea.addEventListener('click', updateStats);
-            textarea.addEventListener('paste', () => {
-                setTimeout(() => {
-                    updateStats();
-                    scheduleAutoSave();
-                }, 10);
-            });
-            newTabBtn.addEventListener('click', createEmptyNote);
-            loadDefaultBtn.addEventListener('click', createLoadMessageTab);
-            copyBtn.addEventListener('click', copyCurrentNote);
-            deleteCurrentBtn.addEventListener('click', deleteCurrentTab);
-            toggleBtn.addEventListener('click', toggleTheme);
-            document.addEventListener('keydown', handleKeys);
-            window.addEventListener('beforeunload', () => {
-                saveCurrentNote();
-                persistAll();
-            });
-            setInterval(() => {
-                if (activeNoteId) saveCurrentNote();
-            }, 30000);
+        html[data-theme="light"] .toast {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1a1a1a;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
         }
-        
-        function init() {
-            initTheme();
-            loadInitial();
-            bindEvents();
-            textarea.focus();
-        }
-        
-        init();
-    })();
+    `;
+    document.head.appendChild(style);
+    
+    const toggle = document.getElementById("themeToggle");
+    if (toggle) {
+        toggle.innerText = savedTheme === "light" ? "🌙" : "☀️";
+        toggle.addEventListener("click", () => {
+            const cur = html.getAttribute("data-theme");
+            const next = cur === "light" ? "dark" : "light";
+            html.setAttribute("data-theme", next);
+            localStorage.setItem("theme", next);
+            toggle.innerText = next === "light" ? "🌙" : "☀️";
+            showToast({ title: "Theme Changed", message: `${next} mode activated`, type: "info", duration: 1500 });
+        });
+    }
+}
+
+// Section switching
+function switchSection(sectionId) {
+    document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active-section"));
+    const targetSection = document.getElementById(`${sectionId}Section`);
+    if (targetSection) targetSection.classList.add("active-section");
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+        if (btn.getAttribute("data-section") === sectionId) btn.classList.add("active");
+        else btn.classList.remove("active");
+    });
+}
+
+function bindTabs() {
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const section = btn.getAttribute("data-section");
+            switchSection(section);
+        });
+    });
+}
+
+// Initialize everything
+function init() {
+    loadPinsFromStorage();
+    renderAllPins();
+    loadNote();
+    initTheme();
+    initTimers();
+    bindTabs();
+    const yearElement = document.getElementById("year");
+    if (yearElement) yearElement.innerText = new Date().getFullYear();
+    
+    if (addPinBtn) addPinBtn.addEventListener("click", addNewPinRow);
+    if (noteTextarea) noteTextarea.addEventListener("input", handleNoteInput);
+    if (resetNoteBtn) resetNoteBtn.addEventListener("click", resetNote);
+    if (copyNoteBtn) copyNoteBtn.addEventListener("click", copyNoteToClipboard);
+    if (preloadNoteBtn) preloadNoteBtn.addEventListener("click", preloadTemplate);
+    
+    setTimeout(() => {
+        showToast({ title: "Welcome! User", message: "You are now using HR Support System", type: "success", duration: 4000 });
+    }, 500);
+}
+
+init();
 </script>
 </body>
 </html>
