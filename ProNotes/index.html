@@ -4,481 +4,533 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>HR Support | ProNotes</title>
+    <title>HR Support | Pin & Notes</title>
     <link rel="icon" href="img/welcom.jpg" />
     <link rel="stylesheet" href="celebration.css">
     <script src="celebration.js"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231677ff'%3E%3Cpath d='M16,9V7L12,3H8V9H6V12H8V21H10V12H12V9H16Z' /%3E%3C/svg%3E">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        :root[data-theme="light"] {
-            --primary: #1677ff;
-            --primary-hover: #4096ff;
-            --bg: #ffffff;
-            --surface: #f8f9fa;
-            --text: #1f2937;
-            --text-secondary: #5b6e8c;
-            --border: #e2e8f0;
-            --border-focus: #1677ff;
-            --error: #ff4d4f;
-            --success: #52c41a;
-            --shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
-            --radius: 12px;
-            --transition: all 0.2s ease;
-        }
+:root[data-theme="light"] {
+    --primary: #1677ff;
+    --primary-hover: #4096ff;
+    --bg: #ffffff;
+    --surface: #f8f9fa;
+    --text: #1f2937;
+    --text-secondary: #5b6e8c;
+    --border: #e2e8f0;
+    --border-focus: #1677ff;
+    --error: #ff4d4f;
+    --success: #52c41a;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
 
-        :root[data-theme="dark"] {
-            --primary: #1677ff;
-            --primary-hover: #3c8cff;
-            --bg: #000000;
-            --surface: #1c1c1e;
-            --text: #ededed;
-            --text-secondary: #a1a1aa;
-            --border: #2c2c2e;
-            --border-focus: #1677ff;
-            --error: #ff7875;
-            --success: #49aa19;
-            --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            --radius: 12px;
-        }
+:root[data-theme="dark"] {
+    --primary: #1677ff;
+    --primary-hover: #3c8cff;
+    --bg: #000000;
+    --surface: #0e0e0e;
+    --text: #ededed;
+    --text-secondary: #a1a1aa;
+    --border: #2c2c2e;
+    --border-focus: #1677ff;
+    --error: #ff7875;
+    --success: #49aa19;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --radius: 12px;
+}
 
-        body {
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.5;
-            transition: background 0.2s, color 0.2s;
-        }
+body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    transition: background 0.2s, color 0.2s;
+}
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
 
-        header {
-            position: sticky;
-            top: 0;
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(12px);
-            z-index: 50;
-        }
+header {
+    position: sticky;
+    top: 12px;
+    z-index: 50;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    width: calc(100% - 2rem);
+    max-width: 1200px;
+    margin: 12px auto clamp(10px, 2vw, 20px) auto;
+}
 
-        .navbar {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.9rem 0;
-            gap: 16px;
-        }
+@media (max-width: 1024px) {
+    header {
+        margin: 10px auto 14px auto;
+    }
+}
 
-        .brand {
-            font-size: 1.6rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), #5b8cff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            cursor: default;
-            letter-spacing: -0.3px;
-        }
+@media (max-width: 600px) {
+    header {
+        margin: 8px auto 12px auto;
+    }
+}
 
-        .section-tabs {
-            display: flex;
-            gap: none;
-            background: var(--surface);
-            border-radius: 40px;
-            padding: 4px;
-            border: 1px solid var(--border);
-        }
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 0;
+    gap: 16px;
+}
 
-        .tab-btn {
-            background: transparent;
-            border: none;
-            padding: 8px 24px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            border-radius: 32px;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: var(--transition);
-        }
+.brand {
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), #5b8cff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    cursor: default;
+    letter-spacing: -0.3px;
+}
 
-        .tab-btn.active {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 2px 6px rgba(22, 119, 255, 0.2);
-        }
+.section-tabs {
+    display: flex;
+    background: var(--surface);
+    border-radius: 40px;
+    padding: 4px;
+    border: 1px solid var(--border);
+}
 
-        .right-actions {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
+.tab-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 24px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 32px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
 
-        .timer {
-            font-family: 'JetBrains Mono', monospace;
-            background: var(--bg);
-            padding: 6px 12px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            border: 1px solid var(--border);
-            color: var(--text);
-        }
+.tab-btn.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 2px 6px rgba(22, 119, 255, 0.2);
+}
 
-        #themeToggle {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 40px;
-            padding: 6px 12px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: var(--transition);
-        }
+.right-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
 
-        .section {
-            display: none;
-            animation: fade 0.25s ease;
-        }
+.timer {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg);
+    padding: 6px 12px;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+}
 
-        .section.active-section {
-            display: block;
-        }
+#themeToggle {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
 
-        @keyframes fade {
-            from { opacity: 0; transform: translateY(6px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
+.section {
+    display: none;
+    animation: fade 0.25s ease;
+}
 
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: none;
-            margin: 28px 0;
-            box-shadow: var(--shadow);
-        }
+.section.active-section {
+    display: block;
+}
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 12px;
-            gap: 12px;
-        }
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        .card-header h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-left: 15px;
-        }
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin: 28px 0;
+    box-shadow: var(--shadow);
+}
 
-        /* Status Bar Styles */
-        .status-bar {
-            background: var(--bg);
-            border-radius: 40px;
-            padding: 8px 16px;
-            border: 1px solid var(--border);
-            display: inline-flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: center;
-        }
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+    gap: 12px;
+}
 
-        .stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: baseline;
-        }
+.card-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 15px;
+}
 
-        .stat-item {
-            display: flex;
-            align-items: baseline;
-            gap: 6px;
-            font-size: 0.8rem;
-        }
+.status-bar {
+    background: var(--bg);
+    border-radius: 40px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+}
 
-        .stat-label {
-            color: var(--text-secondary);
-            font-weight: 500;
-            letter-spacing: 0.3px;
-        }
+.stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: baseline;
+}
 
-        .stat-value {
-            color: var(--primary);
-            font-weight: 600;
-            font-family: 'JetBrains Mono', monospace;
-            background: var(--surface);
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
+.stat-item {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 0.8rem;
+}
 
-        .pin-rows-container {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
+.stat-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
 
-        .pin-row {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 18px;
-            transition: var(--transition);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: flex-end;
-            gap: 16px;
-        }
+.stat-value {
+    color: var(--primary);
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--surface);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
 
-        .pin-row:hover {
-            border-color: var(--primary);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
+.pin-rows-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 
-        .field {
-            flex: 1;
-            min-width: 160px;
-        }
+.pin-row {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    transition: var(--transition);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 16px;
+}
 
-        .field label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 6px;
-        }
+.pin-row:hover {
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
 
-        .field input {
-            width: 100%;
-            padding: 10px 12px;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: var(--text);
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
+.field {
+    flex: 1;
+    min-width: 160px;
+}
 
-        .field input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.2);
-        }
+.field label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
 
-        .field input.error {
-            border-color: var(--error);
-        }
+.field input {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
 
-        .error-msg {
-            font-size: 0.7rem;
-            color: var(--error);
-            margin-top: 4px;
-            display: none;
-        }
+.field input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.2);
+}
 
-        .solved-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--surface);
-            padding: 0 12px;
-            border-radius: 40px;
-            height: 42px;
-        }
+.field input.error {
+    border-color: var(--error);
+}
 
-        .solved-checkbox {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--success);
-            cursor: pointer;
-        }
+.error-msg {
+    font-size: 0.7rem;
+    color: var(--error);
+    margin-top: 4px;
+    display: none;
+}
 
-        .delete-pin-btn {
-            background: var(--error);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 40px;
-            font-weight: 500;
-            cursor: not-allowed;
-            opacity: 0.5;
-            transition: 0.2s;
-            margin-bottom: 5px;
-        }
+.solved-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    padding: 0 12px;
+    border-radius: 40px;
+    height: 42px;
+}
 
-        .delete-pin-btn.enabled {
-            opacity: 1;
-            cursor: pointer;
-        }
+.solved-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--success);
+    cursor: pointer;
+}
 
-        .delete-pin-btn.enabled:hover {
-            background: #d9363e;
-            transform: scale(0.98);
-        }
+.delete-pin-btn {
+    background: var(--error);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-weight: 500;
+    cursor: not-allowed;
+    opacity: 0.5;
+    transition: 0.2s;
+    margin-bottom: 5px;
+}
 
-        .copy-icon-small {
-            cursor: pointer;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            transition: 0.2s;
-        }
+.delete-pin-btn.enabled {
+    opacity: 1;
+    cursor: pointer;
+}
 
-        .copy-icon-small:hover {
-            color: var(--primary);
-        }
+.delete-pin-btn.enabled:hover {
+    background: #d9363e;
+    transform: scale(0.98);
+}
 
-        .add-row-btn {
-            margin-top: 20px;
-            background: transparent;
-            border: 1px dashed var(--border);
-            border-radius: 60px;
-            padding: 10px;
-            width: 100%;
-            font-weight: 500;
-            color: var(--primary);
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.copy-icon-small {
+    cursor: pointer;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    transition: 0.2s;
+}
 
-        .add-row-btn:hover {
-            background: rgba(22, 119, 255, 0.05);
-            border-color: var(--primary);
-        }
+.copy-icon-small:hover {
+    color: var(--primary);
+}
 
-        .note-editor {
-            background: var(--bg);
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            padding: 20px;
-        }
+.add-row-btn {
+    margin-top: 20px;
+    background: transparent;
+    border: 1px dashed var(--border);
+    border-radius: 60px;
+    padding: 10px;
+    width: 100%;
+    font-weight: 500;
+    color: var(--primary);
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-        .action-buttons {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
-            justify-content: flex-end;
-        }
+.add-row-btn:hover {
+    background: rgba(22, 119, 255, 0.05);
+    border-color: var(--primary);
+}
 
-        .copy-note-btn, .preload-note-btn, .reset-note-btn {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            color: var(--text);
-            transition: var(--transition);
-            font-weight: 500;
-        }
+.note-editor {
+    background: var(--bg);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    padding: 20px;
+}
 
-        .preload-note-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-        }
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    justify-content: flex-end;
+}
 
-        .preload-note-btn:hover {
-            background: var(--primary-hover);
-            transform: translateY(-1px);
-        }
+.copy-note-btn,
+.preload-note-btn,
+.reset-note-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--text);
+    transition: var(--transition);
+    font-weight: 500;
+}
 
-        .reset-note-btn {
-            background: var(--error);
-            color: white;
-            border: none;
-        }
+.preload-note-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+}
 
-        .reset-note-btn:hover {
-            background: #d9363e;
-            transform: translateY(-1px);
-        }
+.preload-note-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
 
-        .copy-note-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
+.reset-note-btn {
+    background: var(--error);
+    color: white;
+    border: none;
+}
 
-        textarea {
-            width: 100%;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 18px;
-            font-size: 0.95rem;
-            color: var(--text);
-            resize: vertical;
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-        }
+.reset-note-btn:hover {
+    background: #d9363e;
+    transform: translateY(-1px);
+}
 
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
+.copy-note-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
 
-        .footer {
-            text-align: center;
-            padding: 12px;
-            border-top: 1px solid var(--border);
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-        }
+textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 18px;
+    font-size: 0.95rem;
+    color: var(--text);
+    resize: vertical;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+}
 
-        .toast-container {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
 
-        .toast {
-            background: var(--surface);
-            border-left: 4px solid var(--primary);
-            padding: 12px 16px;
-            border-radius: 14px;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-            backdrop-filter: blur(8px);
-            display: flex;
-            gap: 12px;
-            min-width: 240px;
-        }
+.footer {
+    text-align: center;
+    padding: 12px;
+    border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
 
-        @media (max-width: 780px) {
-            .navbar { flex-direction: column; align-items: stretch; }
-            .section-tabs { justify-content: center; }
-            .pin-row { flex-direction: column; align-items: stretch; }
-            .solved-wrapper { justify-content: space-between; }
-            .card-header { flex-direction: column; align-items: flex-start; }
-            .status-bar { width: 100%; justify-content: center; }
-            .stats { justify-content: space-between; width: 100%; gap: 12px; }
-            .action-buttons { flex-direction: column; }
-            .action-buttons button { width: 100%; }
-        }
+.toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.toast {
+    background: var(--surface);
+    border-left: 4px solid var(--primary);
+    padding: 12px 16px;
+    border-radius: 14px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    display: flex;
+    gap: 12px;
+    min-width: 240px;
+}
+
+@media (max-width: 780px) {
+    .navbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .section-tabs {
+        justify-content: center;
+    }
+
+    .pin-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .solved-wrapper {
+        justify-content: space-between;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .status-bar {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .stats {
+        justify-content: space-between;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons button {
+        width: 100%;
+    }
+}
     </style>
 </head>
 <body>
@@ -502,8 +554,8 @@ function showHRToast() {
 </script>
 
             <div class="section-tabs">
-                <button class="tab-btn active" data-section="notes">Notes <i class="fa-solid fa-pen"></i></button>
-                <button class="tab-btn " data-section="pin">Issues <i class="fa-solid fa-map-pin"></i></button>
+                <button class="tab-btn active" data-section="notes"> Notes <i class="fa-solid fa-pen"></i></button>
+                <button class="tab-btn " data-section="pin"> Issues <i class="fa-solid fa-map-pin"></i></button>
 
             </div>
             <div class="right-actions">
@@ -553,7 +605,7 @@ function showHRToast() {
 <footer class="footer">© <span id="year"></span> HritishShaqya - Keep learning and Enjoying.</footer>
 <div id="fireworks-overlay"></div>
 <script>
-   // ---------- UTILITY FUNCTIONS ----------
+    
 function escapeHtml(str) {
     if (!str) return "";
     return str.replace(/[&<>]/g, function(m) {
@@ -564,7 +616,6 @@ function escapeHtml(str) {
     });
 }
 
-// Single toast management - only one toast visible at a time
 let activeToast = null;
 let toastHideTimeout = null;
 
@@ -572,19 +623,16 @@ function showToast({ title, message, type = "info", duration = 3500, isTypingToa
     const container = document.getElementById("toastContainer");
     if (!container) return;
     
-    // Remove existing toast if any
     if (activeToast) {
         activeToast.remove();
         activeToast = null;
     }
     
-    // Clear any pending hide timeout
     if (toastHideTimeout) {
         clearTimeout(toastHideTimeout);
         toastHideTimeout = null;
     }
     
-    // Create new toast
     const toast = document.createElement("div");
     toast.className = "toast";
     
@@ -596,7 +644,6 @@ function showToast({ title, message, type = "info", duration = 3500, isTypingToa
     
     toast.style.borderLeftColor = borderColor;
     
-    // Apply theme-aware styling for typing toast
     const isDark = document.documentElement.getAttribute("data-theme") === "dark";
     if (isTypingToast) {
         if (isDark) {
@@ -614,7 +661,6 @@ function showToast({ title, message, type = "info", duration = 3500, isTypingToa
     container.appendChild(toast);
     activeToast = toast;
     
-    // Set timeout to remove toast
     toastHideTimeout = setTimeout(() => {
         if (activeToast) {
             activeToast.remove();
@@ -624,20 +670,18 @@ function showToast({ title, message, type = "info", duration = 3500, isTypingToa
     }, duration);
 }
 
-// ---------- GLOBALS ----------
 const pageKey = window.location.pathname.split("/").pop() || "index";
 const STORAGE_PIN = `pins_${pageKey}`;
 const STORAGE_NOTE = `note_${pageKey}`;
 const STORAGE_NOTE_TIMESTAMP = `note_${pageKey}_timestamp`;
 
 let pinRowsData = [];
+let pinFieldTimestamps = []; 
 let lastSavedTimestamp = null;
 
-// Typing timers
 let typingTimer = null;
 let isTypingActive = false;
 
-// DOM elements
 const pinContainer = document.getElementById("pinRowsContainer");
 const addPinBtn = document.getElementById("addPinRowBtn");
 const noteTextarea = document.getElementById("globalNote");
@@ -649,7 +693,6 @@ const wordCountSpan = document.getElementById("wordCount");
 const lineCountSpan = document.getElementById("lineCount");
 const lastSavedSpan = document.getElementById("lastSaved");
 
-// Update note statistics (chars, words, lines)
 function updateNoteStats() {
     const text = noteTextarea.value;
     const chars = text.length;
@@ -661,7 +704,6 @@ function updateNoteStats() {
     lineCountSpan.innerText = lines;
 }
 
-// Update last saved display
 function updateLastSavedDisplay() {
     if (lastSavedTimestamp) {
         const date = new Date(lastSavedTimestamp);
@@ -672,9 +714,21 @@ function updateLastSavedDisplay() {
     }
 }
 
-// Persistence functions for pins
+function updatePinTimestampDisplay(idx, fieldType) {
+    const rowDiv = pinContainer.querySelector(`.pin-row[data-idx="${idx}"]`);
+    if (!rowDiv) return;
+    
+    const timestampSpan = rowDiv.querySelector(`.timestamp-display-${fieldType}-${idx}`);
+    if (timestampSpan && pinFieldTimestamps[idx] && pinFieldTimestamps[idx][fieldType]) {
+        const date = new Date(pinFieldTimestamps[idx][fieldType]);
+        const timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        timestampSpan.innerText = timeStr;
+    }
+}
+
 function persistPins(showSaveToast = true) {
     localStorage.setItem(STORAGE_PIN, JSON.stringify(pinRowsData));
+    localStorage.setItem(STORAGE_PIN + '_field_timestamps', JSON.stringify(pinFieldTimestamps));
     if (showSaveToast) {
         showToast({ title: "Auto-saved", message: "Pin section saved", type: "success", duration: 2000 });
     }
@@ -693,9 +747,36 @@ function loadPinsFromStorage() {
     if (!pinRowsData.length) {
         pinRowsData = [];
     }
+    
+    const timestampsRaw = localStorage.getItem(STORAGE_PIN + '_field_timestamps');
+    if (timestampsRaw) {
+        try {
+            pinFieldTimestamps = JSON.parse(timestampsRaw);
+            if (!Array.isArray(pinFieldTimestamps)) pinFieldTimestamps = [];
+        } catch(e) {
+            pinFieldTimestamps = [];
+        }
+    }
+    
+    while (pinFieldTimestamps.length < pinRowsData.length) {
+        pinFieldTimestamps.push({ username: null, phone: null, issue: null });
+    }
+    while (pinFieldTimestamps.length > pinRowsData.length) {
+        pinFieldTimestamps.pop();
+    }
+    
+    // Ensure each entry has all three fields
+    pinFieldTimestamps.forEach((timestamps, idx) => {
+        if (!timestamps) {
+            pinFieldTimestamps[idx] = { username: null, phone: null, issue: null };
+        } else {
+            if (timestamps.username === undefined) timestamps.username = null;
+            if (timestamps.phone === undefined) timestamps.phone = null;
+            if (timestamps.issue === undefined) timestamps.issue = null;
+        }
+    });
 }
 
-// Validation UI helpers
 function validateFieldUI(idx, fieldType, isValid) {
     const rowDiv = pinContainer.querySelector(`.pin-row[data-idx="${idx}"]`);
     if (!rowDiv) return;
@@ -732,7 +813,6 @@ function validateFieldUI(idx, fieldType, isValid) {
     }
 }
 
-// Handle Enter key navigation
 function handleEnterKey(e, currentField, idx) {
     if (e.key === 'Enter') {
         e.preventDefault();
@@ -759,62 +839,71 @@ function handleEnterKey(e, currentField, idx) {
     }
 }
 
-// Handle typing for any input - shows typing toast and schedules auto-save
-function handleTyping(saveFunction, sectionName) {
-    // Clear existing timer
+function handleTyping(saveFunction, sectionName, idx = null, fieldType = null) {
     if (typingTimer) {
         clearTimeout(typingTimer);
     }
     
-    // Show typing toast if not already showing
     if (!isTypingActive) {
         isTypingActive = true;
         showToast({ 
             title: "You are typing...", 
             message: `In the ${sectionName} section`, 
             type: "info", 
-            duration: 30000, // Long duration, will be replaced
+            duration: 30000, 
             isTypingToast: true 
         });
     }
     
-    // Set timer to save after typing stops (500ms delay)
     typingTimer = setTimeout(() => {
-        // Typing has stopped - save now
-        saveFunction(true);
+        saveFunction(true, idx, fieldType);
         isTypingActive = false;
         typingTimer = null;
     }, 500);
 }
 
-// Pin field handlers
 function handlePinFieldInput(e, fieldType, sectionName) {
     const idx = parseInt(e.target.getAttribute("data-rowidx"));
     let val = e.target.value;
+    let hasChange = false;
     
     if (fieldType === 'username') {
         val = val.toLowerCase().replace(/\s/g, '');
         e.target.value = val;
-        pinRowsData[idx].username = val;
+        if (pinRowsData[idx].username !== val) {
+            pinRowsData[idx].username = val;
+            hasChange = true;
+        }
         validateFieldUI(idx, "username", val.trim() !== "");
     } else if (fieldType === 'phone') {
         val = val.replace(/[^0-9]/g, '');
         e.target.value = val;
-        pinRowsData[idx].phone = val;
+        if (pinRowsData[idx].phone !== val) {
+            pinRowsData[idx].phone = val;
+            hasChange = true;
+        }
         validateFieldUI(idx, "phone", /^\d{7,15}$/.test(val));
     } else if (fieldType === 'issue') {
-        pinRowsData[idx].issue = val;
+        if (pinRowsData[idx].issue !== val) {
+            pinRowsData[idx].issue = val;
+            hasChange = true;
+        }
         validateFieldUI(idx, "issue", val.trim() !== "");
     }
     
-    // Save to storage immediately but don't show toast yet
-    localStorage.setItem(STORAGE_PIN, JSON.stringify(pinRowsData));
-    
-    // Handle typing indicator and delayed save toast
-    handleTyping(() => {
-        // This function runs when typing stops
-        showToast({ title: "Auto-saved", message: "Pin section changes saved", type: "success", duration: 2000 });
-    }, "pin section");
+    if (hasChange) {
+        localStorage.setItem(STORAGE_PIN, JSON.stringify(pinRowsData));
+        
+        handleTyping((showToastMsg, rowIdx, field) => {
+            if (!pinFieldTimestamps[rowIdx]) {
+                pinFieldTimestamps[rowIdx] = { username: null, phone: null, issue: null };
+            }
+            pinFieldTimestamps[rowIdx][field] = Date.now();
+            localStorage.setItem(STORAGE_PIN + '_field_timestamps', JSON.stringify(pinFieldTimestamps));
+            updatePinTimestampDisplay(rowIdx, field);
+            showToast({ title: "Auto-Saved", message: `${field.charAt(0).toUpperCase() + field.slice(1)} saved`, type: "success", duration: 2000 });
+        }, "pin section", idx, fieldType);
+    }
 }
 
 function handleUsernameInput(e) {
@@ -848,6 +937,11 @@ function handleSolvedToggle(e) {
     const idx = parseInt(e.target.getAttribute("data-rowidx"));
     const isChecked = e.target.checked;
     pinRowsData[idx].solved = isChecked;
+    
+    if (!pinFieldTimestamps[idx]) {
+        pinFieldTimestamps[idx] = { username: null, phone: null, issue: null };
+    }
+    
     const deleteBtn = pinContainer.querySelector(`.delete-pin-btn[data-rowidx="${idx}"]`);
     if (deleteBtn) {
         if (isChecked) {
@@ -869,6 +963,7 @@ function handleDeleteClick(e) {
     }
     
     pinRowsData.splice(idx, 1);
+    pinFieldTimestamps.splice(idx, 1);
     persistPins(true);
     renderAllPins();
     showToast({ title: "Deleted", message: "Issue row removed", type: "success", duration: 2000 });
@@ -895,6 +990,7 @@ function addNewPinRow() {
         return;
     }
     pinRowsData.push({ username: "", phone: "", issue: "", solved: false });
+    pinFieldTimestamps.push({ username: null, phone: null, issue: null });
     renderAllPins();
     persistPins(false);
     showToast({ title: "New row added", message: "New issue field created", type: "success", duration: 2000 });
@@ -932,19 +1028,44 @@ function renderAllPins() {
         const rowDiv = document.createElement("div");
         rowDiv.className = "pin-row";
         rowDiv.setAttribute("data-idx", idx);
+        
+        const usernameTime = pinFieldTimestamps[idx]?.username ? 
+            new Date(pinFieldTimestamps[idx].username).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 
+            "—";
+        const phoneTime = pinFieldTimestamps[idx]?.phone ? 
+            new Date(pinFieldTimestamps[idx].phone).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 
+            "—";
+        const issueTime = pinFieldTimestamps[idx]?.issue ? 
+            new Date(pinFieldTimestamps[idx].issue).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 
+            "—";
+        
         rowDiv.innerHTML = `
-            <div class="field">
-                <label><i class="fas fa-user"></i> Username <i class="fas fa-copy copy-icon-small" data-copy-type="username" data-rowidx="${idx}" style="margin-left:6px;"></i></label>
+            <div class="field"> 
+                <label>
+                    <i class="fas fa-user"></i> Username 
+                    <i class="fas fa-copy copy-icon-small" data-copy-type="username" data-rowidx="${idx}" style="margin-left:6px;"></i>
+                    <span style="margin-left:6rem; font-size:0.75rem; color:var(--text-secondary);">Saved: <span class="timestamp-display-username-${idx}">${escapeHtml(usernameTime)}</span></span>
+                </label>
                 <input type="text" class="pin-username" data-rowidx="${idx}" value="${escapeHtml(row.username)}" placeholder="username" autocomplete="off">
                 <div class="error-msg" id="err-user-${idx}">Username is required</div>
             </div>
+
             <div class="field">
-                <label><i class="fas fa-phone-alt"></i> Phone <i class="fas fa-copy copy-icon-small" data-copy-type="phone" data-rowidx="${idx}"></i></label>
+                <label>
+                    <i class="fas fa-phone-alt"></i> Phone 
+                    <i class="fas fa-copy copy-icon-small" data-copy-type="phone" data-rowidx="${idx}"></i>
+                    <span style="margin-left:6rem; font-size:0.75rem; color:var(--text-secondary);">Saved: <span class="timestamp-display-phone-${idx}">${escapeHtml(phoneTime)}</span></span>
+                </label>
                 <input type="tel" class="pin-phone" data-rowidx="${idx}" value="${escapeHtml(row.phone)}" placeholder="7-15 digits" maxlength="15">
                 <div class="error-msg" id="err-phone-${idx}">Phone number must be 7-15 digits</div>
             </div>
+
             <div class="field">
-                <label><i class="fa-solid fa-anchor-circle-exclamation"></i> Issue <i class="fas fa-copy copy-icon-small" data-copy-type="issue" data-rowidx="${idx}"></i></label>
+                <label>
+                    <i class="fa-solid fa-anchor-circle-exclamation"></i> Issue 
+                    <i class="fas fa-copy copy-icon-small" data-copy-type="issue" data-rowidx="${idx}"></i>
+                    <span style="margin-left:6rem; font-size:0.75rem; color:var(--text-secondary);">Saved: <span class="timestamp-display-issue-${idx}">${escapeHtml(issueTime)}</span></span>
+                </label>
                 <input type="text" class="pin-issue" data-rowidx="${idx}" value="${escapeHtml(row.issue)}" placeholder="describe the problem">
                 <div class="error-msg" id="err-issue-${idx}">Issue description is required</div>
             </div>
@@ -996,7 +1117,6 @@ function handleCopyField(e) {
     }).catch(() => showToast({ title: "Error", message: "Copy failed", type: "error", duration: 2000 }));
 }
 
-// NOTES functions with typing indicator and delayed auto-save
 function loadNote() {
     const saved = localStorage.getItem(STORAGE_NOTE);
     if (saved !== null) {
@@ -1028,28 +1148,25 @@ function saveNoteWithTimestamp(showAutoSaveToast = true) {
     }, 200);
     
     if (showAutoSaveToast) {
-        showToast({ title: "Auto-saved", message: "Your notes have been saved", type: "success", duration: 2000 });
+        showToast({ title: "Auto-Saved", message: "Your notes have been saved", type: "success", duration: 2000 });
     }
 }
 
 function handleNoteInput() {
     updateNoteStats();
     
-    // Save to storage immediately but don't show toast yet
     localStorage.setItem(STORAGE_NOTE, noteTextarea.value);
     
-    // Handle typing indicator and delayed save toast
     handleTyping(() => {
-        // Update timestamp and show save toast when typing stops
         lastSavedTimestamp = Date.now();
         localStorage.setItem(STORAGE_NOTE_TIMESTAMP, lastSavedTimestamp);
         updateLastSavedDisplay();
-        showToast({ title: "Auto-saved", message: "Your notes have been saved", type: "success", duration: 2000 });
+        showToast({ title: "Auto-Saved", message: "Your notes have been saved", type: "success", duration: 2000 });
     }, "notes");
 }
 
 function resetNote() {
-    if (confirm("⚠️ Reset the note? This action will erase all current content and cannot be undone.")) {
+    if (confirm("⚠️This action will erase all current content and cannot be undone.")) {
         // Clear any ongoing typing timer
         if (typingTimer) {
             clearTimeout(typingTimer);
@@ -1080,7 +1197,6 @@ Branch Name: ______`;
     }
     
     if (proceed) {
-        // Clear any ongoing typing timer
         if (typingTimer) {
             clearTimeout(typingTimer);
             typingTimer = null;
@@ -1121,16 +1237,14 @@ function updateCurrentTime() {
 }
 
 function initTimers() {
-    updateCurrentTime(); // set immediately
-    setInterval(updateCurrentTime, 1000); // update every second
+    updateCurrentTime();
+    setInterval(updateCurrentTime, 1000); 
 }
-// Theme functions with CSS for typing toast
 function initTheme() {
     const html = document.documentElement;
     const savedTheme = localStorage.getItem("theme") || "light";
     html.setAttribute("data-theme", savedTheme);
     
-    // Inject CSS for typing toast theme support
     const style = document.createElement('style');
     style.textContent = `
         .toast {
@@ -1164,7 +1278,6 @@ function initTheme() {
     }
 }
 
-// Section switching
 function switchSection(sectionId) {
     document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active-section"));
     const targetSection = document.getElementById(`${sectionId}Section`);
@@ -1184,7 +1297,6 @@ function bindTabs() {
     });
 }
 
-// Initialize everything
 function init() {
     loadPinsFromStorage();
     renderAllPins();
