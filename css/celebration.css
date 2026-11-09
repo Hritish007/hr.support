@@ -1,11 +1,10 @@
 #fireworks-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 99999;
   overflow: hidden;
 }
 
@@ -16,42 +15,150 @@
   height: 2px;
 }
 
-/* Spark particle */
+/* Firework particles */
 .spark {
   position: absolute;
-  width: 3px;
-  height: 3px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  opacity: 1;
+  animation: explode 1.3s ease-out forwards;
   filter: blur(0.5px);
-  animation: explode 1.4s ease-out forwards;
+  box-shadow: 0 0 8px currentColor;
 }
 
-/* Glow effect */
-.spark::after {
-  content: "";
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: inherit;
-  border-radius: 50%;
-  filter: blur(4px);
-  opacity: 0.6;
-  top: -2px;
-  left: -2px;
-}
-
-/* Explosion animation with gravity */
 @keyframes explode {
   0% {
     transform: translate(0, 0) scale(1);
     opacity: 1;
   }
-  70% {
+  100% {
+    transform: translate(
+      var(--x),
+      calc(var(--y) + 60px)
+    ) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Neon ripple */
+.ripple {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #00e5ff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: rippleEffect 0.7s ease-out forwards;
+}
+
+@keyframes rippleEffect {
+  to {
+    transform: translate(-50%, -50%) scale(8);
+    opacity: 0;
+  }
+}
+
+/* Magic sparkles */
+.magic {
+  position: absolute;
+  font-size: 16px;
+  pointer-events: none;
+  animation: sparkleFloat 1s ease-out forwards;
+}
+
+@keyframes sparkleFloat {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(var(--mx), var(--my)) scale(1.3);
     opacity: 1;
   }
   100% {
-    transform: translate(var(--x), calc(var(--y) + 80px)) scale(0.5);
+    transform: translate(var(--mx), calc(var(--my) - 30px)) scale(0);
+    opacity: 0;
+  }
+}
+#fireworks-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+/* Firework container */
+.fw {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+}
+
+/* Firework particles */
+.spark {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  animation: explode 1.3s ease-out forwards;
+  filter: blur(0.5px);
+  box-shadow: 0 0 8px currentColor;
+}
+
+@keyframes explode {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(
+      var(--x),
+      calc(var(--y) + 60px)
+    ) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Neon ripple */
+.ripple {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #00e5ff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: rippleEffect 0.7s ease-out forwards;
+}
+
+@keyframes rippleEffect {
+  to {
+    transform: translate(-50%, -50%) scale(8);
+    opacity: 0;
+  }
+}
+
+/* Magic sparkles */
+.magic {
+  position: absolute;
+  font-size: 16px;
+  pointer-events: none;
+  animation: sparkleFloat 1s ease-out forwards;
+}
+
+@keyframes sparkleFloat {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(var(--mx), var(--my)) scale(1.3);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--mx), calc(var(--my) - 30px)) scale(0);
     opacity: 0;
   }
 }
